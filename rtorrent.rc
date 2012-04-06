@@ -1,0 +1,15 @@
+schedule = low_diskspace,5,60,close_low_diskspace=10M
+port_range = 6882-6999
+                         # spare port 6881 for DHT
+port_random = yes
+
+# session directory
+session = /home/jan/.rtorrent/
+
+# DHT
+dht = auto
+dht_port = 6881
+peer_exchange = yes
+
+# encryption
+encryption = allow_incoming,try_outgoing,enable_retry

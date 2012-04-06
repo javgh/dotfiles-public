@@ -1,0 +1,52 @@
+# reading mail
+ignore *                # ignore all lines by default
+unignore from to cc subject date
+unignore user-agent x-mailer x-posting-agent x-http-user-agent
+
+set nomark_old          # Don't mark unread new msgs as old.
+set smart_wrap          # Want smart wrapping.
+set pager_index_lines=7
+alternative_order text/plain text/html
+auto_view text/html
+
+# composing mail
+set edit_headers=yes    # editing headers from within vi
+set fast_reply=yes      # don't ask for headers when replying
+set include=yes         # do quote
+set fcc_attach=no       # don't save a copy of the attachments
+set signature=""        # no signature
+set editor='vim +"set tw=72"'   # limit to 72 chars per line
+
+# From: header magic
+set use_from=yes        # always use From: header
+set envelope_from=yes   # set Return-Path according to From:
+set reverse_name=yes    # figure out From: from e-mail that is replied to
+set reverse_realname=no # ...do not do this for realname though
+
+set alias_file=~/doc/mutt_aliases
+source ~/doc/mutt_aliases
+
+# mailboxes with new mail
+source ~/.mutt_mailboxes
+
+# mailing lists
+source ~/.mutt_lists
+
+# folder hooks
+folder-hook . 'set sort=date-received'
+folder-hook "INBOX.N-" 'set sort=threads'
+
+# keys and macros
+macro index <F9> 'c=INBOX.X-Sent-Mutt'\n
+macro index S 's?/'
+
+# misc
+set auto_tag=yes        # don't require ; to be used
+set move=no             # don't move messages to some mbox
+set delete=yes          # purge messages
+set rfc2047_parameters  # decode RFC-2047-encoded parameters
+set mail_check=90
+set timeout=15
+
+# pretty printing
+set print_command="muttprint -C CUPS -a From_To_CC_*Subject*_Date_User-Agent_X-Mailer_X-Posting-Agent_X-Http-User-Agent"

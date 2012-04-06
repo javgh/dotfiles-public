@@ -1,0 +1,15 @@
+# Note: copy to ~/.muttrc and fill in
+
+# sender
+set realname="..."
+set from="..."
+alternates "...|..."
+
+# folder
+set folder=~/bulk/Maildir
+set spoolfile="=INBOX"                          # inbox
+set record="=INBOX.X-Sent-Mutt"                 # outbox
+set postponed="=INBOX.remote_postponed_mutt"    # postponed messages
+
+# source common part
+source ~/.muttrc-common

@@ -1,0 +1,31 @@
+// available in newer xkb as +level3(caps_switch)
+partial modifier_keys
+xkb_symbols "caps_switch" {
+  key <CAPS> {
+    type[Group1]="ONE_LEVEL",
+    symbols[Group1] = [ ISO_Level3_Shift ]
+  };
+  modifier_map Mod5   { ISO_Level3_Shift };
+};
+
+partial hidden modifier_keys
+xkb_symbols "esc_via_ralt" {
+    key <RALT> { [ Escape ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "esc_via_j" {
+  key <AC07> { symbols[Group1] = [ j, J, Escape ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "danish_umlaut" {
+  key <AC11> { symbols[Group1] = [ adiaeresis, Adiaeresis, aring, Aring ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "german_umlauts" {
+  key <AC01> { symbols[Group1] = [ a, A, adiaeresis, Adiaeresis ] };
+  key <AD07> { symbols[Group1] = [ u, U, udiaeresis, Udiaeresis ] };
+  key <AD09> { symbols[Group1] = [ o, O, odiaeresis, Odiaeresis ] };
+};

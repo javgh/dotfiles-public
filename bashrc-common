@@ -1,0 +1,65 @@
+# source from .bashrc
+
+# prompt
+PS1='\u@\h:\w\$ '
+
+# bash-completion
+[ -f /etc/profile.d/bash-completion ] && source /etc/profile.d/bash-completion
+[ -f /etc/bash_completion ] && source /etc/bash_completion
+
+# give history some space
+HISTSIZE=10000
+HISTFILESIZE=10000
+
+# share history
+shopt -s histappend
+PROMPT_COMMAND="history -a"
+
+# no duplicate entries
+export HISTCONTROL=ignoredups
+
+# umask (remove rights for group & others)
+umask 077
+
+# autojump
+if [ -f /usr/share/autojump/autojump.sh ]; then
+    . /usr/share/autojump/autojump.sh
+fi
+
+# calculator
+c () {
+    echo "$@" | bc -l
+}
+
+# editor
+vimpath=$(which vim)
+if [ -f "$vimpath" ]; then
+    export EDITOR="$vimpath"
+fi
+
+# browser
+firefoxpath=$(which firefox)
+if [ -f "$firefoxpath" ]; then
+    export BROWSER="$firefoxpath"
+fi
+
+# adjust PATH
+PATH=$PATH:$HOME/bin/
+if [ -d $HOME/.cabal/bin ]; then
+    PATH=$PATH:$HOME/.cabal/bin
+fi
+
+# pkgconfig
+export PKG_CONFIG_PATH=$HOME/lib/pkgconfig
+
+# python: virtualenv
+export WORKON_HOME=$HOME/.virtualenvs
+
+# x-terminal-emulator
+if [ -f /usr/bin/x-terminal-emulator ]; then
+    if [ -f $HOME/bin/x-terminal-emulator ]; then
+        rm $HOME/bin/x-terminal-emulator 2> /dev/null
+    fi
+else
+    ln -s $(which xterm) $HOME/bin/x-terminal-emulator 2> /dev/null
+fi

@@ -1,0 +1,8 @@
+$if Bash
+	Space: magic-space
+	"\M-o": "\C-p\C-a\M-f "
+	set show-all-if-ambiguous on
+	"\M-s": menu-complete
+	"\e[A": history-search-backward
+	"\e[B": history-search-forward
+$endif

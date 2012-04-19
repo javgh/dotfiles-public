@@ -14,7 +14,6 @@ set edit_headers=yes    # editing headers from within vi
 set fast_reply=yes      # don't ask for headers when replying
 set include=yes         # do quote
 set fcc_attach=no       # don't save a copy of the attachments
-set signature=""        # no signature
 set editor='vim +"set tw=72"'   # limit to 72 chars per line
 
 # From: header magic

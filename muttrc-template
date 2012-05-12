@@ -4,6 +4,7 @@
 set realname="..."
 set from="..."
 alternates "...|..."
+set signature=""
 
 # folder
 set folder=~/bulk/Maildir

@@ -8,6 +8,7 @@ set pastetoggle=<F9>
 set clipboard+=unnamed " make unnamed register the same as "*
 set showmatch   " show matching brackets
 set wildmode=list:longest " make cmdline tab completion similar to bash
+let mapleader=","   " use comma as a map leader
 
 set textwidth=80
 set colorcolumn=73,81,101,121
@@ -15,6 +16,9 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " spell check
 map <F11> :setlocal spell spelllang=en_us
+
+" sort paragraph
+map <Leader>sp vip:!sort<CR>
 
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5

@@ -37,6 +37,12 @@ if [ -f "$vimpath" ]; then
     export EDITOR="$vimpath"
 fi
 
+# disable XON/XOFF flow control
+# to allow vim to see Ctrl+S
+case "$TERM" in
+    xterm*) stty -ixon
+esac
+
 # browser
 firefoxpath=$(which firefox)
 if [ -f "$firefoxpath" ]; then

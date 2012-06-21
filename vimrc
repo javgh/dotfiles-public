@@ -16,9 +16,14 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " spell check
 map <F11> :setlocal spell spelllang=en_us
+set spellfile=~/doc/vim.spellfile.add
 
 " sort paragraph
 map <Leader>sp vip:!sort<CR>
+
+" jump to top (jt) and later back down (jd)
+map <Leader>jt mpgg
+map <Leader>jd `p
 
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5

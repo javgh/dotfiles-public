@@ -88,6 +88,7 @@ function! OpenInGHCI()
 endfunction
 function! HsSetup()
     map <F6> :call OpenInGHCI() <CR>
+    let b:ghc_staticoptions="-Wall -i.. -i../.. -i../../.."
 endfunction
 au FileType haskell call HsSetup()
 au FileType hamster call HsSetup()

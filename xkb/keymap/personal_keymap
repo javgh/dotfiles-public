@@ -1,7 +1,7 @@
 xkb_keymap {
-	xkb_keycodes  { include "evdev+aliases(qwertz)"	};
-	xkb_types     { include "complete"	};
-	xkb_compat    { include "complete"	};
-	xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(alt_super_win)+personal_addons(caps_switch)+personal_addons(esc_via_j)+personal_addons(danish_umlaut)"	};
-	xkb_geometry  { include "pc(pc105)"	};
+    xkb_keycodes  { include "evdev+aliases(qwertz)" };
+    xkb_types     { include "complete" };
+    xkb_compat    { include "complete" };
+    xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(alt_super_win)+personal_addons(caps_switch)+personal_addons(esc_via_j)+personal_addons(spanish_umlauts)"};
+    xkb_geometry  { include "pc(pc105)" };
 };

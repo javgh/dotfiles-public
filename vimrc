@@ -94,7 +94,7 @@ endfunction
 au FileType haskell call HsSetup()
 au FileType hamster call HsSetup()
 au BufEnter *.hs compiler ghc
-let g:haddock_browser="firefox"
+let g:haddock_browser="google-chrome"
 let g:haddock_indexfiledir=$HOME."/.vim/"
 
 " pathogen

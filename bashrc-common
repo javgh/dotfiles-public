@@ -64,6 +64,11 @@ export PKG_CONFIG_PATH=$HOME/lib/pkgconfig
 # python: virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
 
+# ruby: gem home
+if [ -d $HOME/.gem/ruby/1.9.1/bin ]; then
+    GEM_HOME=$HOME/.gem/ruby/1.9.1/bin
+fi
+
 # x-terminal-emulator
 if [ -f /usr/bin/x-terminal-emulator ]; then
     if [ -f $HOME/bin/x-terminal-emulator ]; then

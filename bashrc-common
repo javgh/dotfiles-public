@@ -69,6 +69,9 @@ if [ -d $HOME/.gem/ruby/1.9.1/bin ]; then
     GEM_HOME=$HOME/.gem/ruby/1.9.1/bin
 fi
 
+# android: sdk home
+export ANDROID_HOME=$HOME/opt/android-sdk
+
 # x-terminal-emulator
 if [ -f /usr/bin/x-terminal-emulator ]; then
     if [ -f $HOME/bin/x-terminal-emulator ]; then

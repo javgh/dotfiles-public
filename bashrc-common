@@ -70,7 +70,17 @@ if [ -d $HOME/.gem/ruby/1.9.1/bin ]; then
 fi
 
 # android: sdk home
-export ANDROID_HOME=$HOME/opt/android-sdk
+if [ -d $HOME/opt/android-sdk ]; then
+    export ANDROID_HOME=$HOME/opt/android-sdk
+fi
+
+# android: add tools to PATH
+if [ -d $HOME/opt/android-sdk/tools ]; then
+    PATH=$PATH:$HOME/opt/android-sdk/tools
+fi
+if [ -d $HOME/opt/android-sdk/platform-tools ]; then
+    PATH=$PATH:$HOME/opt/android-sdk/platform-tools
+fi
 
 # x-terminal-emulator
 if [ -f /usr/bin/x-terminal-emulator ]; then

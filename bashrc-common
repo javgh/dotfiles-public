@@ -82,6 +82,13 @@ if [ -d $HOME/opt/android-sdk/platform-tools ]; then
     PATH=$PATH:$HOME/opt/android-sdk/platform-tools
 fi
 
+# maven
+if [ -d $HOME/opt/apache-maven ]; then
+    export M2_HOME=$HOME/opt/apache-maven
+    export M2=$M2_HOME/bin
+    PATH=$PATH:$M2
+fi
+
 # x-terminal-emulator
 if [ -f /usr/bin/x-terminal-emulator ]; then
     if [ -f $HOME/bin/x-terminal-emulator ]; then

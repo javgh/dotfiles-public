@@ -54,8 +54,8 @@ PATH=$PATH:$HOME/bin/
 if [ -d $HOME/.cabal/bin ]; then
     PATH=$PATH:$HOME/.cabal/bin
 fi
-if [ -d $HOME/.gem/ruby/1.9.1/bin ]; then
-    PATH=$PATH:$HOME/.gem/ruby/1.9.1/bin
+if [ -d $HOME/.gem/ruby/2.0.0/bin ]; then
+    PATH=$PATH:$HOME/.gem/ruby/2.0.0/bin
 fi
 
 # pkgconfig
@@ -63,11 +63,6 @@ export PKG_CONFIG_PATH=$HOME/lib/pkgconfig
 
 # python: virtualenv
 export WORKON_HOME=$HOME/.virtualenvs
-
-# ruby: gem home
-if [ -d $HOME/.gem/ruby/1.9.1/bin ]; then
-    GEM_HOME=$HOME/.gem/ruby/1.9.1/bin
-fi
 
 # android: sdk home
 if [ -d $HOME/opt/android-sdk ]; then

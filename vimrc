@@ -21,6 +21,9 @@ set spellfile=~/doc/vim.spellfile.add
 " sort paragraph
 map <Leader>sp vip:!sort<CR>
 
+" run IndentConsistencyCop
+map <Leader>ic :IndentConsistencyCop<CR>
+
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5
 set sidescrolloff=2

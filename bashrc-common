@@ -92,3 +92,8 @@ if [ -f /usr/bin/x-terminal-emulator ]; then
 else
     ln -s $(which xterm) $HOME/bin/x-terminal-emulator 2> /dev/null
 fi
+
+# let gnome-terminal retain cwd (workaround; see launchpad bug #1193993)
+if [ -f /etc/profile.d/vte.sh ]; then
+    . /etc/profile.d/vte.sh
+fi

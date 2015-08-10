@@ -21,6 +21,13 @@ export HISTCONTROL=ignoredups
 # umask (remove rights for group & others)
 umask 077
 
+# let gnome-terminal retain cwd (workaround; see launchpad bug #1193993)
+# needs to be before autojump script, as it overwrites PROMPT_COMMAND
+# and then prevents autojump from updating its database
+if [ -f /etc/profile.d/vte.sh ]; then
+    . /etc/profile.d/vte.sh
+fi
+
 # autojump
 if [ -f /usr/share/autojump/autojump.sh ]; then
     . /usr/share/autojump/autojump.sh
@@ -91,9 +98,4 @@ if [ -f /usr/bin/x-terminal-emulator ]; then
     fi
 else
     ln -s $(which xterm) $HOME/bin/x-terminal-emulator 2> /dev/null
-fi
-
-# let gnome-terminal retain cwd (workaround; see launchpad bug #1193993)
-if [ -f /etc/profile.d/vte.sh ]; then
-    . /etc/profile.d/vte.sh
 fi

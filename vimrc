@@ -100,5 +100,12 @@ au BufEnter *.hs compiler ghc
 let g:haddock_browser="google-chrome"
 let g:haddock_indexfiledir=$HOME."/.vim/"
 
+" javascript mode
+function! JsSetup()
+  set tabstop=2    " tabs are 2 spaces
+  set shiftwidth=2 " indent is 2 spaces
+endfunction
+au FileType javascript call JsSetup()
+
 " pathogen
 execute pathogen#infect()

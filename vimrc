@@ -9,6 +9,7 @@ set clipboard+=unnamed " make unnamed register the same as "*
 set showmatch   " show matching brackets
 set wildmode=list:longest " make cmdline tab completion similar to bash
 let mapleader=","   " use comma as a map leader
+set directory=~/tmp,.,/var/tmp,/tmp " prefer ~/tmp for swap files
 
 set textwidth=80
 set colorcolumn=73,81,101,121

@@ -2,6 +2,11 @@ xkb_keymap {
     xkb_keycodes  { include "evdev+aliases(qwertz)" };
     xkb_types     { include "complete" };
     xkb_compat    { include "complete" };
-    xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(alt_super_win)+personal_addons(caps_switch)+personal_addons(esc_via_j)+personal_addons(spanish_umlauts)"};
+    xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(alt_super_win)+level3(caps_switch)+level3(ralt_alt)+personal_addons(esc_via_j)+personal_addons(return_is_altgr)+personal_addons(spanish_umlauts)"};
     xkb_geometry  { include "pc(pc105)" };
 };
+
+// see /usr/share/X11/xkb/rules/base.lst for standard options
+// altwin:alt_super_win         Alt is mapped to Right Win, Super to Menu
+// lv3:caps_switch              Caps Lock chooses 3rd level
+// lv3:ralt_alt                 Right Alt key never chooses 3rd level

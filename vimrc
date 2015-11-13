@@ -32,6 +32,11 @@ let g:syntastic_enable_signs = 0
 let g:syntastic_python_checkers = [] " ['flake8', 'pep8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_javascript_checkers = ['standard']
 
+" vimtips-fortune
+let g:fortune_vimtips_file = "../../../vimtips/vimtips"
+let g:fortune_vimtips_display_in_window = 0
+let g:fortune_vimtips_display_in_tooltip = 1
+
 " run IndentConsistencyCop
 map <Leader>ic :IndentConsistencyCop<CR>
 

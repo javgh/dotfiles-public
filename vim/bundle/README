@@ -14,6 +14,12 @@ Current list:
   IndentConsistencyCop  check indentation consistency
   jedi-vim              Python autocompletion
     in jedi-vim run: git submodule update --init
+  syntastic             syntax checking plugin
+  taglist.vim           show source code structure
+  vimagit               single buffer Git plugin
+  vim-gitgutter         show git diff in the sign column
+  vim-javascript        improved Javascript indentation and syntax support
+  vim-preview           preview markup files
+  vim-solidity          syntax support for Solidity
   vim-surround          surround things with parentheses/quotes/etc.
   vimtips-fortune       show tips on startup
-

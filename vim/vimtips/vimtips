@@ -1622,3 +1622,5 @@ in visual mode use S) to surround the selection with parentheses
 %
 ,P to open a preview window (supports markdown, reStructuredText, html and more)
 %
+,M to open magit buffer; S to stage file or hunk; CC to enter message and again to commit
+%

@@ -35,6 +35,11 @@ let g:syntastic_javascript_checkers = ['standard']
 " jedi-vim
 let g:jedi#use_splits_not_buffers = "top"
 
+" vimagit
+let g:magit_show_help=0
+let g:magit_default_fold_level=2
+let g:magit_default_sections = ['commit', 'staged', 'unstaged', 'info', 'global_help']
+
 " vimtips-fortune
 let g:fortune_vimtips_file = "../../../vimtips/vimtips"
 let g:fortune_vimtips_display_in_window = 0

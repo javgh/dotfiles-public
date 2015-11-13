@@ -28,3 +28,6 @@
 [submodule "vim/bundle/vim-solidity"]
 	path = vim/bundle/vim-solidity
 	url = https://github.com/tomlion/vim-solidity.git
+[submodule "vim/bundle/vimagit"]
+	path = vim/bundle/vimagit
+	url = https://github.com/jreybert/vimagit.git

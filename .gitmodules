@@ -19,3 +19,12 @@
 [submodule "vim/bundle/taglist.vim"]
 	path = vim/bundle/taglist.vim
 	url = https://github.com/vim-scripts/taglist.vim.git
+[submodule "vim/bundle/vim-javascript"]
+	path = vim/bundle/vim-javascript
+	url = https://github.com/pangloss/vim-javascript.git
+[submodule "vim/bundle/vim-preview"]
+	path = vim/bundle/vim-preview
+	url = https://github.com/greyblake/vim-preview.git
+[submodule "vim/bundle/vim-solidity"]
+	path = vim/bundle/vim-solidity
+	url = https://github.com/tomlion/vim-solidity.git

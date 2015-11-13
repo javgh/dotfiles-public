@@ -1606,6 +1606,10 @@ F5 attempts to invoke make or a suitable compiler
 %
 F8 opens the "Tag List" plugin
 %
+<CTRL-w>o to close all windows except the current one
+%
+ZQ to close the current window without saving changes
+%
 cs"' to change surrounding double quotes into single quotes
 %
 ds" to delete surrounding double quotes

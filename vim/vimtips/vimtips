@@ -1584,6 +1584,20 @@ Ctrl-a, Ctrl-x will increment and decrement, respectively, the number under the 
 %
 You can use the environment variable 'SHLVL' to check if you are within a vim subshell or not.
 %
+<CTRL-Space> to invoke autocompletion
+%
+use K to open and close documentation/pydoc
+%
+,g go to assignment
+%
+,d go to definition
+%
+,r rename Python variable
+%
+,n show usage of a name within a Python file
+%
+:Pyimport os to open the Python module 'os'
+%
 ,sp sorts the current paragraph
 %
 ,ic to check a buffer's indentation for consistency

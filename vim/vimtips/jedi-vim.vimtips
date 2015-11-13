@@ -1,0 +1,14 @@
+<CTRL-Space> to invoke autocompletion
+%
+use K to open and close documentation/pydoc
+%
+,g go to assignment
+%
+,d go to definition
+%
+,r rename Python variable
+%
+,n show usage of a name within a Python file
+%
+:Pyimport os to open the Python module 'os'
+%

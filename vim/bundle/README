@@ -12,5 +12,8 @@ Current list:
   command-t             file navigation via <Leader>t
     to compile extension: cd command-t/ruby/command-t; ruby extconf.rb; make
   IndentConsistencyCop  check indentation consistency
+  jedi-vim              Python autocompletion
+    in jedi-vim run: git submodule update --init
   vim-surround          surround things with parentheses/quotes/etc.
   vimtips-fortune       show tips on startup
+

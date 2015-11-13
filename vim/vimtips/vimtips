@@ -1578,3 +1578,11 @@ Ctrl-a, Ctrl-x will increment and decrement, respectively, the number under the 
 %
 You can use the environment variable 'SHLVL' to check if you are within a vim subshell or not.
 %
+,sp sorts the current paragraph
+%
+,ic to check a buffer's indentation for consistency
+%
+F5 attempts to invoke make or a suitable compiler
+%
+F8 opens the "Tag List" plugin
+%

@@ -1,0 +1,8 @@
+,sp sorts the current paragraph
+%
+,ic to check a buffer's indentation for consistency
+%
+F5 attempts to invoke make or a suitable compiler
+%
+F8 opens the "Tag List" plugin
+%

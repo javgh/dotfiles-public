@@ -40,6 +40,12 @@ let g:magit_show_help=0
 let g:magit_default_fold_level=2
 let g:magit_default_sections = ['commit', 'staged', 'unstaged', 'info', 'global_help']
 
+" vim-gitgutter
+set updatetime=750          " update more aggressively
+let g:gitgutter_enabled = 0
+let g:gitgutter_sign_column_always = 1
+map <Leader>gg :GitGutterToggle<CR>
+
 " vimtips-fortune
 let g:fortune_vimtips_file = "../../../vimtips/vimtips"
 let g:fortune_vimtips_display_in_window = 0

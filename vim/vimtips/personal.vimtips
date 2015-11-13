@@ -10,3 +10,5 @@ F8 opens the "Tag List" plugin
 %
 ZQ to close the current window without saving changes
 %
+,gg to toggle git diff in the gutter (sign column)
+%

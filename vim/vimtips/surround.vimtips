@@ -1,0 +1,10 @@
+cs"' to change surrounding double quotes into single quotes
+%
+ds" to delete surrounding double quotes
+%
+ysiw) to surround word under the cursor with parentheses; ysiw( will add spaces
+%
+yssb or yss) to wrap the current line with parentheses
+%
+in visual mode use S) to surround the selection with parentheses
+%

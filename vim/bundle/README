@@ -17,9 +17,12 @@ Current list:
   syntastic             syntax checking plugin
   taglist.vim           show source code structure
   vimagit               single buffer Git plugin
+  vim-fireplace         Clojure REPL support
   vim-gitgutter         show git diff in the sign column
   vim-javascript        improved Javascript indentation and syntax support
   vim-preview           preview markup files
+  vim-salve             support for Leiningen
+    dependencies: vim-projectionist, vim-dispatch
   vim-solidity          syntax support for Solidity
   vim-surround          surround things with parentheses/quotes/etc.
   vimtips-fortune       show tips on startup

@@ -1,14 +1,14 @@
-set incsearch   " find next match as we type
+set incsearch               " find next match as we type
 set nohlsearch
 set nowrap
 set background=light
 set modeline
 set autoindent
 set pastetoggle=<F9>
-set clipboard+=unnamed " make unnamed register the same as "*
-set showmatch   " show matching brackets
-set wildmode=list:longest " make cmdline tab completion similar to bash
-let mapleader=","   " use comma as a map leader
+set clipboard+=unnamed      " make unnamed register the same as "*
+set showmatch               " show matching brackets
+set wildmode=list:longest   " make cmdline tab completion similar to bash
+let mapleader=","           " use comma as a map leader
 set directory=~/tmp,.,/var/tmp,/tmp " prefer ~/tmp for swap files
 
 set textwidth=80
@@ -38,13 +38,13 @@ map <Leader>ic :IndentConsistencyCop<CR>
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5
 set sidescrolloff=2
-set sidescroll=1   " scroll vertically in small steps
+set sidescroll=1            " scroll vertically in small steps
 
 " tabs usually cause problems; just use 4 spaces instead
-set expandtab    " use spaces, not tabs.
-set tabstop=4    " tabs are 4 spaces
-set shiftwidth=4 " indent is 4 spaces
-set smarttab     " tab goes to the next tab stop
+set expandtab               " use spaces, not tabs.
+set tabstop=4               " tabs are 4 spaces
+set shiftwidth=4            " indent is 4 spaces
+set smarttab                " tab goes to the next tab stop
 set list
 set listchars=tab:▷⋅,trail:⋅,nbsp:⋅
 
@@ -55,15 +55,15 @@ filetype indent on
 " set up a good status line
 set laststatus=2
 set statusline=
-set statusline+=%f\ " file name
-set statusline+=%h%m%r%w " flags
-set statusline+=\[%{strlen(&ft)?&ft:'none'}, " filetype
-set statusline+=disk:%{&fileencoding}, " file encoding
-set statusline+=mem:%{&encoding}, " internal encoding
-set statusline+=%{&fileformat}] " file format
+set statusline+=%f\                             " file name
+set statusline+=%h%m%r%w                        " flags
+set statusline+=\[%{strlen(&ft)?&ft:'none'},    " filetype
+set statusline+=disk:%{&fileencoding},          " file encoding
+set statusline+=mem:%{&encoding},               " internal encoding
+set statusline+=%{&fileformat}]                 " file format
 set statusline+=\ %{&paste?'[paste]':''}\ 
-set statusline+=%= " right align
-set statusline+=%-14.(%l,%c%V%)\ %<%P " offset
+set statusline+=%=                              " right align
+set statusline+=%-14.(%l,%c%V%)\ %<%P           " offset
 
 " compile function
 function! Compile()
@@ -83,13 +83,6 @@ function! Compile()
     redraw!
 endfunction
 map <F5> :call Compile() \| cc! <CR>
-
-" open terminal function
-function! OpenTerminal()
-    silent !x-terminal-emulator &
-    redraw!
-endfunction
-map <F3> :call OpenTerminal() <CR>
 
 " tag list plugin
 nnoremap <silent> <F8> :TlistToggle<CR>
@@ -113,8 +106,8 @@ let g:haddock_indexfiledir=$HOME."/.vim/"
 
 " javascript mode
 function! JsSetup()
-  set tabstop=2    " tabs are 2 spaces
-  set shiftwidth=2 " indent is 2 spaces
+  set tabstop=2             " tabs are 2 spaces
+  set shiftwidth=2          " indent is 2 spaces
 endfunction
 au FileType javascript call JsSetup()
 

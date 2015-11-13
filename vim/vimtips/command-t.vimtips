@@ -1,0 +1,6 @@
+,t to bring up the Command-T file window; <CTRL-c> to cancel the file selection
+%
+open in Command-T with <CR>, <C-s> (split), <C-v> (vert. split) or <C-t> (tab)
+%
+scroll with <CTRL-j> and <CTRL-k> inside the Command-T file window
+%

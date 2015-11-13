@@ -1,0 +1,13 @@
+To add a new plugin:
+
+  git submodule add <repository>
+
+To update after a fresh checkout:
+
+  git submodule init
+  git submodule update
+
+Current list:
+
+  command-t         file navigation via <Leader>t
+    to compile extension: cd command-t/ruby/command-t; ruby extconf.rb; make

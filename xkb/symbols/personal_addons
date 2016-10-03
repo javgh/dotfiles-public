@@ -19,6 +19,15 @@ xkb_symbols "spanish_umlauts" {
 };
 
 partial alphanumeric_keys
+xkb_symbols "serbian_umlauts" {
+  key <AC03> { symbols[Group1] = [ d, D, dstroke, Dstroke ] };
+  key <AD06> { symbols[Group1] = [ z, Z, zcaron, Zcaron ] };
+  key <AB03> { symbols[Group1] = [ c, C, cacute, Cacute ] };
+  key <AE04> { symbols[Group1] = [ 4, dollar, ccaron, Ccaron ] };
+  key <AC02> { symbols[Group1] = [ s, S, scaron, Scaron ] };
+};
+
+partial alphanumeric_keys
 xkb_symbols "danish_umlaut" {
   key <AC11> { symbols[Group1] = [ adiaeresis, Adiaeresis, aring, Aring ] };
 };

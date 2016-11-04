@@ -125,10 +125,18 @@ let g:haddock_indexfiledir=$HOME."/.vim/"
 
 " javascript mode
 function! JsSetup()
-  set tabstop=2             " tabs are 2 spaces
-  set shiftwidth=2          " indent is 2 spaces
+    set tabstop=2             " tabs are 2 spaces
+    set shiftwidth=2          " indent is 2 spaces
 endfunction
 au FileType javascript call JsSetup()
+
+" beancount mode
+function! BeancountSetup()
+    inoremap . .<C-O>:AlignCommodity<CR>
+    map <Leader>a :AlignCommodity<CR>
+    map <Leader>n o<ESC>:put =strftime('%Y-%m-%d * \"\"')<CR>$i
+endfunction
+au FileType beancount call BeancountSetup()
 
 " pathogen
 execute pathogen#infect()

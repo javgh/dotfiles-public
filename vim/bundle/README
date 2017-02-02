@@ -26,3 +26,4 @@ Current list:
   vim-solidity          syntax support for Solidity
   vim-surround          surround things with parentheses/quotes/etc.
   vimtips-fortune       show tips on startup
+  supertab              allow autocompletion via tab key

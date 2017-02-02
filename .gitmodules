@@ -49,3 +49,6 @@
 [submodule "vim/bundle/vim-beancount"]
 	path = vim/bundle/vim-beancount
 	url = https://github.com/nathangrigg/vim-beancount.git
+[submodule "vim/bundle/supertab"]
+	path = vim/bundle/supertab
+	url = https://github.com/ervandew/supertab

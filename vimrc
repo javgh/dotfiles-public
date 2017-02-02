@@ -32,6 +32,9 @@ let g:syntastic_enable_signs = 0
 let g:syntastic_python_checkers = ['flake8', 'pep8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_javascript_checkers = ['standard']
 
+" supertab
+let b:SuperTabDisabled = 1
+
 " jedi-vim
 let g:jedi#use_splits_not_buffers = "top"
 
@@ -135,6 +138,8 @@ function! BeancountSetup()
     inoremap . .<C-O>:AlignCommodity<CR>
     map <Leader>a :AlignCommodity<CR>
     map <Leader>n o<ESC>:put =strftime('%Y-%m-%d * \"\"')<CR>$i
+    let b:SuperTabDisabled = 0
+    let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 endfunction
 au FileType beancount call BeancountSetup()
 

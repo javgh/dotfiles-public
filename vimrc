@@ -134,10 +134,25 @@ endfunction
 au FileType javascript call JsSetup()
 
 " beancount mode
+function! BeancountAdd()
+    let l:beancount_add_file = tempname()
+    silent execute '!beancount-add ' . shellescape(expand('%')) .
+        \ ' ' . l:beancount_add_file
+    redraw!
+    let l:lines = split(system('wc ' . shellescape(l:beancount_add_file)))[0]
+    silent execute 'r ' . l:beancount_add_file
+    while l:lines > 1
+        normal j
+        let l:lines = l:lines - 1
+    endwhile
+    call delete(l:beancount_add_file)
+endfunction
+
 function! BeancountSetup()
     inoremap . .<C-O>:AlignCommodity<CR>
     map <Leader>a :AlignCommodity<CR>
-    map <Leader>n o<ESC>:put =strftime('%Y-%m-%d * \"\"')<CR>$i
+    map <Leader>n :call BeancountAdd()<CR>
+    map <Leader>N o<ESC>:put =strftime('%Y-%m-%d * \"\"')<CR>$i
     let b:SuperTabDisabled = 0
     let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 endfunction

@@ -146,7 +146,19 @@ bar {
         status_command /nix/store/bh1g0bdi6brmc076cb7d1hqaa684yzd9-i3status-2.11/bin/i3status
 }
 
-# App assignments
+# app assignments
 assign [class="^Chromium-browser$"] 5
 
 for_window [class="^Spotify$"] move to workspace 9
+
+# background
+exec --no-startup-id feh --bg-scale .wallpaper.jpg
+
+# autostart
+exec --no-startup-id dropbox
+exec --no-startup-id redshift-gtk -l 53.1367194:8.2165357
+exec --no-startup-id volumeicon
+exec --no-startup-id nm-applet
+exec --no-startup-id personalkeymap
+exec --no-startup-id dayweekyear
+exec --no-startup-id miscautostart

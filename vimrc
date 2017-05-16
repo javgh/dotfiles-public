@@ -160,3 +160,6 @@ au FileType beancount call BeancountSetup()
 
 " pathogen
 execute pathogen#infect()
+
+" solarized (needs to be after pathogen)
+colorscheme solarized

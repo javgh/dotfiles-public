@@ -52,3 +52,6 @@ set print_command="muttprint -p TO_FILE:/tmp/muttprint.ps -a From_To_CC_*Subject
 
 # GnuPG configuration
 set pgp_use_gpg_agent = yes
+
+# solarized colorscheme
+source ~/.mutt-colors-solarized-light-16.muttrc

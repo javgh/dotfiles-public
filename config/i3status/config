@@ -1,0 +1,27 @@
+general {
+  output_format = "i3bar"
+  colors = false
+  interval = 5
+}
+
+order = "ethernet _first_"
+order += "load"
+order += "disk /"
+order += "tztime local"
+
+ethernet _first_ {
+  format_up = "E: %ip"
+  format_down = "E: down"
+}
+
+load {
+  format = "CPU: %1min %5min %15min"
+}
+
+disk "/" {
+  format = "Disk: %free"
+}
+
+tztime local {
+  format = "%d.%m.%Y (%B) %H:%M:%S"
+}

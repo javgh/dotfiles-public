@@ -1,11 +1,11 @@
 general {
   output_format = "i3bar"
-  colors = false
   interval = 5
 }
 
 order = "ethernet _first_"
 order += "load"
+order += "cpu_temperature 1"
 order += "disk /"
 order += "tztime local"
 
@@ -16,6 +16,11 @@ ethernet _first_ {
 
 load {
   format = "CPU: %1min %5min %15min"
+}
+
+cpu_temperature 1 {
+  format = "%degrees °C"
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon1/temp1_input"
 }
 
 disk "/" {

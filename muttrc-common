@@ -6,8 +6,10 @@ unignore user-agent x-mailer x-posting-agent x-http-user-agent
 set nomark_old          # Don't mark unread new msgs as old.
 set smart_wrap          # Want smart wrapping.
 set pager_index_lines=7
+set mailcap_path=~/.mailcap
 alternative_order text/plain text/html
 auto_view text/html
+bind attach <return> view-mailcap
 
 # composing mail
 set edit_headers=yes    # editing headers from within vi

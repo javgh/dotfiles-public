@@ -23,6 +23,8 @@
       efiPartition = 2;	       # 250 MB
     };
   };
+
+  boot.supportedFilesystems = [ "cifs" ];
   boot.cleanTmpDir = true;
 
   networking.hostName = "dax"; # Define your hostname.
@@ -47,29 +49,43 @@
     beancount
     chromium
     ctags
+    curlftpfs
     dmenu
     dropbox
     encfs
     evince
+    feh
     file
     firefox
     gimp
     git
     glxinfo
     gnome3.gedit
+    gnupg
+    gpodder
     htop
     i3
+    jq
     keepassx
     lftp
     lm_sensors
     mplayer
+    msmtp
+    mutt
     nix-prefetch-git
     nix-repl
+    offlineimap
     patchelf
+    rdiff-backup
+    redshift
     spotify
+    tarsnap
     unzip
     vanilla-dmz       # style neutral scalable cursor theme
     vimHugeX
+    vlc
+    volumeicon
+    w3m
     wget
     xorg.xkbcomp
     xorg.xvinfo
@@ -123,6 +139,25 @@
       enableXfwm = false;
       extraSessionCommands = "i3";
     };
+  };
+
+  # Enable autofs.
+  services.autofs = {
+    enable = true;
+    timeout = 60;
+    autoMaster =
+      let
+        sharecenter = pkgs.writeText "sharecenter" ''
+          sharecenter  -fstype=cifs,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=utf8    ://192.168.1.7/Volume_1
+        '';
+        neelix = pkgs.writeText "neelix" ''
+          # requires /root/.netrc
+          neelix  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.20
+        '';
+      in ''
+        /var/autofs/cifs  ${sharecenter}  --timeout=60
+        /var/autofs/ftp   ${neelix}       --timeout=60
+      '';
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

@@ -6,6 +6,7 @@ set modeline
 set autoindent
 set pastetoggle=<F9>
 set clipboard+=unnamed      " make unnamed register the same as "*
+set backspace=indent,eol,start " backspace over everything in insert mode
 set showmatch               " show matching brackets
 set wildmode=list:longest   " make cmdline tab completion similar to bash
 let mapleader=","           " use comma as a map leader

@@ -54,6 +54,7 @@
     dropbox
     encfs
     evince
+    fava
     feh
     file
     firefox

@@ -64,6 +64,7 @@
     gnome3.gedit
     gnupg
     gpodder
+    hexchat
     htop
     i3
     jq
@@ -79,6 +80,7 @@
     patchelf
     rdiff-backup
     redshift
+    simple-scan
     spotify
     tarsnap
     unzip
@@ -161,11 +163,17 @@
       '';
   };
 
+  # Enable SANE for scanning.
+  hardware.sane = {
+    enable = true;
+    extraBackends = [ pkgs.hplip ];
+  };
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jan = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "scanner" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

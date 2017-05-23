@@ -69,6 +69,7 @@
     i3
     jq
     keepassx
+    leiningen
     lftp
     lm_sensors
     mplayer

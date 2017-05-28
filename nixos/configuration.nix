@@ -134,7 +134,9 @@
     xkbModel = "pc105";
     screenSection =
       ''
-        Option "metamodes" "1920x1080_144 +0+0"
+        # generated with nvidia-settings
+        Option "nvidiaXineramaInfoOrder" "DFP-6"
+        Option "metamodes" "DP-2: nvidia-auto-select +0+0, DP-4: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +3200+0"
       '';
     displayManager.slim.enable = true;
     desktopManager.xfce = {

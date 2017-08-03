@@ -50,8 +50,8 @@ set rfc2047_parameters  # decode RFC-2047-encoded parameters
 set mail_check=90
 set timeout=15
 
-# pretty printing
-set print_command="muttprint -p TO_FILE:/tmp/muttprint.ps -a From_To_CC_*Subject*_Date_User-Agent_X-Mailer_X-Posting-Agent_X-Http-User-Agent"
+# printing
+set print_command="enscript -G -p /tmp/muttprint.ps"
 
 # GnuPG configuration
 set pgp_use_gpg_agent = yes

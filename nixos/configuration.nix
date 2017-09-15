@@ -51,8 +51,11 @@
     ctags
     curlftpfs
     dmenu
+    dnsutils
+    dos2unix
     dropbox
     encfs
+    enscript
     evince
     fava
     feh
@@ -63,25 +66,40 @@
     glxinfo
     gnome3.gedit
     gnupg
+    go-ethereum
     gpodder
     hexchat
     htop
     i3
+    inkscape
     jq
     keepassx
     leiningen
     lftp
+    libreoffice
     lm_sensors
+    monero
     mplayer
     msmtp
     mutt
     nix-prefetch-git
     nix-repl
     offlineimap
+    par2cmdline
     patchelf
+    python3
+    python3Packages.flake8
+    python3Packages.nltk
+    python3Packages.pep8
+    python3Packages.pyflakes
+    python3Packages.pylint
+    python3Packages.requests
+    python3Packages.scikitlearn
     rdiff-backup
     redshift
+    rlwrap
     simple-scan
+    smplayer
     spotify
     tarsnap
     unzip
@@ -93,6 +111,7 @@
     wget
     xorg.xkbcomp
     xorg.xvinfo
+    zbar
   ];
 
   # Enable bash completion.

@@ -102,6 +102,7 @@
     smplayer
     spotify
     tarsnap
+    tor
     unzip
     vanilla-dmz       # style neutral scalable cursor theme
     vimHugeX
@@ -117,15 +118,21 @@
   # Enable bash completion.
   programs.bash.enableCompletion = true;
 
-  # Tweak sudo.
-  security.sudo.wheelNeedsPassword = false;
-  #security.sudo.extraConfig =
-  #  ''
+  # Start OpenSSH agent.
+  programs.ssh = {
+    startAgent = true;
+    agentTimeout = "2h";
+  };
 
-  #    # Ask for root password and remember it for a while.
-  #    Defaults rootpw
-  #    Defaults timestamp_timeout=360
-  #  '';
+  # Tweak sudo.
+  #security.sudo.wheelNeedsPassword = false;
+  security.sudo.extraConfig =
+    ''
+
+      # Ask for root password and remember it for a while.
+      Defaults rootpw
+      Defaults timestamp_timeout=360
+    '';
 
 
   # List services that you want to enable:

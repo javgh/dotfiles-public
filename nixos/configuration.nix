@@ -47,6 +47,7 @@
     autojump
     bc
     beancount
+    binutils
     chromium
     ctags
     curlftpfs
@@ -61,6 +62,7 @@
     feh
     file
     firefox
+    geeqie
     gimp
     git
     glxinfo
@@ -71,6 +73,7 @@
     hexchat
     htop
     i3
+    imagemagick
     inkscape
     jq
     keepassx
@@ -110,6 +113,7 @@
     volumeicon
     w3m
     wget
+    whois
     xorg.xkbcomp
     xorg.xvinfo
     zbar

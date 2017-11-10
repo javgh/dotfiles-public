@@ -20,15 +20,19 @@
     canTouchEfiVariables = true;
     efibootmgr = {
       efiDisk = "/dev/nvme0n1";
-      efiPartition = 2;	       # 250 MB
+      efiPartition = 2;        # 250 MB
     };
   };
 
   boot.supportedFilesystems = [ "cifs" ];
   boot.cleanTmpDir = true;
 
-  networking.hostName = "dax"; # Define your hostname.
-  networking.networkmanager.enable = true;
+  networking = {
+    hostName = "dax";
+    firewall.enable = false;
+    networkmanager.enable = true;
+    extraHosts = builtins.readFile "/home/jan/.hosts";
+  };
 
   # Select internationalisation properties.
   i18n = {
@@ -143,12 +147,6 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # Enable CUPS to print documents.
   services.printing = {

@@ -41,8 +41,10 @@
     defaultLocale = "de_DE.UTF-8";
   };
 
-  # Set your time zone.
-  time.timeZone = "Europe/Berlin";
+  time = {
+    timeZone = "Europe/Berlin";
+    hardwareClockInLocalTime = true;
+  };
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
@@ -72,7 +74,7 @@
     glxinfo
     gnome3.gedit
     gnupg
-    go-ethereum
+    #go-ethereum
     gpodder
     hexchat
     htop
@@ -92,8 +94,10 @@
     nix-prefetch-git
     nix-repl
     offlineimap
+    openssl
     par2cmdline
     patchelf
+    pshs
     python3
     python3Packages.flake8
     python3Packages.nltk
@@ -110,6 +114,7 @@
     spotify
     tarsnap
     tor
+    torbrowser
     unzip
     vanilla-dmz       # style neutral scalable cursor theme
     vimHugeX
@@ -151,7 +156,7 @@
   # Enable CUPS to print documents.
   services.printing = {
     enable = true;
-    drivers = [ pkgs.hplip ];
+    drivers = [ pkgs.hplipWithPlugin ];
   };
 
   # Enable the X11 windowing system.
@@ -197,7 +202,7 @@
   # Enable SANE for scanning.
   hardware.sane = {
     enable = true;
-    extraBackends = [ pkgs.hplip ];
+    extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
   # Enable VirtualBox.
@@ -207,7 +212,7 @@
   users.extraUsers.jan = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "scanner" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "lp" "scanner" "vboxusers" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

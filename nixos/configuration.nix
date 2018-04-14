@@ -46,10 +46,20 @@
     hardwareClockInLocalTime = true;
   };
 
+  sound = {
+    enable = true;
+    mediaKeys.enable = true;
+  };
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    chromium.enablePepperFlash = true;
+  };
+
   environment.systemPackages = with pkgs; [
+    anki
     autojump
     bc
     beancount
@@ -78,6 +88,7 @@
     gpodder
     hexchat
     htop
+    i2p
     i3
     imagemagick
     inkscape
@@ -212,7 +223,7 @@
   users.extraUsers.jan = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "lp" "scanner" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

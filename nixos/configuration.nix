@@ -51,11 +51,14 @@
     mediaKeys.enable = true;
   };
 
+  hardware.pulseaudio.enable = true;
+
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
   nixpkgs.config = {
     allowUnfree = true;
     chromium.enablePepperFlash = true;
+    pulseaudio = true;
   };
 
   environment.systemPackages = with pkgs; [
@@ -84,7 +87,7 @@
     glxinfo
     gnome3.gedit
     gnupg
-    #go-ethereum
+    go-ethereum
     gpodder
     hexchat
     htop
@@ -107,7 +110,9 @@
     offlineimap
     openssl
     par2cmdline
+    pasystray
     patchelf
+    pavucontrol
     pshs
     python3
     python3Packages.flake8
@@ -130,7 +135,6 @@
     vanilla-dmz       # style neutral scalable cursor theme
     vimHugeX
     vlc
-    volumeicon
     w3m
     wget
     whois
@@ -223,7 +227,7 @@
   users.extraUsers.jan = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

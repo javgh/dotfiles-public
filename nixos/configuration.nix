@@ -198,11 +198,13 @@
   # Enable autofs.
   services.autofs = {
     enable = true;
+    debug = false;
     timeout = 60;
     autoMaster =
       let
         sharecenter = pkgs.writeText "sharecenter" ''
-          sharecenter  -fstype=cifs,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=utf8    ://192.168.1.7/Volume_1
+          # vers=1.0 needed to force use of old SMB1 protocol
+          sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=utf8    ://192.168.1.7/Volume_1
         '';
         neelix = pkgs.writeText "neelix" ''
           # requires /root/.netrc

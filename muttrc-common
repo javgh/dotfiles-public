@@ -51,7 +51,7 @@ set mail_check=90
 set timeout=15
 
 # printing
-set print_command="enscript -G -p /tmp/muttprint.ps"
+set print_command="iconv -f utf-8 -t iso-8859-1//TRANSLIT | enscript -X 88591 -G -p /tmp/muttprint.ps"
 
 # GnuPG configuration
 set pgp_use_gpg_agent = yes

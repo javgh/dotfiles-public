@@ -63,10 +63,12 @@
 
   environment.systemPackages = with pkgs; [
     anki
+    aria
     autojump
     bc
     beancount
     binutils
+    borgbackup
     chromium
     ctags
     curlftpfs
@@ -86,6 +88,7 @@
     git
     glxinfo
     gnome3.gedit
+    gnumake
     gnupg
     go-ethereum
     gpodder
@@ -107,6 +110,8 @@
     mutt
     nix-prefetch-git
     nix-repl
+    nodejs
+    nodePackages.node2nix
     offlineimap
     openssl
     par2cmdline
@@ -125,6 +130,7 @@
     rdiff-backup
     redshift
     rlwrap
+    signal-desktop
     simple-scan
     smplayer
     spotify
@@ -204,7 +210,7 @@
       let
         sharecenter = pkgs.writeText "sharecenter" ''
           # vers=1.0 needed to force use of old SMB1 protocol
-          sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=utf8    ://192.168.1.7/Volume_1
+          sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=iso8859-1    ://192.168.1.7/Volume_1
         '';
         neelix = pkgs.writeText "neelix" ''
           # requires /root/.netrc
@@ -215,6 +221,8 @@
         /var/autofs/ftp   ${neelix}       --timeout=60
       '';
   };
+
+  services.ntp.enable = true;
 
   # Enable SANE for scanning.
   hardware.sane = {

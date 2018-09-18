@@ -27,6 +27,9 @@
   boot.supportedFilesystems = [ "cifs" ];
   boot.cleanTmpDir = true;
 
+  # Do not rely on BIOS for latest microcode
+  hardware.cpu.intel.updateMicrocode = true;
+
   networking = {
     hostName = "dax";
     firewall.enable = false;
@@ -119,14 +122,6 @@
     patchelf
     pavucontrol
     pshs
-    python3
-    python3Packages.flake8
-    python3Packages.nltk
-    python3Packages.pep8
-    python3Packages.pyflakes
-    python3Packages.pylint
-    python3Packages.requests
-    python3Packages.scikitlearn
     rdiff-backup
     redshift
     rlwrap
@@ -147,6 +142,15 @@
     xorg.xkbcomp
     xorg.xvinfo
     zbar
+    (python3.withPackages(ps: [
+        ps.flake8
+        ps.nltk
+        ps.pep8
+        ps.pyflakes
+        ps.pylint
+        ps.requests
+        ps.scikitlearn
+      ]))
   ];
 
   # Enable bash completion.
@@ -222,7 +226,8 @@
       '';
   };
 
-  services.ntp.enable = true;
+  # wait for https://github.com/NixOS/nixpkgs/issues/38627
+  #services.ntp.enable = true;
 
   # Enable SANE for scanning.
   hardware.sane = {

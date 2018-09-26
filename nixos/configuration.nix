@@ -79,6 +79,7 @@
     dnsutils
     dos2unix
     dropbox
+    emacs
     encfs
     enscript
     evince
@@ -99,6 +100,7 @@
     htop
     i2p
     i3
+    i3status
     imagemagick
     inkscape
     jq
@@ -112,7 +114,6 @@
     msmtp
     mutt
     nix-prefetch-git
-    nix-repl
     nodejs
     nodePackages.node2nix
     offlineimap
@@ -126,10 +127,12 @@
     redshift
     rlwrap
     signal-desktop
+    simplenote
     simple-scan
     smplayer
     spotify
     tarsnap
+    termite
     tor
     torbrowser
     unzip
@@ -153,8 +156,13 @@
       ]))
   ];
 
-  # Enable bash completion.
-  programs.bash.enableCompletion = true;
+  programs.bash = {
+    enableCompletion = true;
+    interactiveShellInit = ''
+      export VTE_NG_PATH="${pkgs.gnome3.vte-ng}"
+      export AUTOJUMP_PATH="${pkgs.autojump}"
+    '';
+  };
 
   # Start OpenSSH agent.
   programs.ssh = {

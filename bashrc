@@ -15,16 +15,15 @@ umask 077
 # let termite retain cwd; needs to be before autojump script,
 # as it overwrites PROMPT_COMMAND and then prevents autojump
 # from updating its database
-if [ -f $HOME/.nix-profile/etc/profile.d/vte.sh ]; then
-    . $HOME/.nix-profile/etc/profile.d/vte.sh
+if [ -f "$VTE_NG_PATH/etc/profile.d/vte.sh" ]; then
+    . "$VTE_NG_PATH/etc/profile.d/vte.sh"
     __vte_prompt_command
 fi
 export TERM=xterm-256color
 
 # autojump
-autojumppath=$(autojump-share)/autojump.bash
-if [ -f $autojumppath ]; then
-    . $autojumppath
+if [ -f "$AUTOJUMP_PATH/share/autojump/autojump.bash" ]; then
+    . "$AUTOJUMP_PATH/share/autojump/autojump.bash"
 fi
 
 # calculator

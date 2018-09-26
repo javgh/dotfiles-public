@@ -152,13 +152,8 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command /nix/store/bh1g0bdi6brmc076cb7d1hqaa684yzd9-i3status-2.11/bin/i3status
+        status_command i3status
 }
-
-# app assignments
-assign [class="^Chromium-browser$"] 5
-
-for_window [class="^Spotify$"] move to workspace 9
 
 # background
 exec --no-startup-id feh --bg-scale .wallpaper.jpg

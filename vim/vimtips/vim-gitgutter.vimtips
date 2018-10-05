@@ -1,2 +1,4 @@
 ,hs to stage Git hunk
 %
+,gg to activate vim-gitgutter
+%

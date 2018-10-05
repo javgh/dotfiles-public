@@ -138,6 +138,13 @@
     unzip
     vanilla-dmz       # style neutral scalable cursor theme
     vimHugeX
+    vimPlugins.command-t
+    vimPlugins.gitgutter
+    vimPlugins.Supertab
+    vimPlugins.surround
+    vimPlugins.Syntastic
+    vimPlugins.taglist
+    vimPlugins.vim-javascript
     vlc
     w3m
     wget

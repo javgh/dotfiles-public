@@ -1,4 +1,4 @@
-,hs to stage Git hunk
+,hp and ,hs to preview and stage Git hunk
 %
-,gg to activate vim-gitgutter
+,gg to toggle vim-gitgutter
 %

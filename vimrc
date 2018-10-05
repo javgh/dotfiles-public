@@ -46,7 +46,6 @@ let g:magit_default_sections = ['commit', 'staged', 'unstaged', 'info', 'global_
 
 " vim-gitgutter
 set updatetime=750          " update more aggressively
-let g:gitgutter_enabled = 0
 map <Leader>gg :GitGutterToggle<CR>
 
 " vimtips-fortune

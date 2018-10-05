@@ -157,6 +157,13 @@ function! BeancountSetup()
 endfunction
 au FileType beancount call BeancountSetup()
 
+" clojure mode
+function! ClojureSetup()
+    let b:SuperTabDisabled = 0
+    let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+endfunction
+au FileType clojure call ClojureSetup()
+
 " pathogen
 execute pathogen#infect()
 

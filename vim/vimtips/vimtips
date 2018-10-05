@@ -46,7 +46,5 @@ in visual mode use S) to surround the selection with parentheses
 %
 ,hp and ,hs to preview and stage Git hunk
 %
-,gg to toggle vim-gitgutter
-%
 ,P to open a preview window (supports markdown, reStructuredText, html and more)
 %

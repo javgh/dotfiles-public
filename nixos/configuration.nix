@@ -62,6 +62,10 @@
     allowUnfree = true;
     chromium.enablePepperFlash = true;
     pulseaudio = true;
+    packageOverrides = _pkgs: {   # take the set of all packages and
+                                  # return a set of modified packages
+      vimHugeX = _pkgs.vimHugeX.override { python = _pkgs.python3; };
+    };
   };
 
   environment.systemPackages = with pkgs; [
@@ -153,7 +157,9 @@
     xorg.xvinfo
     zbar
     (python3.withPackages(ps: [
+        ps.beancount
         ps.flake8
+        ps.jedi
         ps.nltk
         ps.pep8
         ps.pyflakes

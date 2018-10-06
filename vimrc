@@ -34,7 +34,9 @@ let g:syntastic_python_checkers = ['flake8', 'pep8', 'pyflakes', 'pylint', 'pyth
 let g:syntastic_javascript_checkers = ['standard']
 
 " supertab
-let b:SuperTabDisabled = 1
+let g:SuperTabMappingForward = '<nul>'      " workaround for <c-space>
+let g:SuperTabMappingBackward = '<s-nul>'   " effectively disabled
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " jedi-vim
 let g:jedi#use_splits_not_buffers = "top"
@@ -152,17 +154,9 @@ function! BeancountSetup()
     map <Leader>a :AlignCommodity<CR>
     map <Leader>n :call BeancountAdd()<CR>
     map <Leader>N o<ESC>:put =strftime('%Y-%m-%d * \"\"')<CR>$i
-    let b:SuperTabDisabled = 0
-    let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+    set foldlevel=99
 endfunction
 au FileType beancount call BeancountSetup()
-
-" clojure mode
-function! ClojureSetup()
-    let b:SuperTabDisabled = 0
-    let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-endfunction
-au FileType clojure call ClojureSetup()
 
 " pathogen
 execute pathogen#infect()

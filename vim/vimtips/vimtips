@@ -46,5 +46,7 @@ in visual mode use S) to surround the selection with parentheses
 %
 ,hp and ,hs to preview and stage Git hunk
 %
+:LLPStartPreview to open a live preview for a latex file
+%
 ,P to open a preview window (supports markdown, reStructuredText, html and more)
 %

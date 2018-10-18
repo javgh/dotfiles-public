@@ -47,7 +47,7 @@ let g:magit_default_fold_level=2
 let g:magit_default_sections = ['commit', 'staged', 'unstaged', 'info', 'global_help']
 
 " vim-gitgutter
-set updatetime=750          " update more aggressively
+set updatetime=2000         " update more aggressively
 map <Leader>gg :GitGutterToggle<CR>
 
 " vimtips-fortune

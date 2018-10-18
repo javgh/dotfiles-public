@@ -92,6 +92,7 @@
     file
     firefox
     geeqie
+    getmail
     gimp
     git
     glxinfo
@@ -137,6 +138,7 @@
     spotify
     tarsnap
     termite
+    texlive.combined.scheme-full
     tor
     torbrowser
     unzip
@@ -144,6 +146,7 @@
     vimHugeX
     vimPlugins.command-t
     vimPlugins.gitgutter
+    vimPlugins.latex-live-preview
     vimPlugins.Supertab
     vimPlugins.surround
     vimPlugins.Syntastic

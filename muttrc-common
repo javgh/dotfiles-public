@@ -28,9 +28,6 @@ set reverse_realname=no # ...do not do this for realname though
 set alias_file=~/doc/mutt_aliases
 source ~/doc/mutt_aliases
 
-# mailboxes with new mail
-source ~/.mutt_mailboxes
-
 # mailing lists
 source ~/.mutt_lists
 
@@ -39,8 +36,7 @@ folder-hook . 'set sort=date-received'
 folder-hook "INBOX.N-" 'set sort=threads'
 
 # keys and macros
-macro index <F9> 'c=INBOX.X-Sent-Mutt'\n
-macro index S 's?/'
+macro index S 's?'
 
 # misc
 set auto_tag=yes        # don't require ; to be used

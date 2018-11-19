@@ -98,6 +98,7 @@
     glxinfo
     gnome3.gedit
     gnumake
+    gnumeric
     gnupg
     go-ethereum
     gpodder
@@ -162,6 +163,7 @@
     (python3.withPackages(ps: [
         ps.beancount
         ps.flake8
+        ps.google_api_python_client
         ps.jedi
         ps.nltk
         ps.pep8

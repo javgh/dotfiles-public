@@ -75,6 +75,7 @@
     bc
     beancount
     binutils
+    blueman
     borgbackup
     chromium
     ctags
@@ -168,7 +169,7 @@
         ps.nltk
         ps.pep8
         ps.pyflakes
-        ps.pylint
+        #ps.pylint
         ps.requests
         ps.scikitlearn
       ]))
@@ -261,8 +262,10 @@
     extraBackends = [ pkgs.hplipWithPlugin ];
   };
 
+  hardware.bluetooth.enable = true;
+
   # Enable VirtualBox.
-  virtualisation.virtualbox.host.enable = true;
+  #virtualisation.virtualbox.host.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jan = {

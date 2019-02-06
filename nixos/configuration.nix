@@ -101,7 +101,7 @@
     gnumake
     gnumeric
     gnupg
-    go-ethereum
+    #go-ethereum
     gpodder
     hexchat
     htop
@@ -110,6 +110,7 @@
     i3status
     imagemagick
     inkscape
+    jetbrains.idea-community
     jq
     keepassx
     leiningen
@@ -124,6 +125,7 @@
     nodejs
     nodePackages.node2nix
     offlineimap
+    openjdk
     openssl
     par2cmdline
     pasystray
@@ -133,10 +135,12 @@
     rdiff-backup
     redshift
     rlwrap
+    screen
     signal-desktop
     simplenote
     simple-scan
     smplayer
+    solc
     spotify
     tarsnap
     termite

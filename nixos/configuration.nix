@@ -247,13 +247,13 @@
           # vers=1.0 needed to force use of old SMB1 protocol
           sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=iso8859-1    ://192.168.1.7/Volume_1
         '';
-        neelix = pkgs.writeText "neelix" ''
+        data = pkgs.writeText "data" ''
           # requires /root/.netrc
-          neelix  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.20
+          data  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.7
         '';
       in ''
         /var/autofs/cifs  ${sharecenter}  --timeout=60
-        /var/autofs/ftp   ${neelix}       --timeout=60
+        /var/autofs/ftp   ${data}         --timeout=60
       '';
   };
 

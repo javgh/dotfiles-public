@@ -111,6 +111,7 @@
     imagemagick
     inkscape
     jetbrains.idea-community
+    jetbrains.jdk
     jq
     keepassx
     leiningen
@@ -125,7 +126,6 @@
     nodejs
     nodePackages.node2nix
     offlineimap
-    openjdk
     openssl
     par2cmdline
     pasystray

@@ -32,6 +32,8 @@ let g:syntastic_enable_signs = 0
 
 let g:syntastic_python_checkers = ['flake8', 'pep8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_go_checkers = ['golangci_lint']
+let g:syntastic_go_golangci_lint_args = "--enable-all --fast"
 
 " supertab
 let g:SuperTabMappingForward = '<nul>'      " workaround for <c-space>
@@ -133,6 +135,12 @@ function! JsSetup()
     set shiftwidth=2          " indent is 2 spaces
 endfunction
 au FileType javascript call JsSetup()
+
+" go mode
+function! GoSetup()
+    set nolist
+endfunction
+au FileType go call GoSetup()
 
 " beancount mode
 function! BeancountAdd()

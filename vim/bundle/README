@@ -32,5 +32,6 @@ Current list:
   vimtips-fortune         show tips on startup
   supertab                allow autocompletion via tab key    *
   vim-latex-live-preview  live preview for latex files        *
+  vim-go                  Go development plugin               *
 
   * via NixOS

@@ -101,7 +101,9 @@
     gnumake
     gnumeric
     gnupg
-    #go-ethereum
+    go
+    go-ethereum
+    golangci-lint
     gpodder
     hexchat
     htop
@@ -157,6 +159,7 @@
     vimPlugins.surround
     vimPlugins.Syntastic
     vimPlugins.taglist
+    vimPlugins.vim-go
     vimPlugins.vim-javascript
     vlc
     w3m
@@ -173,7 +176,7 @@
         ps.nltk
         ps.pep8
         ps.pyflakes
-        #ps.pylint
+        ps.pylint
         ps.requests
         ps.scikitlearn
       ]))

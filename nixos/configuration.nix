@@ -27,7 +27,8 @@
   boot.supportedFilesystems = [ "cifs" ];
   boot.cleanTmpDir = true;
 
-  # Do not rely on BIOS for latest microcode
+  # Do not rely on BIOS for latest microcode.
+  # Check with spectre-meltdown-checker.
   hardware.cpu.intel.updateMicrocode = true;
 
   networking = {
@@ -274,11 +275,14 @@
   # Enable VirtualBox.
   #virtualisation.virtualbox.host.enable = true;
 
+  # Enable Docker.
+  virtualisation.docker.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jan = {
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.

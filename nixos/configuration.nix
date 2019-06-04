@@ -18,10 +18,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi = {
     canTouchEfiVariables = true;
-    efibootmgr = {
-      efiDisk = "/dev/nvme0n1";
-      efiPartition = 2;        # 250 MB
-    };
+    efiSysMountPoint = "/boot"; # 250 MB
   };
 
   boot.supportedFilesystems = [ "cifs" ];
@@ -276,7 +273,7 @@
   #virtualisation.virtualbox.host.enable = true;
 
   # Enable Docker.
-  virtualisation.docker.enable = true;
+  #virtualisation.docker.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.jan = {

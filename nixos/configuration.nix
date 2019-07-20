@@ -76,6 +76,7 @@
     blueman
     borgbackup
     chromium
+    cryptsetup
     ctags
     curlftpfs
     dmenu
@@ -132,6 +133,7 @@
     patchelf
     pavucontrol
     pshs
+    qemu
     rdiff-backup
     redshift
     rlwrap

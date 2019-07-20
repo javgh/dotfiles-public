@@ -1,6 +1,9 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
+# Use cfdisk to prepare a GUID partition table (GPT) on the disk:
+#   Partition 1: 300M, EFI System, /boot, bootable, mkfs.fat -F 32 -n UEFI
+#   Partition 2: xG, Linux RAID, integritysetup format, mdadm, mkfs.ext4 -L linux-root
+#     pick a round number to make replacing the disk in the RAID array easier
+#   Partition 3: remaining free space, Linux swap, mkswap -L swap
+# See doc/raid+integrity for RAID details.
 
 { config, pkgs, ... }:
 
@@ -9,24 +12,35 @@
     "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
   ];
 
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-    ];
+  imports = [ /etc/nixos/hardware-configuration.nix ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi = {
-    canTouchEfiVariables = true;
-    efiSysMountPoint = "/boot"; # 250 MB
+  boot = {
+    loader = {
+      systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+    };
+
+    supportedFilesystems = [ "cifs" ];
+    cleanTmpDir = true;
   };
 
-  boot.supportedFilesystems = [ "cifs" ];
-  boot.cleanTmpDir = true;
+  hardware = {
+    # Do not rely on BIOS for latest microcode.
+    # Check with spectre-meltdown-checker.
+    cpu.intel.updateMicrocode = true;
 
-  # Do not rely on BIOS for latest microcode.
-  # Check with spectre-meltdown-checker.
-  hardware.cpu.intel.updateMicrocode = true;
+    pulseaudio.enable = true;
+
+    sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
+    };
+
+    bluetooth.enable = true;
+  };
 
   networking = {
     hostName = "dax";
@@ -35,7 +49,6 @@
     extraHosts = builtins.readFile "/home/jan/.hosts";
   };
 
-  # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "de";
@@ -52,10 +65,6 @@
     mediaKeys.enable = true;
   };
 
-  hardware.pulseaudio.enable = true;
-
-  # List packages installed in system profile. To search by name, run:
-  # $ nix-env -qaP | grep wget
   nixpkgs.config = {
     allowUnfree = true;
     chromium.enablePepperFlash = true;
@@ -182,108 +191,91 @@
       ]))
   ];
 
-  programs.bash = {
-    enableCompletion = true;
-    interactiveShellInit = ''
-      export VTE_NG_PATH="${pkgs.gnome3.vte-ng}"
-      export AUTOJUMP_PATH="${pkgs.autojump}"
-    '';
-  };
-
-  # Start OpenSSH agent.
-  programs.ssh = {
-    startAgent = true;
-    agentTimeout = "2h";
-  };
-
-  # Tweak sudo.
-  #security.sudo.wheelNeedsPassword = false;
-  security.sudo.extraConfig =
-    ''
-
-      # Ask for root password and remember it for a while.
-      Defaults rootpw
-      Defaults timestamp_timeout=360
-    '';
-
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.hplipWithPlugin ];
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-    videoDrivers = [ "nvidia" ];
-    layout = "de";
-    xkbModel = "pc105";
-    screenSection =
-      ''
-        # generated with nvidia-settings
-        Option "nvidiaXineramaInfoOrder" "DFP-6"
-        Option "metamodes" "DP-2: nvidia-auto-select +0+0, DP-4: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +3200+0"
+  programs = {
+    bash = {
+      enableCompletion = true;
+      interactiveShellInit = ''
+        export VTE_NG_PATH="${pkgs.gnome3.vte-ng}"
+        export AUTOJUMP_PATH="${pkgs.autojump}"
       '';
-    displayManager.slim.enable = true;
-    desktopManager.xfce = {
-      enable = true;
-      noDesktop = true;
-      enableXfwm = false;
-      extraSessionCommands = "i3";
+    };
+
+    ssh = {
+      startAgent = true;
+      agentTimeout = "2h";
     };
   };
 
-  # Enable autofs.
-  services.autofs = {
-    enable = true;
-    debug = false;
-    timeout = 60;
-    autoMaster =
-      let
-        sharecenter = pkgs.writeText "sharecenter" ''
-          # vers=1.0 needed to force use of old SMB1 protocol
-          sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=iso8859-1    ://192.168.1.7/Volume_1
+  services = {
+    #openssh.enable = true;
+
+    printing = {
+      enable = true;
+      drivers = [ pkgs.hplipWithPlugin ];
+    };
+
+    xserver = {
+      enable = true;
+      videoDrivers = [ "nvidia" ];
+      layout = "de";
+      xkbModel = "pc105";
+      screenSection =
+        ''
+          # generated with nvidia-settings
+          Option "nvidiaXineramaInfoOrder" "DFP-6"
+          Option "metamodes" "DP-2: nvidia-auto-select +0+0, DP-4: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +3200+0"
         '';
-        data = pkgs.writeText "data" ''
-          # requires /root/.netrc
-          data  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.7
+      displayManager.slim.enable = true;
+      desktopManager.xfce = {
+        enable = true;
+        noDesktop = true;
+        enableXfwm = false;
+        extraSessionCommands = "i3";
+      };
+    };
+
+    autofs = {
+      enable = true;
+      debug = false;
+      timeout = 60;
+      autoMaster =
+        let
+          sharecenter = pkgs.writeText "sharecenter" ''
+            # vers=1.0 needed to force use of old SMB1 protocol
+            sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=iso8859-1    ://192.168.1.7/Volume_1
+          '';
+          data = pkgs.writeText "data" ''
+            # requires /root/.netrc
+            data  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.7
+          '';
+        in ''
+          /var/autofs/cifs  ${sharecenter}  --timeout=60
+          /var/autofs/ftp   ${data}         --timeout=60
         '';
-      in ''
-        /var/autofs/cifs  ${sharecenter}  --timeout=60
-        /var/autofs/ftp   ${data}         --timeout=60
-      '';
+    };
+
+    ntp.enable = true;
+
+    #virtualisation.virtualbox.host.enable = true;
+    #virtualisation.docker.enable = true;
   };
 
-  # wait for https://github.com/NixOS/nixpkgs/issues/38627
-  #services.ntp.enable = true;
-
-  # Enable SANE for scanning.
-  hardware.sane = {
-    enable = true;
-    extraBackends = [ pkgs.hplipWithPlugin ];
-  };
-
-  hardware.bluetooth.enable = true;
-
-  # Enable VirtualBox.
-  #virtualisation.virtualbox.host.enable = true;
-
-  # Enable Docker.
-  #virtualisation.docker.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.jan = {
+  users.extraUsers.jan = {  # set password with 'passwd'
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" ];
   };
 
-  # The NixOS release to be compatible with for stateful data such as databases.
+  security.sudo = {
+    #wheelNeedsPassword = false;
+    extraConfig =
+      ''
+
+        # Ask for root password and remember it for a while.
+        Defaults rootpw
+        Defaults timestamp_timeout=360
+      '';
+  };
+
   system.stateVersion = "17.03";
 }

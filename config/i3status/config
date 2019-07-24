@@ -7,6 +7,7 @@ order = "ethernet _first_"
 order += "load"
 order += "cpu_temperature 1"
 order += "disk /"
+order += "path_exists raid"
 order += "tztime local"
 
 ethernet _first_ {
@@ -25,6 +26,11 @@ cpu_temperature 1 {
 
 disk "/" {
   format = "Disk: %free"
+}
+
+path_exists raid {
+  format = "RAID"
+  path = "/var/run/user/1000/raid_ok"
 }
 
 tztime local {

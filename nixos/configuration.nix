@@ -1,16 +1,16 @@
 # Use cfdisk to prepare a GUID partition table (GPT) on the disk:
-#   Partition 1: 300M, EFI System, /boot, bootable, mkfs.fat -F 32 -n UEFI
+#   Partition 1: 300M, EFI System, /boot, bootable, mkfs.fat -F 32 -n UEFI1 / UEFI2
 #   Partition 2: xG, Linux RAID, integritysetup format, mdadm, mkfs.ext4 -L linux-root
 #     pick a round number to make replacing the disk in the RAID array easier
-#   Partition 3: remaining free space, Linux swap, mkswap -L swap
+#   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
 
 { config, pkgs, ... }:
 
 {
-  nix.nixPath = [
-    "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
-  ];
+  #nix.nixPath = [
+  #  "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
+  #];
 
   imports = [ /etc/nixos/hardware-configuration.nix ];
 
@@ -21,6 +21,23 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot";
       };
+    };
+
+    initrd = {
+      availableKernelModules = [ "dm_integrity" ];
+      extraUtilsCommands = ''
+        copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
+      '';
+      postDeviceCommands = ''
+        integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
+        integritysetup open /dev/nvme1n1p2 nvme1n1p2+integrity
+        mdadm --stop --scan  # start with a clean slate
+        mdadm --assemble --scan --run
+      '';
+      mdadmConf = ''
+        DEVICE /dev/mapper/nvme0n1p2+integrity
+        DEVICE /dev/mapper/nvme1n1p2+integrity
+      '';
     };
 
     supportedFilesystems = [ "cifs" ];
@@ -150,6 +167,7 @@
     signal-desktop
     simplenote
     simple-scan
+    smartmontools
     smplayer
     solc
     spotify
@@ -277,5 +295,12 @@
       '';
   };
 
-  system.stateVersion = "17.03";
+  system = {
+    stateVersion = "19.03";
+
+    activationScripts.sync-boot-fallback = ''
+      echo "syncing /boot and /boot-fallback..."
+      ${pkgs.rsync}/bin/rsync -a --delete /boot/ /boot-fallback
+    '';
+  };
 }

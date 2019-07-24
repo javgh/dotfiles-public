@@ -147,6 +147,7 @@
     lm_sensors
     monero
     mplayer
+    mpv
     msmtp
     mutt
     nix-prefetch-git
@@ -168,7 +169,6 @@
     simplenote
     simple-scan
     smartmontools
-    smplayer
     solc
     spotify
     tarsnap

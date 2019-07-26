@@ -48,6 +48,10 @@ in visual mode use S) to surround the selection with parentheses
 %
 :GoImport strings to add the package to the import section
 %
+,d to go to declaration/definition for the identifier under the cursor
+%
+,e to automatically add an error handling code block
+%
 :LLPStartPreview to open a live preview for a latex file
 %
 ,P to open a preview window (supports markdown, reStructuredText, html and more)

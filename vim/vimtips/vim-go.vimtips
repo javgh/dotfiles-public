@@ -1,2 +1,6 @@
 :GoImport strings to add the package to the import section
 %
+,d to go to declaration/definition for the identifier under the cursor
+%
+,e to automatically add an error handling code block
+%

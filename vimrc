@@ -139,6 +139,8 @@ au FileType javascript call JsSetup()
 " go mode
 function! GoSetup()
     set nolist
+    nmap <Leader>d <Plug>(go-def-split)
+    nmap <Leader>e <Plug>(go-iferr)
 endfunction
 au FileType go call GoSetup()
 

@@ -24,7 +24,7 @@ Current list:
   vim-fireplace           Clojure REPL support
   vim-gitgutter           show git diff in the sign column    *
   vim-javascript          improved Javascript indentation and syntax support *
-  vim-preview             preview markup files
+  vim-preview             preview markup files                +
   vim-salve               support for Leiningen
     dependencies: vim-projectionist, vim-dispatch
   vim-solidity            syntax support for Solidity
@@ -35,3 +35,4 @@ Current list:
   vim-go                  Go development plugin               *
 
   * via NixOS
+  + needs gem: nix-shell -p stdenv; gem install --user-install redcarpet

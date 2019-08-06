@@ -164,6 +164,7 @@
     rdiff-backup
     redshift
     rlwrap
+    ruby
     screen
     signal-desktop
     simplenote

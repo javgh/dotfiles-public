@@ -95,6 +95,7 @@
   environment.systemPackages = with pkgs; [
     anki
     aria
+    asciinema
     autojump
     bc
     beancount
@@ -163,6 +164,7 @@
     qemu
     rdiff-backup
     redshift
+    remind
     rlwrap
     ruby
     screen
@@ -274,9 +276,11 @@
     };
 
     ntp.enable = true;
+  };
 
-    #virtualisation.virtualbox.host.enable = true;
-    #virtualisation.docker.enable = true;
+  virtualisation = {
+    #virtualbox.host.enable = true;
+    #docker.enable = true;
   };
 
   users.extraUsers.jan = {  # set password with 'passwd'

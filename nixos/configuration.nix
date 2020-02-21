@@ -84,7 +84,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    chromium.enablePepperFlash = true;
+    #chromium.enablePepperFlash = true;
     pulseaudio = true;
     packageOverrides = _pkgs: {   # take the set of all packages and
                                   # return a set of modified packages
@@ -106,6 +106,7 @@
     cryptsetup
     ctags
     curlftpfs
+    delve
     dmenu
     dnsutils
     dos2unix
@@ -131,6 +132,7 @@
     go-ethereum
     golangci-lint
     gpodder
+    graphviz
     hexchat
     htop
     i2p
@@ -151,6 +153,7 @@
     mpv
     msmtp
     mutt
+    nbd
     nix-prefetch-git
     nodejs
     nodePackages.node2nix

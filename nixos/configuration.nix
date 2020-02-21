@@ -135,7 +135,6 @@
     graphviz
     hexchat
     htop
-    i2p
     i3
     i3status
     imagemagick
@@ -165,7 +164,6 @@
     pavucontrol
     pshs
     qemu
-    rdiff-backup
     redshift
     remind
     rlwrap
@@ -177,7 +175,6 @@
     smartmontools
     solc
     spotify
-    tarsnap
     termite
     texlive.combined.scheme-full
     tor

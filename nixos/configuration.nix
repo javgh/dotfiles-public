@@ -139,6 +139,7 @@
     i3status
     imagemagick
     inkscape
+    inotify-tools
     jetbrains.idea-community
     jetbrains.jdk
     jq
@@ -197,12 +198,14 @@
     whois
     xorg.xkbcomp
     xorg.xvinfo
+    youtube-dl
     zbar
     (python3.withPackages(ps: [
         ps.beancount
         ps.flake8
         ps.google_api_python_client
         ps.jedi
+        ps.matplotlib
         ps.nltk
         ps.pep8
         ps.pyflakes

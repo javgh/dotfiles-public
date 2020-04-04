@@ -1,5 +1,6 @@
 general {
   output_format = "i3bar"
+  markup = "pango"
   interval = 5
 }
 
@@ -7,6 +8,7 @@ order = "ethernet _first_"
 order += "load"
 order += "cpu_temperature 1"
 order += "disk /"
+order += "read_file playground"
 order += "path_exists raid"
 order += "tztime local"
 
@@ -26,6 +28,12 @@ cpu_temperature 1 {
 
 disk "/" {
   format = "Disk: %free"
+}
+
+read_file playground {
+  path = "/var/run/user/1000/timemachine"
+  format = "<span foreground='white'>Time Machine: %content</span>"
+  format_bad = "<span foreground='#00FF00'>Time Machine</span>"
 }
 
 path_exists raid {

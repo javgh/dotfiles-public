@@ -160,6 +160,7 @@ exec --no-startup-id feh --bg-scale .wallpaper.jpg
 
 # autostart
 exec --no-startup-id raid-status
+exec --no-startup-id timemachine
 exec --no-startup-id dropbox
 exec --no-startup-id redshift-gtk -l 53.1367194:8.2165357
 exec --no-startup-id pasystray

@@ -111,6 +111,7 @@
     dnsutils
     dos2unix
     dropbox
+    electrum
     emacs
     encfs
     enscript

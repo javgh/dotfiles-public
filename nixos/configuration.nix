@@ -67,9 +67,16 @@
   };
 
   i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "de";
     defaultLocale = "de_DE.UTF-8";
+  };
+
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "de";
+  };
+
+  fonts = {
+    enableDefaultFonts = true;
   };
 
   time = {
@@ -84,7 +91,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    #chromium.enablePepperFlash = true;
     pulseaudio = true;
     packageOverrides = _pkgs: {   # take the set of all packages and
                                   # return a set of modified packages
@@ -92,143 +98,141 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    anki
-    aria
-    asciinema
-    autojump
-    bc
-    beancount
-    binutils
-    blueman
-    borgbackup
-    chromium
-    cryptsetup
-    ctags
-    curlftpfs
-    delve
-    dmenu
-    dnsutils
-    dos2unix
-    dropbox
-    electrum
-    emacs
-    encfs
-    enscript
-    evince
-    fava
-    feh
-    file
-    firefox
-    geeqie
-    getmail
-    gimp
-    git
-    glxinfo
-    gnome3.gedit
-    gnumake
-    gnumeric
-    gnupg
-    go
-    go-ethereum
-    golangci-lint
-    gpodder
-    graphviz
-    hexchat
-    htop
-    i3
-    i3status
-    imagemagick
-    inkscape
-    inotify-tools
-    jetbrains.idea-community
-    jetbrains.jdk
-    jq
-    keepassx
-    leiningen
-    lftp
-    libreoffice
-    lm_sensors
-    monero
-    mplayer
-    mpv
-    msmtp
-    mutt
-    nbd
-    nix-prefetch-git
-    nodejs
-    nodePackages.node2nix
-    offlineimap
-    openssl
-    par2cmdline
-    pasystray
-    patchelf
-    pavucontrol
-    pshs
-    qemu
-    redshift
-    remind
-    rlwrap
-    ruby
-    screen
-    signal-desktop
-    simplenote
-    simple-scan
-    smartmontools
-    solc
-    spotify
-    termite
-    texlive.combined.scheme-full
-    tor
-    torbrowser
-    unzip
-    vanilla-dmz       # style neutral scalable cursor theme
-    vimHugeX
-    vimPlugins.command-t
-    vimPlugins.gitgutter
-    vimPlugins.latex-live-preview
-    vimPlugins.Supertab
-    vimPlugins.surround
-    vimPlugins.Syntastic
-    vimPlugins.taglist
-    vimPlugins.vim-go
-    vimPlugins.vim-javascript
-    vlc
-    w3m
-    wget
-    whois
-    xorg.xkbcomp
-    xorg.xvinfo
-    youtube-dl
-    zbar
-    (python3.withPackages(ps: [
-        ps.beancount
-        ps.flake8
-        ps.google_api_python_client
-        ps.jedi
-        ps.matplotlib
-        ps.nltk
-        ps.pep8
-        ps.pyflakes
-        ps.pylint
-        ps.requests
-        ps.scikitlearn
-      ]))
-  ];
+  environment = {
+    homeBinInPath = true;
+
+    systemPackages = with pkgs; [
+      anki
+      aria
+      asciinema
+      bc
+      beancount
+      binutils
+      blueman
+      borgbackup
+      chromium
+      cryptsetup
+      ctags
+      curlftpfs
+      delve
+      dmenu
+      dnsutils
+      dos2unix
+      dropbox
+      electrum
+      emacs
+      encfs
+      enscript
+      evince
+      fava
+      feh
+      file
+      firefox
+      geeqie
+      getmail
+      gimp
+      git
+      glxinfo
+      gnome3.gedit
+      gnumake
+      gnumeric
+      gnupg
+      go
+      go-ethereum
+      golangci-lint
+      gpodder
+      graphviz
+      hexchat
+      htop
+      i3status
+      imagemagick
+      inkscape
+      inotify-tools
+      jetbrains.idea-community
+      jetbrains.jdk
+      jq
+      keepassx
+      leiningen
+      lftp
+      libreoffice
+      lm_sensors
+      monero
+      mplayer
+      mpv
+      msmtp
+      mutt
+      nbd
+      nix-prefetch-git
+      nodejs
+      nodePackages.node2nix
+      offlineimap
+      openssl
+      par2cmdline
+      pasystray
+      patchelf
+      pavucontrol
+      pshs
+      qemu
+      redshift
+      remind
+      rlwrap
+      ruby
+      screen
+      signal-desktop
+      simplenote
+      simple-scan
+      smartmontools
+      solc
+      spotify
+      termite
+      texlive.combined.scheme-full
+      tor
+      torbrowser
+      unzip
+      vanilla-dmz       # style neutral scalable cursor theme
+      vimHugeX
+      vimPlugins.command-t
+      vimPlugins.gitgutter
+      vimPlugins.latex-live-preview
+      vimPlugins.Supertab
+      vimPlugins.surround
+      vimPlugins.Syntastic
+      vimPlugins.taglist
+      vimPlugins.vim-go
+      vimPlugins.vim-javascript
+      vlc
+      w3m
+      wget
+      whois
+      xorg.xkbcomp
+      xorg.xvinfo
+      youtube-dl
+      zbar
+      (python3.withPackages(ps: [
+          ps.beancount
+          ps.flake8
+          ps.google_api_python_client
+          ps.jedi
+          ps.matplotlib
+          ps.nltk
+          ps.pep8
+          ps.pyflakes
+          ps.pylint
+          ps.requests
+          ps.scikitlearn
+        ]))
+    ];
+  };
 
   programs = {
     bash = {
       enableCompletion = true;
-      interactiveShellInit = ''
-        export VTE_NG_PATH="${pkgs.gnome3.vte-ng}"
-        export AUTOJUMP_PATH="${pkgs.autojump}"
-      '';
+      vteIntegration = true;
     };
 
-    ssh = {
-      startAgent = true;
-      agentTimeout = "2h";
-    };
+    autojump.enable = true;
+
+    ssh.startAgent = true;
   };
 
   services = {
@@ -250,13 +254,19 @@
           Option "nvidiaXineramaInfoOrder" "DFP-6"
           Option "metamodes" "DP-2: nvidia-auto-select +0+0, DP-4: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +3200+0"
         '';
-      displayManager.slim.enable = true;
+      displayManager.lightdm = {
+        enable = true;
+        autoLogin = {
+          enable = true;
+          user = "jan";
+        };
+      };
       desktopManager.xfce = {
         enable = true;
         noDesktop = true;
         enableXfwm = false;
-        extraSessionCommands = "i3";
       };
+      windowManager.i3.enable = true;
     };
 
     autofs = {
@@ -280,6 +290,7 @@
     };
 
     ntp.enable = true;
+    acpid.enable = true;
   };
 
   virtualisation = {

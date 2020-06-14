@@ -4,7 +4,7 @@ HISTFILESIZE=10000
 
 # share history
 shopt -s histappend
-PROMPT_COMMAND="history -a"
+PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
 
 # no duplicate entries
 export HISTCONTROL=ignoredups
@@ -12,19 +12,8 @@ export HISTCONTROL=ignoredups
 # umask (remove rights for group & others)
 umask 077
 
-# let termite retain cwd; needs to be before autojump script,
-# as it overwrites PROMPT_COMMAND and then prevents autojump
-# from updating its database
-if [ -f "$VTE_NG_PATH/etc/profile.d/vte.sh" ]; then
-    . "$VTE_NG_PATH/etc/profile.d/vte.sh"
-    __vte_prompt_command
-fi
+# termite
 export TERM=xterm-256color
-
-# autojump
-if [ -f "$AUTOJUMP_PATH/share/autojump/autojump.bash" ]; then
-    . "$AUTOJUMP_PATH/share/autojump/autojump.bash"
-fi
 
 # calculator
 c () {

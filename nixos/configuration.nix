@@ -57,6 +57,8 @@
     };
 
     bluetooth.enable = true;
+
+    opengl.setLdLibraryPath = true;   # needed for CUDA
   };
 
   networking = {
@@ -113,6 +115,8 @@
       chromium
       cryptsetup
       ctags
+      cudatoolkit
+      cudnn
       curlftpfs
       delve
       dmenu
@@ -136,7 +140,6 @@
       gnome3.gedit
       gnumake
       gnumeric
-      gnupg
       go
       go-ethereum
       golangci-lint
@@ -162,6 +165,7 @@
       msmtp
       mutt
       nbd
+      ncdu
       nix-prefetch-git
       nodejs
       nodePackages.node2nix
@@ -204,6 +208,7 @@
       w3m
       wget
       whois
+      woof
       xorg.xkbcomp
       xorg.xvinfo
       youtube-dl
@@ -218,6 +223,7 @@
           ps.pep8
           ps.pyflakes
           ps.pylint
+          ps.qrcode
           ps.requests
           ps.scikitlearn
         ]))
@@ -233,6 +239,10 @@
     autojump.enable = true;
 
     ssh.startAgent = true;
+
+    gnupg.agent.enable = true;
+
+    fuse.userAllowOther = true;
   };
 
   services = {

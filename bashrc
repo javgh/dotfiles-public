@@ -49,3 +49,8 @@ eval `dircolors $HOME/.dircolors.ansi-universal`
 if [ -f $HOME/.bash_aliases ]; then
     . $HOME/.bash_aliases
 fi
+
+# hosts
+if [ -f $HOME/.bash_hosts ]; then
+    . $HOME/.bash_hosts
+fi

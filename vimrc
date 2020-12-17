@@ -32,6 +32,7 @@ let g:syntastic_enable_signs = 0
 
 let g:syntastic_python_checkers = ['flake8', 'pep8', 'pyflakes', 'pylint', 'python']
 let g:syntastic_javascript_checkers = ['standard']
+let g:syntastic_html_checkers = ['validator', 'w3']
 let g:syntastic_go_checkers = ['golangci_lint']
 let g:syntastic_go_golangci_lint_args = "--enable-all --fast"
 

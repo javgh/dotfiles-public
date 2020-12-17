@@ -143,10 +143,12 @@
       go
       go-ethereum
       golangci-lint
+      golint
       gpodder
       graphviz
       hexchat
       htop
+      httplz
       i3status
       imagemagick
       inkscape

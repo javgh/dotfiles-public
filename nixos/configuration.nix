@@ -193,19 +193,26 @@
       termite
       texlive.combined.scheme-full
       tor
-      torbrowser
+      #torbrowser
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
       vimHugeX
       vimPlugins.command-t
-      vimPlugins.gitgutter
-      vimPlugins.latex-live-preview
-      vimPlugins.Supertab
-      vimPlugins.surround
-      vimPlugins.Syntastic
-      vimPlugins.taglist
+      vimPlugins.jedi-vim
+      vimPlugins.supertab
+      vimPlugins.syntastic
+      vimPlugins.taglist-vim
+      vimPlugins.vimagit
+      vimPlugins.vim-dispatch
+      vimPlugins.vim-fireplace
+      vimPlugins.vim-gitgutter
       vimPlugins.vim-go
       vimPlugins.vim-javascript
+      vimPlugins.vim-latex-live-preview
+      vimPlugins.vim-projectionist
+      vimPlugins.vim-salve
+      vimPlugins.vim-solidity
+      vimPlugins.vim-surround
       vlc
       w3m
       wget
@@ -266,12 +273,9 @@
           Option "nvidiaXineramaInfoOrder" "DFP-6"
           Option "metamodes" "DP-2: nvidia-auto-select +0+0, DP-4: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +3200+0"
         '';
-      displayManager.lightdm = {
+      displayManager.autoLogin = {
         enable = true;
-        autoLogin = {
-          enable = true;
-          user = "jan";
-        };
+        user = "jan";
       };
       desktopManager.xfce = {
         enable = true;
@@ -301,7 +305,7 @@
         '';
     };
 
-    ntp.enable = true;
+    timesyncd.enable = true;
     acpid.enable = true;
   };
 

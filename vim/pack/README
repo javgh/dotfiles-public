@@ -1,0 +1,46 @@
+Current list (via ~/.vim/pack):
+
+  vim-preview             preview markup files                *
+    cd vim-preview/start/
+    rm -rf vim-preview
+    git clone https://github.com/greyblake/vim-preview
+    rm -rf vim-preview/.git
+
+  vimtips-fortune         show tips on startup
+    cd vimtips-fortune/start/
+    rm -rf vimtips-fortune
+    git clone https://github.com/openuado/vimtips-fortune
+    rm -rf vimtips-fortune/.git
+
+  vim-solarized8          Solarized true color scheme
+    cd themes/opt/
+    rm -rf vim-solarized8
+    https://github.com/lifepillar/vim-solarized8
+    rm -rf vim-solarized8/.git
+
+  vim-beancount           Beancount support                   +
+    cd vim-beancount/start/
+    rm -rf vim-beancount
+    git clone https://github.com/nathangrigg/vim-beancount
+    rm -rf vim-beancount/.git
+
+  * needs gem: nix-shell -p stdenv; gem install --user-install redcarpet
+  + NixOS package does not seem to work
+
+Current list (via NixOS):
+
+  command-t               file navigation via <Leader>t
+  jedi-vim                Python autocompletion
+  supertab                allow autocompletion via tab key
+  syntastic               syntax checking plugin
+  taglist-vim             show source code structure
+  vimagit                 single buffer Git plugin
+  vim-fireplace           Clojure REPL support
+  vim-gitgutter           show git diff in the sign column
+  vim-go                  Go development plugin
+  vim-javascript          improved Javascript indentation and syntax support
+  vim-latex-live-preview  live preview for latex files
+  vim-salve               support for Leiningen
+    dependencies: vim-projectionist, vim-dispatch
+  vim-solidity            syntax support for Solidity
+  vim-surround            surround things with parentheses/quotes/etc.

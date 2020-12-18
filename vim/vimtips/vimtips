@@ -20,11 +20,11 @@ use K to open and close documentation/pydoc
 %
 ,sp sorts the current paragraph
 %
-,ic to check a buffer's indentation for consistency
-%
 F5 attempts to invoke make or a suitable compiler
 %
 F8 opens the "Tag List" plugin
+%
+F12 activates spell check
 %
 <CTRL-w>o to close all windows except the current one
 %

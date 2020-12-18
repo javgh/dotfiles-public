@@ -12,12 +12,14 @@ set wildmode=list:longest   " make cmdline tab completion similar to bash
 let mapleader=","           " use comma as a map leader
 set directory=~/tmp,.,/var/tmp,/tmp " prefer ~/tmp for swap files
 
+" solarized8
+colorscheme solarized8
+
 set textwidth=80
 set colorcolumn=73,81,101,121
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " spell check
-map <F11> :setlocal spell spelllang=en_us
+map <F12> :setlocal spell spelllang=en_us
 set spellfile=~/doc/vim.spellfile.add
 
 " sort paragraph
@@ -54,12 +56,9 @@ set updatetime=2000         " update more aggressively
 map <Leader>gg :GitGutterToggle<CR>
 
 " vimtips-fortune
-let g:fortune_vimtips_file = "../../../vimtips/vimtips"
+let g:fortune_vimtips_file = "../../../../../vimtips/vimtips"
 let g:fortune_vimtips_display_in_window = 0
 let g:fortune_vimtips_display_in_tooltip = 1
-
-" run IndentConsistencyCop
-map <Leader>ic :IndentConsistencyCop<CR>
 
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5
@@ -168,9 +167,3 @@ function! BeancountSetup()
     set foldlevel=99
 endfunction
 au FileType beancount call BeancountSetup()
-
-" pathogen
-execute pathogen#infect()
-
-" solarized (needs to be after pathogen)
-colorscheme solarized

@@ -40,6 +40,7 @@
       '';
     };
 
+    kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
     cleanTmpDir = true;
   };

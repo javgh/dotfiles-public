@@ -120,6 +120,7 @@
       curlftpfs
       delve
       dmenu
+      dmidecode
       dnsutils
       dos2unix
       dropbox
@@ -307,11 +308,12 @@
 
     timesyncd.enable = true;
     acpid.enable = true;
+    blueman.enable = true;
   };
 
   virtualisation = {
     #virtualbox.host.enable = true;
-    #docker.enable = true;
+    docker.enable = true;
   };
 
   users.extraUsers.jan = {  # set password with 'passwd'

@@ -264,6 +264,11 @@
       drivers = [ pkgs.hplipWithPlugin ];
     };
 
+    avahi = {   # to help find scanner
+      enable = true;
+      nssmdns = true;
+    };
+
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];

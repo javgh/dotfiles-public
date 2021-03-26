@@ -59,7 +59,7 @@
 
     bluetooth.enable = true;
 
-    opengl.setLdLibraryPath = true;   # needed for CUDA
+    #opengl.setLdLibraryPath = true;   # needed for CUDA
   };
 
   networking = {
@@ -116,8 +116,8 @@
       chromium
       cryptsetup
       ctags
-      cudatoolkit
-      cudnn
+      #cudatoolkit
+      #cudnn
       curlftpfs
       delve
       dmenu

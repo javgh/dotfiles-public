@@ -36,7 +36,7 @@ let g:syntastic_python_checkers = ['flake8', 'pep8', 'pyflakes', 'pylint', 'pyth
 let g:syntastic_javascript_checkers = ['standard']
 let g:syntastic_html_checkers = ['validator']
 let g:syntastic_go_checkers = ['golangci_lint']
-let g:syntastic_go_golangci_lint_args = "--enable-all --fast"
+let g:syntastic_go_golangci_lint_args = "--enable-all --fast --disable wsl"
 
 " supertab
 let g:SuperTabMappingForward = '<nul>'      " workaround for <c-space>

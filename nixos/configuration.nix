@@ -195,7 +195,7 @@
       termite
       texlive.combined.scheme-full
       tor
-      #torbrowser
+      torbrowser
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
       vimHugeX
@@ -227,7 +227,7 @@
       (python3.withPackages(ps: [
           ps.beancount
           ps.flake8
-          ps.google_api_python_client
+          ps.google-api-python-client
           ps.jedi
           ps.matplotlib
           ps.nltk
@@ -315,6 +315,7 @@
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
+    keybase.enable = true;
   };
 
   virtualisation = {

@@ -113,6 +113,8 @@
       binutils
       blueman
       borgbackup
+      brave
+      charles
       chromium
       cryptsetup
       ctags

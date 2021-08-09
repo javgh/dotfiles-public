@@ -40,6 +40,11 @@
       '';
     };
 
+    kernelPatches = [
+      # see https://bugzilla.kernel.org/show_bug.cgi?id=213795
+      { name = "cd-tray-fix"; patch = /etc/nixos/cd-tray-fix.patch; }
+    ];
+
     kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
     cleanTmpDir = true;
@@ -95,10 +100,6 @@
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
-    packageOverrides = _pkgs: {   # take the set of all packages and
-                                  # return a set of modified packages
-      vimHugeX = _pkgs.vimHugeX.override { python = _pkgs.python3; };
-    };
   };
 
   environment = {
@@ -141,7 +142,7 @@
       gimp
       git
       glxinfo
-      gnome3.gedit
+      gnome.gedit
       gnumake
       gnumeric
       go

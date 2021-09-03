@@ -15,7 +15,7 @@ set directory=~/tmp,.,/var/tmp,/tmp " prefer ~/tmp for swap files
 " solarized8
 colorscheme solarized8
 
-set textwidth=80
+set textwidth=0
 set colorcolumn=73,81,101,121
 
 " spell check

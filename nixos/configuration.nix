@@ -40,11 +40,6 @@
       '';
     };
 
-    kernelPatches = [
-      # see https://bugzilla.kernel.org/show_bug.cgi?id=213795
-      { name = "cd-tray-fix"; patch = /etc/nixos/cd-tray-fix.patch; }
-    ];
-
     kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
     cleanTmpDir = true;

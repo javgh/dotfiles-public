@@ -252,6 +252,8 @@
     gnupg.agent.enable = true;
 
     fuse.userAllowOther = true;
+
+    adb.enable = true;
   };
 
   services = {
@@ -324,7 +326,7 @@
   users.extraUsers.jan = {  # set password with 'passwd'
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" ];
   };
 
   security.sudo = {

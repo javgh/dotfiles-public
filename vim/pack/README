@@ -18,14 +18,7 @@ Current list (via ~/.vim/pack):
     https://github.com/lifepillar/vim-solarized8
     rm -rf vim-solarized8/.git
 
-  vim-beancount           Beancount support                   +
-    cd vim-beancount/start/
-    rm -rf vim-beancount
-    git clone https://github.com/nathangrigg/vim-beancount
-    rm -rf vim-beancount/.git
-
   * needs gem: nix-shell -p stdenv; gem install --user-install redcarpet
-  + NixOS package does not seem to work
 
 Current list (via NixOS):
 
@@ -35,6 +28,7 @@ Current list (via NixOS):
   syntastic               syntax checking plugin
   taglist-vim             show source code structure
   vimagit                 single buffer Git plugin
+  vim-beancount           Beancount support
   vim-fireplace           Clojure REPL support
   vim-gitgutter           show git diff in the sign column
   vim-go                  Go development plugin
@@ -44,3 +38,6 @@ Current list (via NixOS):
     dependencies: vim-projectionist, vim-dispatch
   vim-solidity            syntax support for Solidity
   vim-surround            surround things with parentheses/quotes/etc.
+
+  NixOS documentation: ~/repos/nixpkgs/doc/languages-frameworks/vim.section.md
+  available plugins: ~/repos/nixpkgs/pkgs/misc/vim-plugins/vim-plugin-names

@@ -196,23 +196,6 @@
       torbrowser
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
-      vimHugeX
-      vimPlugins.command-t
-      vimPlugins.jedi-vim
-      vimPlugins.supertab
-      vimPlugins.syntastic
-      vimPlugins.taglist-vim
-      vimPlugins.vimagit
-      vimPlugins.vim-dispatch
-      vimPlugins.vim-fireplace
-      vimPlugins.vim-gitgutter
-      vimPlugins.vim-go
-      vimPlugins.vim-javascript
-      vimPlugins.vim-latex-live-preview
-      vimPlugins.vim-projectionist
-      vimPlugins.vim-salve
-      vimPlugins.vim-solidity
-      vimPlugins.vim-surround
       vlc
       w3m
       wget
@@ -240,6 +223,37 @@
   };
 
   programs = {
+    vim = {
+      package = pkgs.vim_configurable.customize {
+        name = "vim";
+        vimrcConfig = {
+          customRC = ''source ~/.vimrc'';
+          packages.myPackages = with pkgs.vimPlugins; {
+            start = [
+              command-t
+              jedi-vim
+              supertab
+              syntastic
+              taglist-vim
+              vimagit
+              vim-beancount
+              vim-dispatch
+              vim-fireplace
+              vim-gitgutter
+              vim-go
+              vim-javascript
+              vim-latex-live-preview
+              vim-projectionist
+              vim-salve
+              vim-solidity
+              vim-surround
+            ];
+          };
+        };
+      };
+      defaultEditor = true;
+    };
+
     bash = {
       enableCompletion = true;
       vteIntegration = true;

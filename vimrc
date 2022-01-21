@@ -167,3 +167,6 @@ function! BeancountSetup()
     set foldlevel=99
 endfunction
 au FileType beancount call BeancountSetup()
+
+" todo mode
+au BufRead todo set bg=light

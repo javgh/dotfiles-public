@@ -157,6 +157,8 @@
       jetbrains.jdk
       jq
       keepassx
+      kicad
+      kiwix
       leiningen
       lftp
       libreoffice

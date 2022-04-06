@@ -43,6 +43,9 @@
     kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
     cleanTmpDir = true;
+
+    # activate to build aarch64 targets; see https://nixos.wiki/wiki/NixOS_on_ARM
+    #binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   hardware = {

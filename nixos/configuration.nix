@@ -83,6 +83,11 @@
 
   fonts = {
     enableDefaultFonts = true;
+    fonts = with pkgs; [
+      corefonts
+      liberation_ttf
+      noto-fonts
+    ];
   };
 
   time = {

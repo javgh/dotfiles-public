@@ -345,7 +345,7 @@
   users.extraUsers.jan = {  # set password with 'passwd'
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" "dialout" ];
   };
 
   security.sudo = {

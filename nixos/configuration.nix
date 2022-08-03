@@ -34,7 +34,7 @@
         mdadm --stop --scan  # start with a clean slate
         mdadm --assemble --scan --run
       '';
-      mdadmConf = ''
+      services.swraid.mdadmConf = ''
         DEVICE /dev/mapper/nvme0n1p2+integrity
         DEVICE /dev/mapper/nvme1n1p2+integrity
       '';
@@ -53,7 +53,10 @@
     # Check with spectre-meltdown-checker.
     cpu.intel.updateMicrocode = true;
 
-    pulseaudio.enable = true;
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
 
     sane = {
       enable = true;
@@ -141,7 +144,7 @@
       file
       firefox
       geeqie
-      getmail
+      getmail6
       gimp
       git
       glxinfo
@@ -203,7 +206,7 @@
       termite
       texlive.combined.scheme-full
       tor
-      torbrowser
+      tor-browser-bundle-bin
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
       vlc

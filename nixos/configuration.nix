@@ -64,6 +64,7 @@
     };
 
     bluetooth.enable = true;
+    rtl-sdr.enable = true;
 
     #opengl.setLdLibraryPath = true;   # needed for CUDA
   };
@@ -156,6 +157,7 @@
       golangci-lint
       golint
       gpodder
+      gqrx
       graphviz
       hexchat
       htop
@@ -195,6 +197,7 @@
       redshift
       remind
       rlwrap
+      rtl-sdr
       ruby
       screen
       signal-desktop
@@ -353,7 +356,7 @@
   users.extraUsers.jan = {  # set password with 'passwd'
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" "dialout" ];
+    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" "dialout" "plugdev" ];
   };
 
   security.sudo = {

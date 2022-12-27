@@ -200,6 +200,7 @@
       rtl-sdr
       ruby
       screen
+      shellcheck
       signal-desktop
       simplenote
       simple-scan

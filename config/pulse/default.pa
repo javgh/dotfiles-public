@@ -1,0 +1,4 @@
+.include /etc/pulse/default.pa
+
+load-module module-null-sink sink_name=network_broadcast sink_properties=device.description="Netzwerk-Broadcast"
+load-module module-simple-protocol-tcp source=network_broadcast.monitor record=true port=4711

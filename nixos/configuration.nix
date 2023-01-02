@@ -66,7 +66,7 @@
     bluetooth.enable = true;
     rtl-sdr.enable = true;
 
-    #opengl.setLdLibraryPath = true;   # needed for CUDA
+    opengl.setLdLibraryPath = true;   # needed for CUDA
   };
 
   networking = {
@@ -126,8 +126,8 @@
       chromium
       cryptsetup
       ctags
-      #cudatoolkit
-      #cudnn
+      cudaPackages.cudatoolkit
+      cudaPackages.cudnn
       curlftpfs
       delve
       dmenu
@@ -206,6 +206,7 @@
       simple-scan
       smartmontools
       solc
+      solvespace
       spotify
       termite
       texlive.combined.scheme-full

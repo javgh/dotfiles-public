@@ -73,7 +73,7 @@
     hostName = "dax";
     firewall.enable = false;
     networkmanager.enable = true;
-    extraHosts = builtins.readFile "/home/jan/.hosts";
+    extraHosts = builtins.readFile /home/jan/.hosts;
   };
 
   i18n = {

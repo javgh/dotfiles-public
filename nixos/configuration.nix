@@ -245,10 +245,16 @@
       package = pkgs.vim_configurable.customize {
         name = "vim";
         vimrcConfig = {
-          customRC = ''source ~/.vimrc'';
+          customRC = ''
+            " Copilot plugin currently requires Node.js version 12.x-17.x
+            let g:copilot_node_command="${pkgs.nodejs-16_x}/bin/node"
+
+            source ~/.vimrc
+          '';
           packages.myPackages = with pkgs.vimPlugins; {
             start = [
               command-t
+              copilot-vim
               jedi-vim
               supertab
               syntastic

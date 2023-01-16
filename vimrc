@@ -61,6 +61,10 @@ let g:fortune_vimtips_file = "../../../../../vimtips/vimtips"
 let g:fortune_vimtips_display_in_window = 0
 let g:fortune_vimtips_display_in_tooltip = 1
 
+" GitHub Copilot
+let g:copilot_filetypes = {'*': v:false}    " off by default
+command EnableCopilot let b:copilot_enabled=v:true
+
 " always keep a number of lines and columns visible around the cursor
 set scrolloff=5
 set sidescrolloff=2

@@ -7,7 +7,22 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  curlftpfs-ng = pkgs.stdenv.mkDerivation rec {
+    version = "0.9.3";
+    pname = "curlftpfs-ng";
+
+    src = pkgs.fetchurl {
+      url = "http://ikn.org.uk/download/tool/curlftpfs-ng/curlftpfs-ng-${version}.tar.gz";
+      sha256 = "ZiItXdAf7TDenYBGe+h7JyNXUqRC9EYcC7VK1EGmpTI=";
+    };
+
+    nativeBuildInputs = with pkgs; [ autoreconfHook pkg-config ];
+    buildInputs = with pkgs; [ fuse curl glib zlib ];
+
+    # see also: ~/doc/curlftpfs
+  };
+in {
   #nix.nixPath = [
   #  "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
   #];
@@ -128,7 +143,7 @@
       ctags
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
-      curlftpfs
+      curlftpfs-ng
       delve
       dmenu
       dmidecode

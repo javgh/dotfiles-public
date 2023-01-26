@@ -63,6 +63,7 @@ let g:fortune_vimtips_display_in_tooltip = 1
 
 " GitHub Copilot
 let g:copilot_filetypes = {'*': v:false}    " off by default
+let g:copilot_no_maps = v:true              " maps break 'Ü'
 command EnableCopilot let b:copilot_enabled=v:true
 
 " always keep a number of lines and columns visible around the cursor

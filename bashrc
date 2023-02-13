@@ -4,7 +4,7 @@ HISTFILESIZE=10000
 
 # share history
 shopt -s histappend
-PROMPT_COMMAND="$PROMPT_COMMAND; history -a"
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 # no duplicate entries
 export HISTCONTROL=ignoredups

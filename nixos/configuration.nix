@@ -134,6 +134,7 @@ in {
       bc
       beancount
       binutils
+      blender
       blueman
       borgbackup
       brave
@@ -307,6 +308,8 @@ in {
     fuse.userAllowOther = true;
 
     adb.enable = true;
+
+    _1password-gui.enable = true;
   };
 
   services = {

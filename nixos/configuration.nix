@@ -368,6 +368,15 @@ in {
         '';
     };
 
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_15;
+      initialScript = pkgs.writeText "initialScript.sql" ''
+        CREATE USER jan;
+        CREATE DATABASE playground WITH OWNER jan;
+      '';
+    };
+
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;

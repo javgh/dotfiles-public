@@ -380,7 +380,7 @@ in {
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
-    keybase.enable = true;
+    keybase.enable = false;
   };
 
   virtualisation = {

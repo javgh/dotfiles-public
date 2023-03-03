@@ -202,6 +202,7 @@ in {
       nix-prefetch-git
       nodejs
       nodePackages.node2nix
+      nodePackages.stylelint
       offlineimap
       openssl
       par2cmdline

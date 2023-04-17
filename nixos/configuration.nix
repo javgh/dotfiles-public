@@ -238,6 +238,7 @@ in {
       w3m
       wget
       whois
+      wineWowPackages.full    # wow = "Windows on Windows"
       woof
       xorg.xkbcomp
       xorg.xvinfo

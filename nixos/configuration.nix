@@ -81,7 +81,10 @@ in {
     bluetooth.enable = true;
     rtl-sdr.enable = true;
 
-    opengl.setLdLibraryPath = true;   # needed for CUDA
+    opengl = {
+      setLdLibraryPath = true;   # needed for CUDA
+      driSupport32Bit = true;    # needed for docker.enableNvidia
+    };
   };
 
   networking = {
@@ -386,7 +389,10 @@ in {
 
   virtualisation = {
     #virtualbox.host.enable = true;
-    docker.enable = true;
+    docker = {
+      enable = true;
+      enableNvidia = true;
+    };
   };
 
   users.extraUsers.jan = {  # set password with 'passwd'

@@ -9,3 +9,6 @@ alias twoweeks='remind -c+2 -w160 -m ~/doc/reminders.rem'
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias myip2='dig TXT +short o-o.myaddr.l.google.com @ns1.google.com'
 chunked-mpv () { mpv "$1" --start=$(($2 * 7 * 60)) --length=7:10; }
+alias media-mount='gio mount dav://data.fritz.box:8000'
+alias media-umount='gio mount -u dav://data.fritz.box:8000'
+alias media-cd='cd /run/user/1000/gvfs/dav\:host\=data.fritz.box\,port\=8000\,ssl\=false/'

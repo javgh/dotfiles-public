@@ -7,22 +7,7 @@
 
 { config, pkgs, ... }:
 
-let
-  curlftpfs-ng = pkgs.stdenv.mkDerivation rec {
-    version = "0.9.3";
-    pname = "curlftpfs-ng";
-
-    src = pkgs.fetchurl {
-      url = "http://ikn.org.uk/download/tool/curlftpfs-ng/curlftpfs-ng-${version}.tar.gz";
-      sha256 = "ZiItXdAf7TDenYBGe+h7JyNXUqRC9EYcC7VK1EGmpTI=";
-    };
-
-    nativeBuildInputs = with pkgs; [ autoreconfHook pkg-config ];
-    buildInputs = with pkgs; [ fuse curl glib zlib ];
-
-    # see also: ~/doc/curlftpfs
-  };
-in {
+{
   #nix.nixPath = [
   #  "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
   #];
@@ -141,13 +126,13 @@ in {
       blueman
       borgbackup
       brave
+      cadaver
       charles
       chromium
       cryptsetup
       ctags
       cudaPackages.cudatoolkit
       cudaPackages.cudnn
-      curlftpfs-ng
       delve
       dmenu
       dmidecode
@@ -351,26 +336,6 @@ in {
         enableXfwm = false;
       };
       windowManager.i3.enable = true;
-    };
-
-    autofs = {
-      enable = true;
-      debug = false;
-      timeout = 60;
-      autoMaster =
-        let
-          sharecenter = pkgs.writeText "sharecenter" ''
-            # vers=1.0 needed to force use of old SMB1 protocol
-            sharecenter  -fstype=cifs,vers=1.0,nodev,nosuid,async,uid=jan,gid=users,credentials=/home/jan/.cifsrc,iocharset=iso8859-1    ://192.168.1.7/Volume_1
-          '';
-          data = pkgs.writeText "data" ''
-            # requires /root/.netrc
-            data  -fstype=fuse,allow_other    :/run/current-system/sw/bin/curlftpfs\#192.168.1.7
-          '';
-        in ''
-          /var/autofs/cifs  ${sharecenter}  --timeout=60
-          /var/autofs/ftp   ${data}         --timeout=60
-        '';
     };
 
     postgresql = {

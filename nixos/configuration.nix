@@ -77,6 +77,24 @@
     firewall.enable = false;
     networkmanager.enable = true;
     extraHosts = builtins.readFile /home/jan/.hosts;
+
+    wg-quick.interfaces = {
+      wg0 = {
+        autostart = false;
+        address = [ "192.168.0.5/24" ];
+        privateKeyFile = "/home/jan/.wireguard/olegeno/private_key";
+        peers = [
+          {
+            endpoint = "195.201.27.235:51820";
+            publicKey = "+iE+VPhY1dDASMj6c5nzQO4NvvVpMPAEuxYmPX54ewk=";
+            allowedIPs = [
+              "192.168.0.0/24"
+              "192.168.2.0/24"
+            ];
+          }
+        ];
+      };
+    };
   };
 
   i18n = {

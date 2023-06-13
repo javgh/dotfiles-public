@@ -193,6 +193,7 @@
       jetbrains.jdk
       jq
       keepassx
+      keepassxc
       kicad
       kiwix
       leiningen

@@ -367,6 +367,19 @@
       '';
     };
 
+    #influxdb = {
+    #  enable = true;
+    #  extraConfig.http.flux-enabled = true;
+    #};
+
+    #grafana = {
+    #  enable = true;
+    #  settings.server = {
+    #    http_addr = "127.0.0.1";
+    #    http_port = 3000;
+    #  };
+    #};
+
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;

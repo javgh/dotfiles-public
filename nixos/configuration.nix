@@ -400,6 +400,21 @@
     extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" "dialout" "plugdev" ];
   };
 
+  systemd.shutdown = let
+    unloadNvidiaModules = pkgs.writeShellScript "unload-nvidia-modules.shutdown" ''
+      # Nvidia kernel modules currently cause this message to appear on shutdown:
+      # "Failed to unmount /oldroot/sys: Device or resource busy"
+      # This script unloads the Nvidia kernel modules before shutdown
+      # to allow for a clean unmount.
+      # It might not be needed in the future. To test:
+      # Disable the script and check with 'systemctl halt'.
+
+      ${pkgs.kmod}/bin/rmmod nvidia_uvm nvidia_drm nvidia_modeset nvidia
+    '';
+  in {
+    "unload-nvidia-modules.shutdown" = unloadNvidiaModules;
+  };
+
   security.sudo = {
     #wheelNeedsPassword = false;
     extraConfig =

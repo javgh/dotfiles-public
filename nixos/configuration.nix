@@ -42,7 +42,7 @@
 
     kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
-    cleanTmpDir = true;
+    tmp.cleanOnBoot = true;
 
     # activate to build aarch64 targets; see https://nixos.wiki/wiki/NixOS_on_ARM
     #binfmt.emulatedSystems = [ "aarch64-linux" ];
@@ -192,7 +192,6 @@
       jetbrains.idea-community
       jetbrains.jdk
       jq
-      keepassx
       keepassxc
       kicad
       kiwix
@@ -268,19 +267,15 @@
 
   programs = {
     vim = {
-      package = pkgs.vim_configurable.customize {
+      package = pkgs.vim-full.customize {
         name = "vim";
         vimrcConfig = {
           customRC = ''
-            " Copilot plugin currently requires Node.js version 12.x-17.x
-            let g:copilot_node_command="${pkgs.nodejs-16_x}/bin/node"
-
             source ~/.vimrc
           '';
           packages.myPackages = with pkgs.vimPlugins; {
             start = [
               command-t
-              copilot-vim
               jedi-vim
               supertab
               syntastic

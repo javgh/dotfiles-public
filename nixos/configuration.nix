@@ -40,9 +40,14 @@
       '';
     };
 
+    tmp = {
+      useTmpfs = true;
+      tmpfsSize = "75%";
+      cleanOnBoot = true;
+    };
+
     kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
     supportedFilesystems = [ "cifs" ];
-    tmp.cleanOnBoot = true;
 
     # activate to build aarch64 targets; see https://nixos.wiki/wiki/NixOS_on_ARM
     #binfmt.emulatedSystems = [ "aarch64-linux" ];

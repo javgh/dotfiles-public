@@ -309,6 +309,11 @@
       vteIntegration = true;
     };
 
+    fzf = {
+      keybindings = true;
+      fuzzyCompletion = true;
+    };
+
     autojump.enable = true;
 
     ssh.startAgent = true;

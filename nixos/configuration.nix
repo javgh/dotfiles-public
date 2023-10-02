@@ -373,10 +373,7 @@
       '';
     };
 
-    #influxdb = {
-    #  enable = true;
-    #  extraConfig.http.flux-enabled = true;
-    #};
+    #influxdb2.enable = true;
 
     #grafana = {
     #  enable = true;

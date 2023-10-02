@@ -153,6 +153,7 @@
       cadaver
       charles
       chromium
+      croc
       cryptsetup
       ctags
       cudaPackages.cudatoolkit

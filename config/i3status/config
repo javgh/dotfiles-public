@@ -4,7 +4,8 @@ general {
   interval = 5
 }
 
-order = "ethernet _first_"
+order = "battery 0"
+order += "wireless _first_"
 order += "load"
 order += "cpu_temperature 1"
 order += "disk /"
@@ -13,9 +14,20 @@ order += "path_exists raid"
 order += "volume master"
 order += "tztime local"
 
-ethernet _first_ {
-  format_up = "E: %ip"
-  format_down = "E: down"
+battery 0 {
+  format = "%status %percentage %remaining (%emptytime %consumption)"
+  format_down = "No battery"
+  status_chr = "⚡ CHR"
+  status_bat = "🔋 BAT"
+  status_unk = "? UNK"
+  status_full = "☻ FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
+}
+
+wireless _first_ {
+  format_up = "W: %ip (%essid, %bitrate)"
+  format_down = "W: down"
 }
 
 load {
@@ -38,17 +50,6 @@ cpu_temperature 1 {
 
 disk "/" {
   format = "Disk: %free"
-}
-
-read_file timemachine {
-  path = "/var/run/user/1000/timemachine"
-  format = "<span foreground='white'>Time Machine: %content</span>"
-  format_bad = "<span foreground='#00FF00'>Time Machine</span>"
-}
-
-path_exists raid {
-  format = "RAID"
-  path = "/var/run/user/1000/raid_ok"
 }
 
 volume master {

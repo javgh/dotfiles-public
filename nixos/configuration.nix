@@ -86,6 +86,22 @@
     wg-quick.interfaces = {
       wg0 = {
         autostart = false;
+        address = [ "10.10.0.1/24" ];
+        privateKeyFile = "/home/jan/.wireguard/intranet/private_key";
+        peers = import /home/jan/.wireguard/intranet/peers.nix;
+        # template for peers.nix:
+        # [
+        #   {
+        #     endpoint = "...:51820";
+        #     publicKey = "...";
+        #     allowedIPs = [ "10.10.0.0/24" ];
+        #     persistentKeepalive = 25;
+        #   }
+        # ]
+      };
+
+      wg1 = {
+        autostart = false;
         address = [ "192.168.0.5/24" ];
         privateKeyFile = "/home/jan/.wireguard/olegeno/private_key";
         peers = [
@@ -329,7 +345,7 @@
   };
 
   services = {
-    #openssh.enable = true;
+    openssh.enable = true;
 
     printing = {
       enable = true;

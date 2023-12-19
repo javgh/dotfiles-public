@@ -112,6 +112,7 @@
               "192.168.0.0/24"
               "192.168.2.0/24"
               "192.168.1.196/32"
+              "192.168.3.0/24"
             ];
           }
         ];
@@ -156,6 +157,7 @@
     homeBinInPath = true;
 
     systemPackages = with pkgs; [
+      aichat
       anki
       aria
       asciinema
@@ -345,7 +347,7 @@
   };
 
   services = {
-    openssh.enable = true;
+    #openssh.enable = true;
 
     printing = {
       enable = true;

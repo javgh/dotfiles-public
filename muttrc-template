@@ -3,14 +3,14 @@
 # sender
 set realname="..."
 set from="..."
-alternates "...|..."
+alternates "...|...|..."
 set signature=""
 
 # folder
-set folder=~/bulk/Maildir
-set spoolfile="=INBOX"                          # inbox
-set record="=INBOX.X-Sent-Mutt"                 # outbox
-set postponed="=INBOX.remote_postponed_mutt"    # postponed messages
+set folder=~/main/protected/mail/Maildir/
+set spoolfile="=inbox"                          # inbox
+set record="=outbox"                            # outbox
+set postponed="=postponed"                      # postponed messages
 
 # source common part
 source ~/.muttrc-common

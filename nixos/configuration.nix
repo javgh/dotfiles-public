@@ -85,7 +85,7 @@
 
     wg-quick.interfaces = {
       wg0 = {
-        autostart = false;
+        autostart = true;
         address = [ "10.10.0.1/24" ];
         privateKeyFile = "/home/jan/.wireguard/intranet/private_key";
         peers = import /home/jan/.wireguard/intranet/peers.nix;
@@ -230,6 +230,7 @@
       mutt
       nbd
       ncdu
+      nextcloud-client
       nix-prefetch-git
       nodejs
       nodePackages.node2nix
@@ -347,7 +348,10 @@
   };
 
   services = {
-    #openssh.enable = true;
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
 
     printing = {
       enable = true;
@@ -408,7 +412,7 @@
   };
 
   virtualisation = {
-    #virtualbox.host.enable = true;
+    virtualbox.host.enable = true;
     docker = {
       enable = true;
       enableNvidia = true;

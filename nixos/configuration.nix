@@ -34,11 +34,12 @@
         mdadm --stop --scan  # start with a clean slate
         mdadm --assemble --scan --run
       '';
-      services.swraid.mdadmConf = ''
-        DEVICE /dev/mapper/nvme0n1p2+integrity
-        DEVICE /dev/mapper/nvme1n1p2+integrity
-      '';
     };
+
+    swraid.mdadmConf = ''
+      DEVICE /dev/mapper/nvme0n1p2+integrity
+      DEVICE /dev/mapper/nvme1n1p2+integrity
+    '';
 
     tmp = {
       useTmpfs = true;
@@ -130,8 +131,8 @@
   };
 
   fonts = {
-    enableDefaultFonts = true;
-    fonts = with pkgs; [
+    enableDefaultPackages = true;
+    packages = with pkgs; [
       corefonts
       liberation_ttf
       noto-fonts
@@ -251,7 +252,6 @@
       screen
       shellcheck
       signal-desktop
-      simplenote
       simple-scan
       smartmontools
       solc

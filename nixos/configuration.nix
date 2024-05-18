@@ -87,7 +87,7 @@
     wg-quick.interfaces = {
       wg0 = {
         autostart = true;
-        address = [ "10.10.0.1/24" ];
+        address = [ "10.10.0.1/32" ];
         privateKeyFile = "/home/jan/.wireguard/intranet/private_key";
         peers = import /home/jan/.wireguard/intranet/peers.nix;
         # template for peers.nix:
@@ -103,7 +103,7 @@
 
       wg1 = {
         autostart = false;
-        address = [ "192.168.0.5/24" ];
+        address = [ "192.168.0.5/32" ];
         privateKeyFile = "/home/jan/.wireguard/olegeno/private_key";
         peers = [
           {
@@ -182,6 +182,7 @@
       dmidecode
       dnsutils
       dos2unix
+      drawio
       dropbox
       electrum
       emacs
@@ -222,6 +223,7 @@
       kiwix
       leiningen
       lftp
+      librecad
       libreoffice
       lm_sensors
       monero
@@ -242,6 +244,7 @@
       pasystray
       patchelf
       pavucontrol
+      pdftk
       pshs
       qemu
       redshift
@@ -280,6 +283,7 @@
           ps.jedi
           ps.matplotlib
           ps.nltk
+          ps.pandas
           ps.pep8
           ps.pyflakes
           ps.pylint

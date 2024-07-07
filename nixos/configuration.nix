@@ -193,12 +193,12 @@
       feh
       file
       firefox
+      gedit
       geeqie
       getmail6
       gimp
       git
       glxinfo
-      gnome.gedit
       gnumake
       gnumeric
       go
@@ -364,30 +364,33 @@
 
     avahi = {   # to help find scanner
       enable = true;
-      nssmdns = true;
+      nssmdns4 = true;
     };
 
     xserver = {
       enable = true;
       videoDrivers = [ "nvidia" ];
-      layout = "de";
-      xkbModel = "pc105";
+      xkb = {
+        layout = "de";
+        model = "pc105";
+      };
       screenSection =
         ''
           # generated with nvidia-settings; also set configuration via xfce4-display-settings
           Option "nvidiaXineramaInfoOrder" "DFP-3"
           Option "metamodes" "DP-2: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +0+0, DP-4: nvidia-auto-select +3200+0"
         '';
-      displayManager.autoLogin = {
-        enable = true;
-        user = "jan";
-      };
       desktopManager.xfce = {
         enable = true;
         noDesktop = true;
         enableXfwm = false;
       };
       windowManager.i3.enable = true;
+    };
+
+    displayManager.autoLogin = {
+      enable = true;
+      user = "jan";
     };
 
     postgresql = {

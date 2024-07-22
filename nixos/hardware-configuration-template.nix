@@ -21,17 +21,19 @@
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/4836-5686";
       fsType = "vfat";
+      options = [ "nofail" ];   # not a hard requirement for system startup
     };
 
   fileSystems."/boot-fallback" =
     { device = "/dev/disk/by-uuid/4447-E87C";
       fsType = "vfat";
+      options = [ "nofail" ];   # not a hard requirement for system startup
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/53dd1d7d-fceb-430b-9845-c52e5919abd0"; }
-      { device = "/dev/disk/by-uuid/31305f5f-04a6-43e4-aba8-56dcedd6173a"; }
-    ];
+    [ { device = "/dev/disk/by-uuid/53dd1d7d-fceb-430b-9845-c52e5919abd0"; options = [ "nofail" ]; }
+      { device = "/dev/disk/by-uuid/31305f5f-04a6-43e4-aba8-56dcedd6173a"; options = [ "nofail" ]; }
+    ];  # swap should also not be a hard requirement for system startup
 
   nix.settings.max-jobs = lib.mkDefault 4;
   powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

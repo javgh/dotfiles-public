@@ -275,7 +275,7 @@
       woof
       xorg.xkbcomp
       xorg.xvinfo
-      youtube-dl
+      yt-dlp
       zbar
       (python3.withPackages(ps: [
           ps.beancount

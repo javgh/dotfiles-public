@@ -1,6 +1,6 @@
 partial alphanumeric_keys
-xkb_symbols "vim_normal_mode_via_r" {
-  key <AD04> { symbols[Group1] = [ r, R, bracketleft, bracketleft ] };
+xkb_symbols "esc_via_caret" {
+  key <TLDE> { symbols[Group1] = [ asciicircum, degree, Escape, notsign ] };
 };
 
 partial alphanumeric_keys

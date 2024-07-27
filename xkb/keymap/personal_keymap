@@ -2,7 +2,7 @@ xkb_keymap {
     xkb_keycodes  { include "evdev+aliases(qwertz)" };
     xkb_types     { include "complete" };
     xkb_compat    { include "complete" };
-    xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(alt_super_win)+level3(caps_switch)+personal_addons(esc_via_j)+personal_addons(spanish_umlauts)+personal_addons(serbian_umlauts)"};
+    xkb_symbols   { include "pc+de(nodeadkeys)+inet(evdev)+altwin(menu_win)+level3(caps_switch)+personal_addons(vim_normal_mode_via_r)+personal_addons(spanish_umlauts)+personal_addons(serbian_umlauts)"};
     xkb_geometry  { include "pc(pc105)" };
 };
 
@@ -10,3 +10,4 @@ xkb_keymap {
 // altwin:alt_super_win         Alt is mapped to Right Win, Super to Menu
 // lv3:caps_switch              Caps Lock chooses 3rd level
 // lv3:ralt_alt                 Right Alt key never chooses 3rd level
+// altwin:menu_win              Super is mapped to the Menu key.

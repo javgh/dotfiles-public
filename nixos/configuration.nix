@@ -5,7 +5,7 @@
 #   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
 
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   #nix.nixPath = [
@@ -165,6 +165,7 @@
       asciinema
       bc
       beancount
+      beancount-language-server
       binutils
       blender
       blueman
@@ -227,6 +228,7 @@
       librecad
       libreoffice
       lm_sensors
+      lua-language-server
       monero
       mplayer
       mpv
@@ -235,6 +237,7 @@
       nbd
       ncdu
       nextcloud-client
+      nixd
       nix-prefetch-git
       nodejs
       nodePackages.node2nix
@@ -247,12 +250,16 @@
       pavucontrol
       pdftk
       pshs
+      pyright
       qemu
       redshift
       remind
+      ripgrep
       rlwrap
       rtl-sdr
       ruby
+      ruff
+      ruff-lsp
       screen
       shellcheck
       signal-desktop
@@ -273,8 +280,11 @@
       whois
       wineWowPackages.full    # wow = "Windows on Windows"
       woof
+      xclip
+      xorg.xev
       xorg.xkbcomp
       xorg.xvinfo
+      yarn
       yt-dlp
       zbar
       (python3.withPackages(ps: [
@@ -288,6 +298,7 @@
           ps.pep8
           ps.pyflakes
           ps.pylint
+          ps.pynvim
           ps.qrcode
           ps.requests
           ps.scikitlearn
@@ -296,37 +307,19 @@
   };
 
   programs = {
-    vim = {
-      package = pkgs.vim-full.customize {
-        name = "vim";
-        vimrcConfig = {
-          customRC = ''
-            source ~/.vimrc
-          '';
-          packages.myPackages = with pkgs.vimPlugins; {
-            start = [
-              command-t
-              jedi-vim
-              supertab
-              syntastic
-              taglist-vim
-              vimagit
-              vim-beancount
-              vim-dispatch
-              vim-fireplace
-              vim-gitgutter
-              vim-go
-              vim-javascript
-              vim-latex-live-preview
-              vim-projectionist
-              vim-salve
-              vim-solidity
-              vim-surround
-            ];
-          };
+    neovim = {
+      enable = true;
+      configure = {
+        customRC = ''
+          luafile ~/.config/nvim/init.lua
+        '';
+        packages.myPackages = with pkgs.vimPlugins; {
+          start = [ lazy-nvim ];
         };
       };
       defaultEditor = true;
+      viAlias = true;
+      vimAlias = true;
     };
 
     bash = {

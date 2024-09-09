@@ -394,7 +394,7 @@
       '';
     };
 
-    #influxdb2.enable = true;
+    influxdb2.enable = true;
 
     #grafana = {
     #  enable = true;

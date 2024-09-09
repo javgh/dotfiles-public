@@ -8,9 +8,7 @@
 { pkgs, ... }:
 
 {
-  #nix.nixPath = [
-  #  "/home/jan/repos" "nixos-config=/etc/nixos/configuration.nix"
-  #];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   imports = [ /etc/nixos/hardware-configuration.nix ];
 

@@ -1,16 +1,7 @@
-# Use cfdisk to prepare a GUID partition table (GPT) on the disk:
-#   Partition 1: 300M, EFI System, /boot, bootable, mkfs.fat -F 32 -n UEFI1 / UEFI2
-#   Partition 2: xG, Linux RAID, integritysetup format, mdadm, mkfs.ext4 -L linux-root
-#     pick a round number to make replacing the disk in the RAID array easier
-#   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
-# See doc/raid+integrity for RAID details.
-
 { pkgs, ... }:
 
 {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  imports = [ /etc/nixos/hardware-configuration.nix ];
 
   boot = {
     loader = {
@@ -69,11 +60,6 @@
 
     bluetooth.enable = true;
     rtl-sdr.enable = true;
-
-    opengl = {
-      setLdLibraryPath = true;   # needed for CUDA
-      driSupport32Bit = true;    # needed for docker.enableNvidia
-    };
   };
 
   networking = {
@@ -175,8 +161,6 @@
       croc
       cryptsetup
       ctags
-      cudaPackages.cudatoolkit
-      cudaPackages.cudnn
       delve
       dmenu
       dmidecode
@@ -412,10 +396,7 @@
 
   virtualisation = {
     virtualbox.host.enable = true;
-    docker = {
-      enable = true;
-      enableNvidia = true;
-    };
+    docker.enable = true;
   };
 
   users.extraUsers.jan = {  # set password with 'passwd'

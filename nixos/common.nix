@@ -12,50 +12,19 @@
       };
     };
 
-    initrd = {
-      availableKernelModules = [ "dm_integrity" ];
-      extraUtilsCommands = ''
-        copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
-      '';
-      postDeviceCommands = ''
-        integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
-        integritysetup open /dev/nvme1n1p2 nvme1n1p2+integrity
-        mdadm --stop --scan  # start with a clean slate
-        mdadm --assemble --scan --run
-      '';
-    };
-
-    swraid.mdadmConf = ''
-      DEVICE /dev/mapper/nvme0n1p2+integrity
-      DEVICE /dev/mapper/nvme1n1p2+integrity
-    '';
-
     tmp = {
       useTmpfs = true;
       tmpfsSize = "75%";
       cleanOnBoot = true;
     };
-
-    kernelModules = [ "nct6775" ];  # found via 'sensors-detect'; see also 'sensors'
-    supportedFilesystems = [ "cifs" ];
-
-    # activate to build aarch64 targets; see https://nixos.wiki/wiki/NixOS_on_ARM
-    #binfmt.emulatedSystems = [ "aarch64-linux" ];
   };
 
   hardware = {
-    # Do not rely on BIOS for latest microcode.
-    # Check with spectre-meltdown-checker.
-    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
 
     pulseaudio = {
       enable = true;
       package = pkgs.pulseaudioFull;
-    };
-
-    sane = {
-      enable = true;
-      extraBackends = [ pkgs.hplipWithPlugin ];
     };
 
     bluetooth.enable = true;
@@ -63,15 +32,12 @@
   };
 
   networking = {
-    hostName = "dax";
     firewall.enable = false;
     networkmanager.enable = true;
-    extraHosts = builtins.readFile /home/jan/.hosts;
 
     wg-quick.interfaces = {
       wg0 = {
         autostart = true;
-        address = [ "10.10.0.1/32" ];
         privateKeyFile = "/home/jan/.wireguard/intranet/private_key";
         peers = import /home/jan/.wireguard/intranet/peers.nix;
         # template for peers.nix:
@@ -87,7 +53,6 @@
 
       wg1 = {
         autostart = false;
-        address = [ "192.168.0.5/32" ];
         privateKeyFile = "/home/jan/.wireguard/olegeno/private_key";
         peers = [
           {
@@ -124,15 +89,9 @@
     ];
   };
 
-  time = {
-    timeZone = "Europe/Berlin";
-    hardwareClockInLocalTime = true;
-  };
+  time.timeZone = "Europe/Berlin";
 
-  sound = {
-    enable = true;
-    mediaKeys.enable = true;
-  };
+  sound.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -328,11 +287,6 @@
   };
 
   services = {
-    openssh = {
-      enable = true;
-      settings.PasswordAuthentication = false;
-    };
-
     printing = {
       enable = true;
       drivers = [ pkgs.hplipWithPlugin ];
@@ -345,17 +299,10 @@
 
     xserver = {
       enable = true;
-      videoDrivers = [ "nvidia" ];
       xkb = {
         layout = "de";
         model = "pc105";
       };
-      screenSection =
-        ''
-          # generated with nvidia-settings; also set configuration via xfce4-display-settings
-          Option "nvidiaXineramaInfoOrder" "DFP-3"
-          Option "metamodes" "DP-2: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +0+0, DP-4: nvidia-auto-select +3200+0"
-        '';
       desktopManager.xfce = {
         enable = true;
         noDesktop = true;
@@ -369,29 +316,9 @@
       user = "jan";
     };
 
-    postgresql = {
-      enable = true;
-      package = pkgs.postgresql_15;
-      initialScript = pkgs.writeText "initialScript.sql" ''
-        CREATE USER jan;
-        CREATE DATABASE playground WITH OWNER jan;
-      '';
-    };
-
-    influxdb2.enable = true;
-
-    #grafana = {
-    #  enable = true;
-    #  settings.server = {
-    #    http_addr = "127.0.0.1";
-    #    http_port = 3000;
-    #  };
-    #};
-
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
-    keybase.enable = false;
   };
 
   virtualisation = {
@@ -402,22 +329,19 @@
   users.extraUsers.jan = {  # set password with 'passwd'
     isNormalUser = true;
     uid = 1000;
-    extraGroups = [ "wheel" "networkmanager" "cdrom" "lp" "scanner" "vboxusers" "audio" "docker" "adbusers" "dialout" "plugdev" ];
-  };
-
-  systemd.shutdown = let
-    unloadNvidiaModules = pkgs.writeShellScript "unload-nvidia-modules.shutdown" ''
-      # Nvidia kernel modules currently cause this message to appear on shutdown:
-      # "Failed to unmount /oldroot/sys: Device or resource busy"
-      # This script unloads the Nvidia kernel modules before shutdown
-      # to allow for a clean unmount.
-      # It might not be needed in the future. To test:
-      # Disable the script and check with 'systemctl halt'.
-
-      ${pkgs.kmod}/bin/rmmod nvidia_uvm nvidia_drm nvidia_modeset nvidia
-    '';
-  in {
-    "unload-nvidia-modules.shutdown" = unloadNvidiaModules;
+    extraGroups = [
+      "adbusers"
+      "audio"
+      "cdrom"
+      "dialout"
+      "docker"
+      "lp"
+      "networkmanager"
+      "plugdev"
+      "scanner"
+      "vboxusers"
+      "wheel"
+    ];
   };
 
   security.sudo = {
@@ -429,14 +353,5 @@
         Defaults rootpw
         Defaults timestamp_timeout=360
       '';
-  };
-
-  system = {
-    stateVersion = "19.03";
-
-    activationScripts.sync-boot-fallback = ''
-      echo "syncing /boot and /boot-fallback..."
-      ${pkgs.rsync}/bin/rsync -a --delete /boot/ /boot-fallback
-    '';
   };
 }

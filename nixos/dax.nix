@@ -5,39 +5,160 @@
 #   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
 
-{ lib, ... }:
+{ pkgs, ... }:
 
 {
   imports = [ ./common.nix ];
 
-  hardware.enableRedistributableFirmware = true;
-  boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" "sr_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" ];
-  boot.extraModulePackages = [ ];
+  nix.settings.max-jobs = 4;
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/7d557d88-7bec-4cbe-8665-82968c79ec7b";
+  fileSystems = {
+    "/" = {
+      device = "/dev/disk/by-uuid/7d557d88-7bec-4cbe-8665-82968c79ec7b";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4836-5686";
+    "/boot" = {
+      device = "/dev/disk/by-uuid/4836-5686";
       fsType = "vfat";
       options = [ "nofail" ];   # not a hard requirement for system startup
     };
 
-  fileSystems."/boot-fallback" =
-    { device = "/dev/disk/by-uuid/4447-E87C";
+    "/boot-fallback" = {
+      device = "/dev/disk/by-uuid/4447-E87C";
       fsType = "vfat";
       options = [ "nofail" ];   # not a hard requirement for system startup
     };
+  };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/53dd1d7d-fceb-430b-9845-c52e5919abd0"; options = [ "nofail" ]; }
-      { device = "/dev/disk/by-uuid/31305f5f-04a6-43e4-aba8-56dcedd6173a"; options = [ "nofail" ]; }
-    ];  # swap should also not be a hard requirement for system startup
+  swapDevices = [
+    { device = "/dev/disk/by-uuid/53dd1d7d-fceb-430b-9845-c52e5919abd0"; options = [ "nofail" ]; }
+    { device = "/dev/disk/by-uuid/31305f5f-04a6-43e4-aba8-56dcedd6173a"; options = [ "nofail" ]; }
+  ];  # swap should also not be a hard requirement for system startup
 
-  nix.settings.max-jobs = lib.mkDefault 4;
-  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "ahci"
+        "nvme"
+        "sd_mod"
+        "sr_mod"
+        "usbhid"
+        "usb_storage"
+        "xhci_pci"
+      ] ++ [
+        "dm_integrity"
+      ];
+
+      extraUtilsCommands = ''
+        copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
+      '';
+      postDeviceCommands = ''
+        integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
+        integritysetup open /dev/nvme1n1p2 nvme1n1p2+integrity
+        mdadm --stop --scan  # start with a clean slate
+        mdadm --assemble --scan --run
+      '';
+    };
+
+    swraid.mdadmConf = ''
+      DEVICE /dev/mapper/nvme0n1p2+integrity
+      DEVICE /dev/mapper/nvme1n1p2+integrity
+    '';
+
+    kernelModules = [
+      "kvm-intel"
+      "nct6775"     # found via 'sensors-detect'; see also 'sensors'
+    ];
+
+    supportedFilesystems = [ "cifs" ];
+
+    # activate to build aarch64 targets; see https://nixos.wiki/wiki/NixOS_on_ARM
+    #binfmt.emulatedSystems = [ "aarch64-linux" ];
+  };
+
+  hardware = {
+    # Do not rely on BIOS for latest microcode.
+    # Check with spectre-meltdown-checker.
+    cpu.intel.updateMicrocode = true;
+
+    sane = {
+      enable = true;
+      extraBackends = [ pkgs.hplipWithPlugin ];
+    };
+  };
+
+  networking = {
+    hostName = "dax";
+    extraHosts = builtins.readFile /home/jan/.hosts;
+
+    wg-quick.interfaces = {
+      wg0.address = [ "10.10.0.1/32" ];
+      wg1.address = [ "192.168.0.5/32" ];
+    };
+  };
+
+  time.hardwareClockInLocalTime = true;     # coexist with Windows
+
+  sound.mediaKeys.enable = true;
+
+  services = {
+    openssh = {
+      enable = true;
+      settings.PasswordAuthentication = false;
+    };
+
+    xserver = {
+      videoDrivers = [ "nvidia" ];
+      screenSection =
+        ''
+          # generated with nvidia-settings; also set configuration via xfce4-display-settings
+          Option "nvidiaXineramaInfoOrder" "DFP-3"
+          Option "metamodes" "DP-2: 1920x1080_144 +1280+0, DP-0: nvidia-auto-select +0+0, DP-4: nvidia-auto-select +3200+0"
+        '';
+    };
+
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_15;
+      initialScript = pkgs.writeText "initialScript.sql" ''
+        CREATE USER jan;
+        CREATE DATABASE playground WITH OWNER jan;
+      '';
+    };
+
+    influxdb2.enable = true;
+
+    #grafana = {
+    #  enable = true;
+    #  settings.server = {
+    #    http_addr = "127.0.0.1";
+    #    http_port = 3000;
+    #  };
+    #};
+  };
+
+  systemd.shutdown = let
+    unloadNvidiaModules = pkgs.writeShellScript "unload-nvidia-modules.shutdown" ''
+      # Nvidia kernel modules currently cause this message to appear on shutdown:
+      # "Failed to unmount /oldroot/sys: Device or resource busy"
+      # This script unloads the Nvidia kernel modules before shutdown
+      # to allow for a clean unmount.
+      # It might not be needed in the future. To test:
+      # Disable the script and check with 'systemctl halt'.
+
+      ${pkgs.kmod}/bin/rmmod nvidia_uvm nvidia_drm nvidia_modeset nvidia
+    '';
+  in {
+    "unload-nvidia-modules.shutdown" = unloadNvidiaModules;
+  };
+
+  system = {
+    stateVersion = "19.03";
+
+    activationScripts.sync-boot-fallback = ''
+      echo "syncing /boot and /boot-fallback..."
+      ${pkgs.rsync}/bin/rsync -a --delete /boot/ /boot-fallback
+    '';
+  };
 }

@@ -117,6 +117,7 @@
       cadaver
       charles
       chromium
+      clojure-lsp
       croc
       cryptsetup
       ctags
@@ -148,6 +149,7 @@
       go-ethereum
       golangci-lint
       golint
+      gopls
       gpodder
       gqrx
       graphviz

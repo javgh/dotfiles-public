@@ -15,7 +15,7 @@ vim.opt.shiftwidth = 4                      -- indent is 4 spaces
 
 -- show some important characters
 vim.opt.list = true
-vim.o.listchars= 'tab:▷⋅,trail:⋅,nbsp:⋅'
+vim.o.listchars = 'tab:▷⋅,trail:⋅,nbsp:⋅'
 
 -- configure status line
 vim.opt.statusline = ""
@@ -90,6 +90,17 @@ vim.api.nvim_create_autocmd("FileType", {
                 journal_file = journal_file_absolute
             }
         })
+    end,
+})
+
+-- go mode
+local go_group = vim.api.nvim_create_augroup('go-group', {})
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "go",
+    group = go_group,
+    callback = function()
+        vim.opt_local.expandtab = false
+        vim.wo.listchars = 'tab:▷ ,trail:⋅,nbsp:⋅'
     end,
 })
 
@@ -178,8 +189,16 @@ require("lazy").setup({
                         },
                     },
                 })
-                require("lspconfig").nixd.setup({})
+                require("lspconfig").nixd.setup({
+                    capabilities = capabilities
+                })
                 require("lspconfig").beancount.setup({
+                    capabilities = capabilities
+                })
+                require("lspconfig").clojure_lsp.setup({
+                    capabilities = capabilities
+                })
+                require("lspconfig").gopls.setup({
                     capabilities = capabilities
                 })
 

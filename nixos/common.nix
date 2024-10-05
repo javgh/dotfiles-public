@@ -185,6 +185,7 @@
       nodejs
       nodePackages.node2nix
       nodePackages.stylelint
+      nvtopPackages.full
       offlineimap
       openssl
       par2cmdline

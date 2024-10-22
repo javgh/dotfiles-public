@@ -136,6 +136,16 @@ require("lazy").setup({
                             secret = { "cat", "/home/jan/.anthropicrc" },
                         },
                     },
+                    agents = {
+                        {
+                            provider = "anthropic",
+                            name = "ChatClaude-3-5-Sonnet-latest",
+                            chat = true,
+                            command = true,
+                            model = { model = "claude-3-5-sonnet-latest" },
+                            system_prompt = require("gp.defaults").chat_system_prompt,
+                        },
+                    },
                 }
                 local gp = require("gp")
                 gp.setup(conf)

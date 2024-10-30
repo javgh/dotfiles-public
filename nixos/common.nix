@@ -194,6 +194,7 @@
       pavucontrol
       pdftk
       pshs
+      pv
       pyright
       qemu
       redshift
@@ -218,6 +219,7 @@
       tor-browser-bundle-bin
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
+      visidata
       vlc
       w3m
       wget
@@ -243,6 +245,7 @@
           ps.pyflakes
           ps.pylint
           ps.pynvim
+          ps.pyxdg
           ps.qrcode
           ps.requests
           ps.scikitlearn

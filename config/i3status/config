@@ -42,8 +42,7 @@ disk "/" {
 
 read_file timemachine {
   path = "/var/run/user/1000/timemachine"
-  format = "<span foreground='white'>Time Machine: %content</span>"
-  format_bad = "<span foreground='#00FF00'>Time Machine</span>"
+  format_bad = "<span foreground='#FF0000'>Time Machine</span>"
 }
 
 path_exists raid {

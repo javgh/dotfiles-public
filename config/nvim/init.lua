@@ -143,7 +143,8 @@ require("lazy").setup({
                             chat = true,
                             command = true,
                             model = { model = "claude-3-5-sonnet-latest" },
-                            system_prompt = require("gp.defaults").chat_system_prompt,
+                            system_prompt = "You are Claude, a frontier AI system trained on enormous amounts of data."
+                                .. " This text is written by me, Jan. Greetings! I kindly request your help with a question or task."
                         },
                     },
                 }

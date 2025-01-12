@@ -91,8 +91,6 @@
 
   time.timeZone = "Europe/Berlin";
 
-  sound.enable = true;
-
   nixpkgs.config = {
     allowUnfree = true;
     pulseaudio = true;
@@ -172,7 +170,7 @@
       libreoffice
       lm_sensors
       lua-language-server
-      monero
+      monero-cli
       mplayer
       mpv
       msmtp
@@ -270,7 +268,7 @@
     };
 
     bash = {
-      enableCompletion = true;
+      completion.enable = true;
       vteIntegration = true;
     };
 
@@ -325,6 +323,7 @@
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
+    pipewire.enable = false;
   };
 
   virtualisation = {

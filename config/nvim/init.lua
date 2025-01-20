@@ -57,6 +57,12 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.cmd.normal('j$')
             vim.cmd('startinsert')
         end, {})
+        vim.keymap.set('n', '<Leader>bb', function()
+            local today = os.date('%Y-%m-%d balance ')
+            vim.api.nvim_put({"", today}, 'l', true, false)
+            vim.cmd.normal('j$')
+            vim.cmd('startinsert!')
+        end, {})
         vim.keymap.set('n', '<Leader>bw', function()
             local tmpname = os.tmpname()
             vim.cmd(string.format("terminal beancount-add \"%s\" \"%s\"",

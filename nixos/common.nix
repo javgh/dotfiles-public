@@ -115,6 +115,7 @@
       cadaver
       charles
       chromium
+      clang-tools
       clojure-lsp
       croc
       cryptsetup
@@ -135,6 +136,7 @@
       feh
       file
       firefox
+      gcc
       gedit
       geeqie
       getmail6
@@ -247,6 +249,7 @@
           ps.qrcode
           ps.requests
           ps.scikitlearn
+          ps.seaborn
         ]))
     ];
   };

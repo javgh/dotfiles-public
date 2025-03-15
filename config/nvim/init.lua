@@ -113,6 +113,20 @@ vim.api.nvim_create_autocmd("FileType", {
 -- terminal mode
 vim.api.nvim_set_keymap('t', '<Leader><ESC>', '<C-\\><C-n>', { noremap = true })
 
+-- Nix helper
+local function nix_prefetch()
+    local start_line = vim.fn.getpos("'<")[2]
+    local end_line = vim.fn.getpos("'>")[2]
+    local selected_text = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    local prefetch_cmd = vim.system({'nix-prefetch-wizard'}, {stdin = selected_text, text = true}):wait()
+    local output = vim.split(prefetch_cmd.stdout, "\n", {trimempty = true})
+    local last_line = selected_text[#selected_text]
+    local indent_str = last_line:match("^%s*")
+    vim.api.nvim_buf_set_lines(0, end_line, end_line, false, {indent_str .. output[1]})
+end
+vim.api.nvim_create_user_command('NixPrefetch', nix_prefetch, {range = true})
+vim.api.nvim_set_keymap('v', '<Leader>np', ':NixPrefetch<CR>', {})
+
 -- plugins
 require("lazy").setup({
     spec = {
@@ -351,5 +365,6 @@ local tips = {
     ",<ESC> to exit terminal mode",
     "<CTRL-f> to complete filesystem paths",
     ",lf to request LSP formatting",
+    ",np to call nix-prefetch-url and insert a hash",
 }
 vim.api.nvim_echo({{tips[math.random(1, #tips)]}}, false, {})

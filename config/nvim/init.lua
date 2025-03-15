@@ -221,6 +221,9 @@ require("lazy").setup({
                 require("lspconfig").superhtml.setup({
                     capabilities = capabilities,
                 })
+                require("lspconfig").clangd.setup({
+                    capabilities = capabilities,
+                })
 
                 vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})
             end,

@@ -86,6 +86,8 @@
       corefonts
       liberation_ttf
       noto-fonts
+      comfortaa
+      ubuntu_font_family
     ];
   };
 
@@ -127,6 +129,7 @@
       dos2unix
       drawio
       dropbox
+      efibootmgr
       electrum
       emacs
       encfs
@@ -181,6 +184,7 @@
       nbd
       ncdu
       nextcloud-client
+      nftables
       nixd
       nix-prefetch-git
       nodejs
@@ -206,6 +210,7 @@
       ruby
       ruff
       ruff-lsp
+      scrcpy
       screen
       shellcheck
       signal-desktop

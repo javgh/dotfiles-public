@@ -238,6 +238,9 @@ require("lazy").setup({
                 require("lspconfig").clangd.setup({
                     capabilities = capabilities,
                 })
+                require("lspconfig").jdtls.setup({
+                    capabilities = capabilities,
+                })
 
                 vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})
             end,

@@ -160,6 +160,7 @@
       imagemagick
       inkscape
       inotify-tools
+      jdt-language-server
       jetbrains.idea-community
       jetbrains.jdk
       jq

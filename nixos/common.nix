@@ -170,6 +170,7 @@
       keepassxc
       kicad
       kiwix
+      krita
       leiningen
       lftp
       librecad
@@ -187,6 +188,7 @@
       nftables
       nixd
       nix-prefetch-git
+      nmap
       nodejs
       nodePackages.node2nix
       nodePackages.stylelint
@@ -231,6 +233,7 @@
       wget
       whois
       wineWowPackages.full    # wow = "Windows on Windows"
+      wireshark
       woof
       xclip
       xorg.xev

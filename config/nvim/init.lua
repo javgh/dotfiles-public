@@ -1,5 +1,6 @@
 vim.opt.wrap = false
 vim.opt.hlsearch = false                    -- clear highlights after a search
+vim.opt.hidden = false                      -- no hidden buffers
 vim.o.wildmode = 'list:longest'             -- make cmdline tab completion similar to bash
 vim.g.mapleader = ","                       -- use comma as map leader
 vim.o.colorcolumn = '73,81,101,121,161'     -- visualize various common text widths: 72, 80, 100, 120, 160

@@ -128,7 +128,6 @@
       dnsutils
       dos2unix
       drawio
-      dropbox
       efibootmgr
       electrum
       emacs
@@ -204,6 +203,7 @@
       pv
       pyright
       qemu
+      qsyncthingtray
       redshift
       remind
       ripgrep
@@ -221,6 +221,7 @@
       solc
       solvespace
       spotify
+      syncthing
       termite
       texlive.combined.scheme-full
       tor

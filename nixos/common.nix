@@ -109,6 +109,7 @@
       borgbackup
       brave
       cadaver
+      cargo
       charles
       chromium
       clang-tools
@@ -205,6 +206,8 @@
       rtl-sdr
       ruby
       ruff
+      rust-analyzer
+      rustc
       scrcpy
       screen
       shellcheck

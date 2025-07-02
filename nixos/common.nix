@@ -21,12 +21,6 @@
 
   hardware = {
     enableRedistributableFirmware = true;
-
-    pulseaudio = {
-      enable = true;
-      package = pkgs.pulseaudioFull;
-    };
-
     bluetooth.enable = true;
     rtl-sdr.enable = true;
   };
@@ -211,7 +205,6 @@
       rtl-sdr
       ruby
       ruff
-      ruff-lsp
       scrcpy
       screen
       shellcheck
@@ -305,6 +298,11 @@
   };
 
   services = {
+    pulseaudio = {
+      enable = true;
+      package = pkgs.pulseaudioFull;
+    };
+
     printing = {
       enable = true;
       drivers = [ pkgs.hplipWithPlugin ];

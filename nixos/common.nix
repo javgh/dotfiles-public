@@ -248,6 +248,7 @@
           ps.flake8
           ps.google-api-python-client
           ps.jedi
+          ps.jupytext
           ps.matplotlib
           ps.nltk
           ps.pandas

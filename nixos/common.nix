@@ -223,11 +223,14 @@
       texlive.combined.scheme-full
       tor
       tor-browser-bundle-bin
+      typescript
+      typescript-language-server
       unzip
       vanilla-dmz       # style neutral scalable cursor theme
       visidata
       vlc
       w3m
+      webpack-cli
       wget
       whois
       wineWowPackages.full    # wow = "Windows on Windows"

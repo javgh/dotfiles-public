@@ -208,7 +208,7 @@ require("lazy").setup({
                 require("lspconfig").pyright.setup({
                     capabilities = capabilities
                 })
-                require("lspconfig").ruff_lsp.setup({
+                require("lspconfig").ruff.setup({
                     capabilities = capabilities
                 })
                 require("lspconfig").lua_ls.setup({
@@ -240,6 +240,9 @@ require("lazy").setup({
                     capabilities = capabilities,
                 })
                 require("lspconfig").jdtls.setup({
+                    capabilities = capabilities,
+                })
+                require("lspconfig").ts_ls.setup({
                     capabilities = capabilities,
                 })
 
@@ -370,5 +373,6 @@ local tips = {
     "<CTRL-f> to complete filesystem paths",
     ",lf to request LSP formatting",
     ",np to call nix-prefetch-url and insert a hash",
+    "<CTRL-w>d to show diagnostics for the current line",
 }
 vim.api.nvim_echo({{tips[math.random(1, #tips)]}}, false, {})

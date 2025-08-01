@@ -32,6 +32,13 @@ vim.opt.statusline:append("%-14.(%l,%c%V%) %<%P")           -- offset
 vim.api.nvim_set_keymap('n', '<Leader>sp', 'vip:!sort<CR>', {}) -- sort paragraph with ,sp
 vim.api.nvim_set_keymap('n', '<F5>', ':make<CR>', {})           -- invoke :make with F5
 
+-- diagnostics
+vim.diagnostic.config({
+    virtual_text = {
+        current_line = true
+    }
+})
+
 -- use system-wide python (needs pynvim installed; see also :checkhealth provider)
 vim.g.python3_host_prog = '/run/current-system/sw/bin/python3'
 

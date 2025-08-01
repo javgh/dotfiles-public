@@ -103,6 +103,7 @@
       bc
       beancount
       beancount-language-server
+      beanquery
       binutils
       blender
       blueman

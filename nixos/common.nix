@@ -229,6 +229,7 @@
       vanilla-dmz       # style neutral scalable cursor theme
       visidata
       vlc
+      vscode-langservers-extracted
       w3m
       webpack-cli
       wget

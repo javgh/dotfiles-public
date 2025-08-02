@@ -94,16 +94,6 @@ vim.api.nvim_create_autocmd("FileType", {
             })
         end, {})
         vim.opt.foldlevel=99
-
-        -- configure integration with beancount-language-server again to set journal_file
-        local capabilities = require('cmp_nvim_lsp').default_capabilities()
-        local journal_file_absolute = vim.fn.fnamemodify(ev.file, ":p")
-        require("lspconfig").beancount.setup({
-            capabilities = capabilities,
-            init_options = {
-                journal_file = journal_file_absolute
-            }
-        })
     end,
 })
 
@@ -210,51 +200,6 @@ require("lazy").setup({
 
         {
             "neovim/nvim-lspconfig",
-            config = function()
-                local capabilities = require('cmp_nvim_lsp').default_capabilities()
-                require("lspconfig").pyright.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").ruff.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").lua_ls.setup({
-                    capabilities = capabilities,
-                    settings = {
-                        Lua = {
-                            diagnostics = {
-                                globals = { "vim" },
-                            },
-                        },
-                    },
-                })
-                require("lspconfig").nixd.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").beancount.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").clojure_lsp.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").gopls.setup({
-                    capabilities = capabilities
-                })
-                require("lspconfig").superhtml.setup({
-                    capabilities = capabilities,
-                })
-                require("lspconfig").clangd.setup({
-                    capabilities = capabilities,
-                })
-                require("lspconfig").jdtls.setup({
-                    capabilities = capabilities,
-                })
-                require("lspconfig").ts_ls.setup({
-                    capabilities = capabilities,
-                })
-
-                vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})
-            end,
         },
 
         {
@@ -356,8 +301,38 @@ require("lazy").setup({
         {
             "xuhdev/vim-latex-live-preview",
         },
+
+-- LSP
+vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})
+
+local default_caps = vim.lsp.protocol.make_client_capabilities()
+local cmp_caps = require("cmp_nvim_lsp").default_capabilities()
+local capabilities = vim.tbl_deep_extend("force", default_caps, cmp_caps)
+vim.lsp.config('*', {
+    capabilities = capabilities,
+})
+
+vim.lsp.enable('pyright')       -- Python
+vim.lsp.enable('ruff')          -- Python
+vim.lsp.enable('lua_ls')        -- Lua
+vim.lsp.config('lua_ls', {
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" },
+            },
+        },
     },
 })
+vim.lsp.enable('nixd')          -- Nix
+vim.lsp.enable('clojure_lsp')   -- Clojure
+vim.lsp.enable('gopls')         -- Go
+vim.lsp.enable('superhtml')     -- HTML
+vim.lsp.enable('clangd')        -- C
+vim.lsp.enable('jdtls')         -- Java
+vim.lsp.enable('ts_ls')         -- Javascript
+vim.lsp.enable('eslint')        -- Javascript
+vim.lsp.enable('beancount')     -- Beancount
 
 local tips = {
     "<CTRL-w>o to close all windows except the current one",

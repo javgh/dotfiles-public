@@ -37,7 +37,7 @@ cpu_temperature 1 {
 }
 
 disk "/" {
-  format = "Disk: %free"
+  format = "Disk: %avail"
 }
 
 read_file timemachine {

@@ -100,8 +100,6 @@
     };
   };
 
-  time.hardwareClockInLocalTime = true;     # coexist with Windows
-
   services = {
     openssh = {
       enable = true;

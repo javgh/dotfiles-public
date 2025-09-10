@@ -168,8 +168,10 @@
       krita
       leiningen
       lftp
+      libnotify
       librecad
       libreoffice
+      linuxPackages.cpupower
       lm_sensors
       lua-language-server
       monero-cli

@@ -116,6 +116,15 @@
     fprintd.enable = true;
     fwupd.enable = true;
     libinput.touchpad.tapping = false;  # too many accidental clicks
+
+    influxdb2.enable = false;
+    grafana = {
+      enable = false;
+      settings.server = {
+        http_addr = "127.0.0.1";
+        http_port = 3000;
+      };
+    };
   };
 
   systemd.services = {

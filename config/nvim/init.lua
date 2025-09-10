@@ -301,6 +301,8 @@ require("lazy").setup({
         {
             "xuhdev/vim-latex-live-preview",
         },
+    },
+})
 
 -- LSP
 vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})

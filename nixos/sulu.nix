@@ -115,6 +115,7 @@
     #openssh.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
+    libinput.touchpad.tapping = false;  # too many accidental clicks
   };
 
   systemd.services = {

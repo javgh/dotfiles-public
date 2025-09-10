@@ -246,6 +246,7 @@
       zbar
       (python3.withPackages(ps: [
           ps.beancount
+          ps.dbus-next
           ps.flake8
           ps.google-api-python-client
           ps.jedi

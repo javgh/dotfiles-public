@@ -335,6 +335,7 @@ vim.lsp.enable('jdtls')         -- Java
 vim.lsp.enable('ts_ls')         -- Javascript
 vim.lsp.enable('eslint')        -- Javascript
 vim.lsp.enable('beancount')     -- Beancount
+vim.lsp.enable('rust_analyzer') -- Rust
 
 local tips = {
     "<CTRL-w>o to close all windows except the current one",

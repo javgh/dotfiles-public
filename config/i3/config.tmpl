@@ -181,4 +181,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id personalkeymap
 exec --no-startup-id dayweekyear
+{{if eq .Hostname "dax"}}
 exec --no-startup-id miscautostart
+{{end}}

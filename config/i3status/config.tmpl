@@ -4,19 +4,48 @@ general {
   interval = 5
 }
 
+{{if eq .Hostname "dax"}}
 order = "ethernet _first_"
+{{end}}
+{{if eq .Hostname "sulu"}}
+order = "battery 1"
+order += "wireless _first_"
+{{end}}
 order += "load"
 order += "cpu_temperature 1"
 order += "disk /"
 order += "read_file timemachine"
 order += "path_exists raid"
+{{if eq .Hostname "sulu"}}
+order += "read_file companion-watcher"
+{{end}}
 order += "volume master"
 order += "tztime local"
 
+{{if eq .Hostname "dax"}}
 ethernet _first_ {
   format_up = "E: %ip"
   format_down = "E: down"
 }
+{{end}}
+
+{{if eq .Hostname "sulu"}}
+battery 1 {
+  format = "%status %percentage %remaining %consumption"
+  format_down = "No battery"
+  status_chr = "⚡ CHR"
+  status_bat = "🔋 BAT"
+  status_unk = "? UNK"
+  status_full = "☻ FULL"
+  path = "/sys/class/power_supply/BAT%d/uevent"
+  low_threshold = 10
+}
+
+wireless _first_ {
+  format_up = "W: %ip (%essid, %bitrate)"
+  format_down = "W: down"
+}
+{{end}}
 
 load {
   format = "CPU: %1min %5min %15min"
@@ -33,7 +62,12 @@ load {
 # Seems to change between reboots; use wildcards to be more reliable.
 cpu_temperature 1 {
   format = "%degrees °C"
+{{if eq .Hostname "dax"}}
   path = "/sys/devices/platform/coretemp.0/hwmon/hwmon?/temp1_input"
+{{end}}
+{{if eq .Hostname "sulu"}}
+  path = "/sys/class/thermal/thermal_zone0/temp"
+{{end}}
 }
 
 disk "/" {
@@ -49,6 +83,13 @@ path_exists raid {
   format = "RAID"
   path = "/var/run/user/1000/raid_ok"
 }
+
+{{if eq .Hostname "sulu"}}
+read_file companion-watcher {
+  path = "/var/run/user/1000/companion-watcher"
+  format_bad = "<span foreground='#FF0000'>Companion</span>"
+}
+{{end}}
 
 volume master {
   format = "♪: %volume"

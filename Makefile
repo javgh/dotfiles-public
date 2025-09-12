@@ -1,0 +1,2 @@
+all:
+	apply-dotfile-templates

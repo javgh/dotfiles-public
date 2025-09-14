@@ -1,0 +1,73 @@
+general {
+  output_format = "i3bar"
+  markup = "pango"
+  interval = 5
+}
+
+
+order = "ethernet _first_"
+
+
+order += "load"
+order += "cpu_temperature 1"
+order += "disk /"
+order += "read_file timemachine"
+order += "path_exists raid"
+
+order += "volume master"
+order += "tztime local"
+
+
+ethernet _first_ {
+  format_up = "E: %ip"
+  format_down = "E: down"
+}
+
+
+
+
+load {
+  format = "CPU: %1min %5min %15min"
+}
+
+# Find with:
+# ls -l /sys/devices/platform/coretemp.0/hwmon/*/temp*_label
+# cat /sys/devices/platform/coretemp.0/hwmon/*/temp*_label
+#
+# Alternative:
+# ls -l /sys/class/thermal/thermal_zone*/type
+# cat /sys/class/thermal/thermal_zone*/type
+#
+# Seems to change between reboots; use wildcards to be more reliable.
+cpu_temperature 1 {
+  format = "%degrees °C"
+
+  path = "/sys/devices/platform/coretemp.0/hwmon/hwmon?/temp1_input"
+
+
+}
+
+disk "/" {
+  format = "Disk: %avail"
+}
+
+read_file timemachine {
+  path = "/var/run/user/1000/timemachine"
+  format_bad = "<span foreground='#FF0000'>Time Machine</span>"
+}
+
+path_exists raid {
+  format = "RAID"
+  path = "/var/run/user/1000/raid_ok"
+}
+
+
+
+volume master {
+  format = "♪: %volume"
+  device = "pulse"
+}
+
+tztime local {
+  format = "%d.%m.%Y (%B, KW %V) %H:%M:%S"
+}

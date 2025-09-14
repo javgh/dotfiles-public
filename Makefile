@@ -1,2 +1,2 @@
 all:
-	apply-dotfile-templates
+	apply-dotfile-templates dax sulu

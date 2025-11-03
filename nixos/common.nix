@@ -89,7 +89,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    pulseaudio = true;
   };
 
   environment = {
@@ -309,9 +308,15 @@
   };
 
   services = {
-    pulseaudio = {
+    pipewire = {
       enable = true;
-      package = pkgs.pulseaudioFull;
+      audio.enable = true;
+      pulse.enable = true;
+
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
     };
 
     printing = {
@@ -346,7 +351,6 @@
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
-    pipewire.enable = false;
   };
 
   virtualisation = {
@@ -372,14 +376,18 @@
     ];
   };
 
-  security.sudo = {
-    #wheelNeedsPassword = false;
-    extraConfig =
-      ''
+  security = {
+    sudo = {
+      #wheelNeedsPassword = false;
+      extraConfig =
+        ''
 
-        # Ask for root password and remember it for a while.
-        Defaults rootpw
-        Defaults timestamp_timeout=360
-      '';
+          # Ask for root password and remember it for a while.
+          Defaults rootpw
+          Defaults timestamp_timeout=360
+        '';
+    };
+
+    rtkit.enable = true;     # allow realtime priority for PulseAudio/PipeWire
   };
 }

@@ -89,6 +89,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [ "python3.12-ecdsa-0.19.1" ];
   };
 
   environment = {
@@ -120,6 +121,7 @@
       delve
       dmenu
       dmidecode
+      dmtx-utils
       dnsutils
       dos2unix
       drawio

@@ -10,7 +10,9 @@ order = "battery 1"
 order += "wireless _first_"
 
 order += "load"
+
 order += "cpu_temperature 1"
+
 order += "disk /"
 order += "read_file timemachine"
 order += "path_exists raid"
@@ -55,10 +57,7 @@ load {
 # Seems to change between reboots; use wildcards to be more reliable.
 cpu_temperature 1 {
   format = "%degrees °C"
-
-
   path = "/sys/class/thermal/thermal_zone0/temp"
-
 }
 
 disk "/" {

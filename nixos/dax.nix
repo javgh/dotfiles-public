@@ -29,6 +29,12 @@
       fsType = "vfat";
       options = [ "nofail" ];   # not a hard requirement for system startup
     };
+
+    "/data" = {
+      device = "/dev/disk/by-uuid/0609d6a5-6cb4-407a-a78c-b2def2f11243";
+      fsType = "ext4";
+      options = [ "nofail" ];   # not a hard requirement for system startup
+    };
   };
 
   swapDevices = [

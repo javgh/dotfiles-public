@@ -1,6 +1,6 @@
 # Use cfdisk to prepare a GUID partition table (GPT) on the disk:
 #   Partition 1: 300M, EFI System, /boot, bootable, mkfs.fat -F 32 -n UEFI1 / UEFI2
-#   Partition 2: xG, Linux RAID, integritysetup format, mdadm, mkfs.ext4 -L linux-root
+#   Partition 2: 1800G, Linux RAID, integritysetup format, mdadm, mkfs.ext4 -L linux-root
 #     pick a round number to make replacing the disk in the RAID array easier
 #   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
@@ -19,21 +19,21 @@
     };
 
     "/boot" = {
-      device = "/dev/disk/by-uuid/4836-5686";
+      device = "/dev/disk/by-uuid/A356-582E";
       fsType = "vfat";
       options = [ "nofail" ];   # not a hard requirement for system startup
     };
 
     "/boot-fallback" = {
-      device = "/dev/disk/by-uuid/4447-E87C";
+      device = "/dev/disk/by-uuid/0D30-00C2";
       fsType = "vfat";
       options = [ "nofail" ];   # not a hard requirement for system startup
     };
   };
 
   swapDevices = [
-    { device = "/dev/disk/by-uuid/53dd1d7d-fceb-430b-9845-c52e5919abd0"; options = [ "nofail" ]; }
-    { device = "/dev/disk/by-uuid/31305f5f-04a6-43e4-aba8-56dcedd6173a"; options = [ "nofail" ]; }
+    { device = "/dev/disk/by-uuid/bfab7c28-95dc-4f66-90b6-3ee1fafa1b70"; options = [ "nofail" ]; }
+    { device = "/dev/disk/by-uuid/701936ff-c4f2-496f-b1ab-3703a89ca847"; options = [ "nofail" ]; }
   ];  # swap should also not be a hard requirement for system startup
 
   boot = {
@@ -43,6 +43,7 @@
         "nvme"
         "sd_mod"
         "sr_mod"
+        "thunderbolt"
         "usbhid"
         "usb_storage"
         "xhci_pci"
@@ -67,8 +68,8 @@
     '';
 
     kernelModules = [
-      "kvm-intel"
-      "nct6775"     # found via 'sensors-detect'; see also 'sensors'
+      "kvm-amd"
+      #"nct6775"     # found via 'sensors-detect'; see also 'sensors'
     ];
 
     supportedFilesystems = [ "cifs" ];
@@ -80,7 +81,7 @@
   hardware = {
     # Do not rely on BIOS for latest microcode.
     # Check with spectre-meltdown-checker.
-    cpu.intel.updateMicrocode = true;
+    cpu.amd.updateMicrocode = true;
 
     sane = {
       enable = true;

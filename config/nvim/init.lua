@@ -157,10 +157,10 @@ require("lazy").setup({
                     agents = {
                         {
                             provider = "anthropic",
-                            name = "claude-opus-4-0",
+                            name = "claude-opus-4-5",
                             chat = true,
                             command = true,
-                            model = { model = "claude-opus-4-0" },
+                            model = { model = "claude-opus-4-5", temperature = nil, top_k = nil },
                             system_prompt = "You are Claude, a frontier AI system trained on enormous amounts of data."
                                 .. " This text is written by me, Jan. Greetings! I kindly request your help with a question or task."
                         },

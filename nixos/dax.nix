@@ -61,16 +61,16 @@
         copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
       '';
       postDeviceCommands = ''
-        integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
-        integritysetup open /dev/nvme1n1p2 nvme1n1p2+integrity
+        integritysetup open /dev/disk/by-partuuid/5dbfb67c-2e53-4292-bc31-0241b901a089 a089+integrity
+        integritysetup open /dev/disk/by-partuuid/c47d9ef5-da6f-4190-b47d-d1f80da2cf0a cf0a+integrity
         mdadm --stop --scan  # start with a clean slate
         mdadm --assemble --scan --run
       '';
     };
 
     swraid.mdadmConf = ''
-      DEVICE /dev/mapper/nvme0n1p2+integrity
-      DEVICE /dev/mapper/nvme1n1p2+integrity
+      DEVICE /dev/mapper/a089+integrity
+      DEVICE /dev/mapper/cf0a+integrity
     '';
 
     kernelModules = [

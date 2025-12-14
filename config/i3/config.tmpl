@@ -150,8 +150,8 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # volume control
-bindsym $mod+plus exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
-bindsym $mod+numbersign exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+plus exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05+
+bindsym $mod+numbersign exec --no-startup-id wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.05-
 
 # network tool
 bindsym $mod+n exec --no-startup-id dmenu_hosts

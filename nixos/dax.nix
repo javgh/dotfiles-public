@@ -68,10 +68,14 @@
       '';
     };
 
-    swraid.mdadmConf = ''
-      DEVICE /dev/mapper/a089+integrity
-      DEVICE /dev/mapper/cf0a+integrity
-    '';
+    swraid = {
+      enable = true;
+      mdadmConf = ''
+        PROGRAM /bin/true
+        DEVICE /dev/mapper/a089+integrity
+        DEVICE /dev/mapper/cf0a+integrity
+      '';
+    };
 
     kernelModules = [
       "kvm-amd"

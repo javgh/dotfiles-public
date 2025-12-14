@@ -81,7 +81,7 @@
       liberation_ttf
       noto-fonts
       comfortaa
-      ubuntu_font_family
+      ubuntu-classic
     ];
   };
 
@@ -98,7 +98,6 @@
     systemPackages = with pkgs; [
       aichat
       anki
-      aria
       asciinema
       bc
       beancount
@@ -141,7 +140,6 @@
       getmail6
       gimp
       git
-      glxinfo
       gnumake
       gnumeric
       go
@@ -154,7 +152,7 @@
       graphviz
       hexchat
       htop
-      httplz
+      #httplz
       i3status
       imagemagick
       inkscape
@@ -175,6 +173,7 @@
       linuxPackages.cpupower
       lm_sensors
       lua-language-server
+      mesa-demos
       monero-cli
       mplayer
       mpv
@@ -202,7 +201,7 @@
       pv
       pyright
       qemu
-      qsyncthingtray
+      #qsyncthingtray
       redshift
       remind
       ripgrep
@@ -225,7 +224,7 @@
       termite
       texlive.combined.scheme-full
       tor
-      tor-browser-bundle-bin
+      tor-browser
       typescript
       typescript-language-server
       unzip
@@ -239,7 +238,6 @@
       whois
       wineWowPackages.full    # wow = "Windows on Windows"
       wireshark
-      woof
       xclip
       xorg.xev
       xorg.xkbcomp
@@ -264,7 +262,7 @@
           ps.pyxdg
           ps.qrcode
           ps.requests
-          ps.scikitlearn
+          ps.scikit-learn
           ps.seaborn
         ]))
     ];

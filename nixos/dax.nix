@@ -111,6 +111,15 @@
     };
   };
 
+  environment.systemPackages =
+    let
+        my-llama-cpp = pkgs.llama-cpp.override {
+          cudaSupport = true;
+        };
+    in [
+      my-llama-cpp
+    ];
+
   programs.steam = {
     enable = true;
     extraCompatPackages = with pkgs; [ proton-ge-bin ];

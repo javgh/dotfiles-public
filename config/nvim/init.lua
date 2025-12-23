@@ -4,6 +4,7 @@ vim.opt.hidden = false                      -- no hidden buffers
 vim.o.wildmode = 'list:longest'             -- make cmdline tab completion similar to bash
 vim.g.mapleader = ","                       -- use comma as map leader
 vim.o.colorcolumn = '73,81,101,121,161'     -- visualize various common text widths: 72, 80, 100, 120, 160
+vim.opt.diffopt:append("vertical")          -- vertical diff split
 
 -- always keep a number of lines and columns visible around the cursor
 vim.opt.scrolloff = 5
@@ -301,6 +302,15 @@ require("lazy").setup({
         {
             "xuhdev/vim-latex-live-preview",
         },
+
+        {
+            "sindrets/diffview.nvim",
+            init = function()
+                vim.api.nvim_set_keymap('n', '<Leader>do', ':DiffviewOpen<CR>', {})
+                vim.api.nvim_set_keymap('n', '<Leader>dc', ':DiffviewClose<CR>', {})
+                vim.api.nvim_set_keymap('n', '<Leader>df', ':DiffviewFileHistory<CR>', {})
+            end,
+        },
     },
 })
 
@@ -359,5 +369,13 @@ local tips = {
     ",lf to request LSP formatting",
     ",np to call nix-prefetch-url and insert a hash",
     "<CTRL-w>d to show diagnostics for the current line",
+    ":diffsplit {filename} to diff current buffer against provided file",
+    ":diffthis to turn current window into a diff window",
+    ":diffpatch {patchfile} to patch the current buffer and show diff view",
+    "diff mode: ]c to jump to start of next change",
+    ":diffget or do (diff obtain) to undo difference with another buffer",
+    ",do to open diffview plugin",
+    ",dc to close diffview plugin",
+    ",df to open file history diffview",
 }
 vim.api.nvim_echo({{tips[math.random(1, #tips)]}}, false, {})

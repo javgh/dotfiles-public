@@ -113,10 +113,16 @@
 
   environment.systemPackages =
     let
+        boot-windows = pkgs.writeScriptBin "boot-windows" (builtins.readFile ./scripts/boot-windows);
+        disable-ipv6 = pkgs.writeScriptBin "disable-ipv6" (builtins.readFile ./scripts/disable-ipv6);
+        hard-disk-report = pkgs.writeScriptBin "hard-disk-report" (builtins.readFile ./scripts/hard-disk-report);
         my-llama-cpp = pkgs.llama-cpp.override {
           cudaSupport = true;
         };
     in [
+      boot-windows
+      disable-ipv6
+      hard-disk-report
       my-llama-cpp
     ];
 

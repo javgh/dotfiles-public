@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+function report {
+    echo "+ $1"
+    $1
+    echo ""
+}
+
+report "smartctl -H /dev/disk/by-id/nvme-Samsung_SSD_9100_PRO_with_Heatsink_2TB_S7ZNNJ0Y403273L"
+report "smartctl -H /dev/disk/by-id/nvme-CT2000T710SSD8_251352A3174C"
+report "cat /proc/mdstat"
+report "mdadm -D /dev/md/mirrored"
+report "cat /sys/block/md127/md/array_state"
+report "cat /sys/block/md127/md/degraded"
+report "cat /sys/block/md127/md/mismatch_cnt"
+report "cat /sys/block/md127/md/rd0/state"
+report "cat /sys/block/md127/md/rd0/errors"
+report "cat /sys/block/md127/md/rd1/state"
+report "cat /sys/block/md127/md/rd1/errors"
+
+echo "+ dmesg | grep integrity"
+dmesg | grep integrity

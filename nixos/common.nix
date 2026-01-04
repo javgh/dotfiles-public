@@ -201,7 +201,7 @@
       pv
       pyright
       qemu
-      #qsyncthingtray
+      syncthingtray
       redshift
       remind
       ripgrep

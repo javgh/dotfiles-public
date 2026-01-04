@@ -20,7 +20,7 @@
   };
 
   hardware = {
-    enableRedistributableFirmware = true;
+    enableAllFirmware = true;
     bluetooth.enable = true;
     rtl-sdr.enable = true;
   };

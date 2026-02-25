@@ -254,6 +254,7 @@
           ps.google-api-python-client
           ps.jedi
           ps.jupytext
+          ps.kokoro
           ps.matplotlib
           ps.nltk
           ps.pandas
@@ -266,6 +267,7 @@
           ps.requests
           ps.scikit-learn
           ps.seaborn
+          ps.spacy-models.en_core_web_sm    # for kokoro
         ]))
     ];
   };

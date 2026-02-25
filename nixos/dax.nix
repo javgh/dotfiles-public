@@ -167,6 +167,38 @@
     #};
   };
 
+  users.extraUsers.sp = {
+    isNormalUser = true;
+    uid = 1090;
+  };
+
+  systemd.services = {
+    keep-folder-shared =
+      let
+        keep-folder-shared-tool = pkgs.writeShellScriptBin "keep-folder-shared" ''
+          while true; do
+            ${pkgs.inotify-tools}/bin/inotifywait -q -e create -e moved_to -r /data/shared_folder
+            find /data/shared_folder -exec chmod g+rw {} \; 2> /dev/null
+            find /data/shared_folder -type d -exec chmod g+x {} \; 2> /dev/null
+          done
+        '';
+      in {
+        description = "keep-folder-shared";
+        after = [ "multi-user.target" ];
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "simple";
+          WorkingDirectory="/data/shared_folder";
+          ExecStart = "${keep-folder-shared-tool}/bin/keep-folder-shared";
+          User = "root";
+        };
+      };
+  };
+
+  security.sudo.extraRules = [
+    { users = [ "jan" ]; runAs = "sp"; commands = [ {command = "ALL"; options = [ "NOPASSWD" ]; } ]; }
+  ];
+
   system = {
     stateVersion = "19.03";
 

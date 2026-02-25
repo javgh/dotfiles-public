@@ -183,6 +183,7 @@
       nextcloud-client
       nftables
       nixd
+      nettools
       nix-prefetch-git
       nmap
       nodejs
@@ -196,6 +197,7 @@
       patchelf
       pavucontrol
       pdftk
+      poppler-utils
       pshs
       pv
       pyright
@@ -246,6 +248,7 @@
       zbar
       (python3.withPackages(ps: [
           ps.beancount
+          ps.beanquery
           ps.dbus-next
           ps.flake8
           ps.google-api-python-client

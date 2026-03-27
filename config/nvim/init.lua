@@ -126,6 +126,75 @@ end
 vim.api.nvim_create_user_command('NixPrefetch', nix_prefetch, {range = true})
 vim.api.nvim_set_keymap('v', '<Leader>np', ':NixPrefetch<CR>', {})
 
+-- email helper
+local function read_muttrc_identities()
+    local path = vim.fn.expand('$HOME/.muttrc')
+    local file = io.open(path, 'r')
+    if not file then
+        vim.notify('Could not open ' .. path, vim.log.levels.ERROR)
+        return nil
+    end
+
+    local content = file:read('*a')
+    file:close()
+
+    -- Extract realname
+    local realname = content:match('set realname="([^"]+)"')
+    if not realname then
+        vim.notify('Could not find realname in ' .. path, vim.log.levels.ERROR)
+        return nil
+    end
+
+    -- Extract alternates (the pipe-separated list of addresses)
+    local alternates_str = content:match('alternates "([^"]+)"')
+    if not alternates_str then
+        vim.notify('Could not find alternates in ' .. path, vim.log.levels.ERROR)
+        return nil
+    end
+
+    -- Split on "|" and build "From: Realname <email>" strings
+    local identities = {}
+    for email in alternates_str:gmatch('[^|]+') do
+        table.insert(identities, string.format('From: %s <%s>', realname, email))
+    end
+
+    return identities
+end
+local function select_email_address()
+    local identities = read_muttrc_identities()
+    if not identities then return end
+
+    local pickers = require('telescope.pickers')
+    local finders = require('telescope.finders')
+    local conf = require('telescope.config').values
+    local actions = require('telescope.actions')
+    local action_state = require('telescope.actions.state')
+    local themes = require("telescope.themes")
+
+    local opts = themes.get_cursor()
+    pickers.new(opts, {
+        prompt_title = 'Select email address',
+        finder = finders.new_table {
+            results = identities,
+        },
+        sorter = conf.generic_sorter({}),
+        attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+                actions.close(prompt_bufnr)
+                local selection = action_state.get_selected_entry()
+                if selection then
+                    vim.cmd.normal('0D')
+                    vim.api.nvim_put({ selection[1] }, 'c', true, true)
+                end
+            end)
+            return true
+        end,
+    }):find()
+end
+vim.api.nvim_create_user_command('SelectEmailAddress', select_email_address, {})
+vim.api.nvim_set_keymap('n', '<Leader>mf', ':SelectEmailAddress<CR>', {})
+
+
 -- plugins
 require("lazy").setup({
     spec = {
@@ -377,5 +446,6 @@ local tips = {
     ",do to open diffview plugin",
     ",dc to close diffview plugin",
     ",df to open file history diffview",
+    ",mf to select From: line",
 }
 vim.api.nvim_echo({{tips[math.random(1, #tips)]}}, false, {})

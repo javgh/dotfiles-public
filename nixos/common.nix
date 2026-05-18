@@ -27,7 +27,12 @@
 
   networking = {
     firewall.enable = false;
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = [
+        pkgs.networkmanager-openvpn
+      ];
+    };
 
     wg-quick.interfaces = {
       wg0 = {
@@ -96,8 +101,8 @@
     homeBinInPath = true;
 
     systemPackages = with pkgs; [
-      aichat
       anki
+      anydesk
       asciinema
       bc
       beancount
@@ -180,10 +185,11 @@
       mutt
       nbd
       ncdu
+      nethack
+      nettools
       nextcloud-client
       nftables
       nixd
-      nettools
       nix-prefetch-git
       nmap
       nodejs
@@ -212,6 +218,7 @@
       ruff
       rust-analyzer
       rustc
+      rustfmt
       scrcpy
       screen
       shellcheck

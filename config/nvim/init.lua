@@ -72,6 +72,11 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.cmd.normal('j$')
             vim.cmd('startinsert!')
         end, {})
+        vim.keymap.set('n', '<Leader>bc', function ()
+            local path = vim.fn.expand('$XDG_RUNTIME_DIR/beancount-classify')
+            vim.cmd({ cmd = 'read', args = { path } })
+        end, {})
+        vim.keymap.set('v', '<leader>be', ':!beancount-exchange<CR>')
         vim.keymap.set('n', '<Leader>bw', function()
             local tmpname = os.tmpname()
             vim.cmd(string.format("terminal beancount-add \"%s\" \"%s\"",

@@ -420,6 +420,15 @@ vim.lsp.enable('ts_ls')         -- Javascript
 vim.lsp.enable('eslint')        -- Javascript
 vim.lsp.enable('beancount')     -- Beancount
 vim.lsp.enable('rust_analyzer') -- Rust
+vim.lsp.config('rust_analyzer', {
+    settings = {
+        ['rust-analyzer'] = {
+            cargo = {
+                targetDir = vim.fn.expand('$HOME/tmp/rust-analyzer-target-dir'),
+            },
+        },
+    },
+})
 
 local tips = {
     "<CTRL-w>o to close all windows except the current one",

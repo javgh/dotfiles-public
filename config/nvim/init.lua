@@ -426,6 +426,9 @@ vim.lsp.config('rust_analyzer', {
             cargo = {
                 targetDir = vim.fn.expand('$HOME/tmp/rust-analyzer-target-dir'),
             },
+            check = {
+                command = "clippy",
+            },
         },
     },
 })

@@ -118,6 +118,7 @@
       charles
       chromium
       clang-tools
+      clippy
       clojure-lsp
       croc
       cryptsetup

@@ -115,6 +115,7 @@
       brave
       cadaver
       cargo
+      cargo-outdated
       charles
       chromium
       clang-tools

@@ -6,6 +6,7 @@
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "gp.nvim": { "branch": "main", "commit": "c37f154b97690c4925fef4e35ffdbf2c844b5f4e" },
   "gruvbox-material": { "branch": "master", "commit": "4bfc6983abc249c5943a60d8eb3980a3c2ababe1" },
+  "lean.nvim": { "branch": "main", "commit": "8c7ea37917ac4c061a4d6a6fcefa68a42b1e150b" },
   "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "nvim-cmp": { "branch": "main", "commit": "d97d85e01339f01b842e6ec1502f639b080cb0fc" },
   "nvim-lspconfig": { "branch": "master", "commit": "f1237a8b3c243608a7116fa1ad216c441d7c2264" },

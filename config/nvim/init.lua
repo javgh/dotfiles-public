@@ -385,6 +385,17 @@ require("lazy").setup({
                 vim.api.nvim_set_keymap('n', '<Leader>df', ':DiffviewFileHistory<CR>', {})
             end,
         },
+
+        {
+            "Julian/lean.nvim",
+            event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+            dependencies = {
+                "nvim-telescope/telescope.nvim",
+            },
+            opts = {
+                mappings = true,
+            }
+        },
     },
 })
 
@@ -455,6 +466,7 @@ local tips = {
     ",lf to request LSP formatting",
     ",np to call nix-prefetch-url and insert a hash",
     "<CTRL-w>d to show diagnostics for the current line",
+    "]d to jump to next diagnostic in the buffer",
     ":diffsplit {filename} to diff current buffer against provided file",
     ":diffthis to turn current window into a diff window",
     ":diffpatch {patchfile} to patch the current buffer and show diff view",

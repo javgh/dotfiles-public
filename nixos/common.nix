@@ -170,6 +170,7 @@
       kicad
       kiwix
       krita
+      lean4
       leiningen
       lftp
       libnotify

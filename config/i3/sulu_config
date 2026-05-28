@@ -177,6 +177,7 @@ exec --no-startup-id companion-watcher
 exec --no-startup-id pasystray
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
+exec --no-startup-id mpris-proxy    # for Bluetooth play/pause
 exec --no-startup-id personalkeymap
 exec --no-startup-id dayweekyear
 

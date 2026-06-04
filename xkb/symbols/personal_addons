@@ -16,6 +16,8 @@ xkb_symbols "spanish_umlauts" {
   key <AD09> { symbols[Group1] = [ o, O, oacute, Oacute ] };
   key <AD07> { symbols[Group1] = [ u, U, uacute, Uacute ] };
   key <AB06> { symbols[Group1] = [ n, N, ntilde, Ntilde ] };
+
+  key <AE03> { symbols[Group1] = [ 3, section, EuroSign, NoSymbol ] };
 };
 
 partial alphanumeric_keys
@@ -25,6 +27,11 @@ xkb_symbols "serbian_umlauts" {
   key <AB03> { symbols[Group1] = [ c, C, cacute, Cacute ] };
   key <AE04> { symbols[Group1] = [ 4, dollar, ccaron, Ccaron ] };
   key <AC02> { symbols[Group1] = [ s, S, scaron, Scaron ] };
+};
+
+partial alphanumeric_keys
+xkb_symbols "french_umlauts" {
+  key <AD02> { symbols[Group1] = [ w, W, egrave, Egrave ] };
 };
 
 partial alphanumeric_keys

@@ -5,7 +5,7 @@
 #   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
 
-{ pkgs, ... }:
+{ pkgs, utils, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -55,17 +55,39 @@
         "xhci_pci"
       ] ++ [
         "dm_integrity"
+        "crc32c"
       ];
 
-      extraUtilsCommands = ''
-        copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
-      '';
-      postDeviceCommands = ''
-        integritysetup open /dev/disk/by-partuuid/5dbfb67c-2e53-4292-bc31-0241b901a089 a089+integrity
-        integritysetup open /dev/disk/by-partuuid/c47d9ef5-da6f-4190-b47d-d1f80da2cf0a cf0a+integrity
-        mdadm --stop --scan  # start with a clean slate
-        mdadm --assemble --scan --run
-      '';
+      systemd =
+        let
+          a089 = "/dev/disk/by-partuuid/5dbfb67c-2e53-4292-bc31-0241b901a089";
+          a089-device = "${utils.escapeSystemdPath a089}.device";
+          cf0a = "/dev/disk/by-partuuid/c47d9ef5-da6f-4190-b47d-d1f80da2cf0a";
+          cf0a-device = "${utils.escapeSystemdPath cf0a}.device";
+          pre-raid-integritysetup-script = pkgs.writeShellScript "pre-raid-integritysetup" ''
+            integritysetup open ${a089} a089+integrity
+            integritysetup open ${cf0a} cf0a+integrity
+          '';
+         in {
+           initrdBin = [ pkgs.cryptsetup ];
+           storePaths = [ pre-raid-integritysetup-script ];
+           services = {
+             pre-raid-integritysetup = {
+               description = "pre-raid-integritysetup";
+               requires = [ a089-device cf0a-device ];
+               after = [ a089-device cf0a-device ];
+               before = [ "local-fs-pre.target" ];
+               wantedBy = [ "local-fs-pre.target" ];
+               unitConfig.DefaultDependencies = false;  # avoid surprise ordering in initrd
+               serviceConfig = {
+                 Type = "oneshot";
+                 RemainAfterExit = true;
+                 WorkingDirectory="/";
+                 ExecStart = "${pre-raid-integritysetup-script}";
+               };
+             };
+           };
+         };
     };
 
     swraid = {

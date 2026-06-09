@@ -101,6 +101,8 @@
     homeBinInPath = true;
 
     systemPackages = with pkgs; [
+      alacritty
+      android-tools
       anki
       anydesk
       asciinema
@@ -196,8 +198,6 @@
       nix-prefetch-git
       nmap
       nodejs
-      nodePackages.node2nix
-      nodePackages.stylelint
       nvtopPackages.full
       offlineimap
       openssl
@@ -232,7 +232,6 @@
       solvespace
       spotify
       syncthing
-      termite
       texlive.combined.scheme-full
       tor
       tor-browser
@@ -247,12 +246,12 @@
       webpack-cli
       wget
       whois
-      wineWowPackages.full    # wow = "Windows on Windows"
+      wineWow64Packages.full    # wow = "Windows on Windows"
       wireshark
       xclip
-      xorg.xev
-      xorg.xkbcomp
-      xorg.xvinfo
+      xev
+      xkbcomp
+      xvinfo
       yarn
       yt-dlp
       zbar
@@ -298,15 +297,12 @@
       vimAlias = true;
     };
 
-    bash = {
-      completion.enable = true;
-      vteIntegration = true;
-    };
-
     fzf = {
       keybindings = true;
       fuzzyCompletion = true;
     };
+
+    bash.completion.enable = true;
 
     autojump.enable = true;
 
@@ -315,8 +311,6 @@
     gnupg.agent.enable = true;
 
     fuse.userAllowOther = true;
-
-    adb.enable = true;
 
     _1password-gui.enable = true;
   };
@@ -362,6 +356,8 @@
       user = "jan";
     };
 
+    gnome.gcr-ssh-agent.enable = false;
+
     timesyncd.enable = true;
     acpid.enable = true;
     blueman.enable = true;
@@ -376,7 +372,6 @@
     isNormalUser = true;
     uid = 1000;
     extraGroups = [
-      "adbusers"
       "audio"
       "cdrom"
       "dialout"

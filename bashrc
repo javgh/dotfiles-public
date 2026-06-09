@@ -12,7 +12,7 @@ export HISTCONTROL=ignoredups
 # umask (remove rights for group & others)
 umask 077
 
-# termite
+# alacritty
 export TERM=xterm-256color
 
 # calculator
@@ -41,9 +41,6 @@ fi
 # NPM
 export NPM_CONFIG_PREFIX=$HOME/.npm-global
 export PATH=$PATH:$HOME/.npm-global/bin
-
-# solarized dircolors
-eval `dircolors $HOME/.dircolors.ansi-universal`
 
 # aliases
 if [ -f $HOME/.bash_aliases ]; then

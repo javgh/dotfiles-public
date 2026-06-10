@@ -5,7 +5,7 @@
 #   /dev/nvme0n1p4 3628689408 3907028991  278339584 132,7G Linux Swap
 # See doc/raid+integrity for RAID details.
 # Use cryptsetup {luksFormat,luksDump} to configure and check encryption.
-{ pkgs, lib, ... }:
+{ pkgs, lib, utils, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -35,51 +35,60 @@
         "usb_storage"
         "xhci_pci"
       ] ++ [
-        "dm_integrity"
-        "dm_crypt"
-        "dm_mod"
-        "cbc"
-        "hmac"
-        "sha256"
-        "rng"
         "aes"
+        "cbc"
+        "crc32c"
+        "dm_crypt"
+        "dm_integrity"
+        "dm_mod"
         "encrypted_keys"
+        "hmac"
+        "rng"
+        "sha256"
         "trusted"
       ];
 
-      extraUtilsCommands = ''
-        copy_bin_and_libs ${pkgs.cryptsetup}/bin/integritysetup
-        copy_bin_and_libs ${pkgs.cryptsetup}/bin/cryptsetup
-      '';
-      postDeviceCommands = ''
-        integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
-        integritysetup open /dev/nvme0n1p3 nvme0n1p3+integrity
-        mdadm --stop --scan  # start with a clean slate
-        mdadm --assemble --scan --run
+      systemd =
+        let
+          pre-raid-integritysetup-script = pkgs.writeShellScript "pre-raid-integritysetup" ''
+            integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
+            integritysetup open /dev/nvme0n1p3 nvme0n1p3+integrity
+          '';
+          nvme0n1p2-device = "${utils.escapeSystemdPath "/dev/nvme0n1p2"}.device";
+          nvme0n1p3-device = "${utils.escapeSystemdPath "/dev/nvme0n1p3"}.device";
+         in {
+           initrdBin = [ pkgs.cryptsetup ];
+           storePaths = [ pre-raid-integritysetup-script ];
+           services = {
+             pre-raid-integritysetup = {
+               description = "pre-raid-integritysetup";
+               requires = [ nvme0n1p2-device nvme0n1p3-device ];
+               after = [ nvme0n1p2-device nvme0n1p3-device ];
+               before = [ "cryptsetup-pre.target" "shutdown.target" ];
+               wants = [ "cryptsetup-pre.target" ];
+               wantedBy = [ "initrd.target" ];
+               conflicts = [ "shutdown.target" ];
+               unitConfig.DefaultDependencies = false;  # avoid surprise ordering in initrd
+                                                        # shutdown.target added as per 'man 7 systemd.special'
+               serviceConfig = {
+                 Type = "oneshot";
+                 RemainAfterExit = true;
+                 WorkingDirectory="/";
+                 ExecStart = "${pre-raid-integritysetup-script}";
+               };
+             };
+           };
+         };
 
-        while true; do
-            read -s -p "Ready to decrypt disk. Please provide passphrase: " passphrase
-            echo
-            echo -n "$passphrase" | cryptsetup open /dev/md/mirrored mirrored+decrypted
+      luks.devices = {
+        mirrored_decrypted = {
+          device = "/dev/md/mirrored";
+        };
 
-            if [ $? == 0 ]; then
-                break
-            fi
-        done
-
-        while true; do
-            echo -n "$passphrase" | cryptsetup open /dev/nvme0n1p4 nvme0n1p4+decrypted
-
-            if [ $? == 0 ]; then
-                break
-            else
-                read -s -p "Ready to decrypt swap. Please provide passphrase: " passphrase
-                echo
-            fi
-        done
-
-        passphrase=""
-      '';
+        nvme0n1p4_decrypted = {
+          device = "/dev/nvme0n1p4";
+        };
+      };
     };
 
     swraid = {

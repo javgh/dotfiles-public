@@ -132,6 +132,7 @@
       dmtx-utils
       dnsutils
       dos2unix
+      dracut
       drawio
       efibootmgr
       electrum

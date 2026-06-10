@@ -5,7 +5,7 @@
 #   Partition 3: remaining free space, Linux swap, mkswap -L swap1 / swap2
 # See doc/raid+integrity for RAID details.
 
-{ pkgs, utils, ... }:
+{ pkgs, config, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -58,38 +58,24 @@
         "crc32c"
       ];
 
-      systemd =
-        let
-          a089 = "/dev/disk/by-partuuid/5dbfb67c-2e53-4292-bc31-0241b901a089";
-          a089-device = "${utils.escapeSystemdPath a089}.device";
-          cf0a = "/dev/disk/by-partuuid/c47d9ef5-da6f-4190-b47d-d1f80da2cf0a";
-          cf0a-device = "${utils.escapeSystemdPath cf0a}.device";
-          pre-raid-integritysetup-script = pkgs.writeShellScript "pre-raid-integritysetup" ''
-            integritysetup open ${a089} a089+integrity
-            integritysetup open ${cf0a} cf0a+integrity
-          '';
-         in {
-           initrdBin = [ pkgs.cryptsetup ];
-           storePaths = [ pre-raid-integritysetup-script ];
-           services = {
-             pre-raid-integritysetup = {
-               description = "pre-raid-integritysetup";
-               requires = [ a089-device cf0a-device ];
-               after = [ a089-device cf0a-device ];
-               before = [ "local-fs-pre.target" "shutdown.target" ];
-               wantedBy = [ "local-fs-pre.target" ];
-               conflicts = [ "shutdown.target" ];
-               unitConfig.DefaultDependencies = false;  # avoid surprise ordering in initrd
-                                                        # shutdown.target added as per 'man 7 systemd.special'
-               serviceConfig = {
-                 Type = "oneshot";
-                 RemainAfterExit = true;
-                 WorkingDirectory="/";
-                 ExecStart = "${pre-raid-integritysetup-script}";
-               };
-             };
-           };
-         };
+      systemd = {
+        # define /etc/integritytab and add systemd machinery to integrate it into the boot process
+
+        contents."/etc/integritytab".text = ''
+          a089+integrity PARTUUID=5dbfb67c-2e53-4292-bc31-0241b901a089
+          cf0a+integrity PARTUUID=c47d9ef5-da6f-4190-b47d-d1f80da2cf0a
+        '';
+
+        additionalUpstreamUnits = [
+          "integritysetup-pre.target"
+          "integritysetup.target"
+        ];
+
+        storePaths = [
+          "${config.boot.initrd.systemd.package}/lib/systemd/systemd-integritysetup"
+          "${config.boot.initrd.systemd.package}/lib/systemd/system-generators/systemd-integritysetup-generator"
+        ];
+      };
     };
 
     swraid = {

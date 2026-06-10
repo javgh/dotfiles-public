@@ -5,7 +5,7 @@
 #   /dev/nvme0n1p4 3628689408 3907028991  278339584 132,7G Linux Swap
 # See doc/raid+integrity for RAID details.
 # Use cryptsetup {luksFormat,luksDump} to configure and check encryption.
-{ pkgs, lib, utils, ... }:
+{ pkgs, lib, config, ... }:
 
 {
   imports = [ ./common.nix ];
@@ -48,37 +48,24 @@
         "trusted"
       ];
 
-      systemd =
-        let
-          pre-raid-integritysetup-script = pkgs.writeShellScript "pre-raid-integritysetup" ''
-            integritysetup open /dev/nvme0n1p2 nvme0n1p2+integrity
-            integritysetup open /dev/nvme0n1p3 nvme0n1p3+integrity
-          '';
-          nvme0n1p2-device = "${utils.escapeSystemdPath "/dev/nvme0n1p2"}.device";
-          nvme0n1p3-device = "${utils.escapeSystemdPath "/dev/nvme0n1p3"}.device";
-         in {
-           initrdBin = [ pkgs.cryptsetup ];
-           storePaths = [ pre-raid-integritysetup-script ];
-           services = {
-             pre-raid-integritysetup = {
-               description = "pre-raid-integritysetup";
-               requires = [ nvme0n1p2-device nvme0n1p3-device ];
-               after = [ nvme0n1p2-device nvme0n1p3-device ];
-               before = [ "cryptsetup-pre.target" "shutdown.target" ];
-               wants = [ "cryptsetup-pre.target" ];
-               wantedBy = [ "initrd.target" ];
-               conflicts = [ "shutdown.target" ];
-               unitConfig.DefaultDependencies = false;  # avoid surprise ordering in initrd
-                                                        # shutdown.target added as per 'man 7 systemd.special'
-               serviceConfig = {
-                 Type = "oneshot";
-                 RemainAfterExit = true;
-                 WorkingDirectory="/";
-                 ExecStart = "${pre-raid-integritysetup-script}";
-               };
-             };
-           };
-         };
+      systemd = {
+        # define /etc/integritytab and add systemd machinery to integrate it into the boot process
+
+        contents."/etc/integritytab".text = ''
+          nvme0n1p2+integrity /dev/nvme0n1p2
+          nvme0n1p3+integrity /dev/nvme0n1p3
+        '';
+
+        additionalUpstreamUnits = [
+          "integritysetup-pre.target"
+          "integritysetup.target"
+        ];
+
+        storePaths = [
+          "${config.boot.initrd.systemd.package}/lib/systemd/systemd-integritysetup"
+          "${config.boot.initrd.systemd.package}/lib/systemd/system-generators/systemd-integritysetup-generator"
+        ];
+      };
 
       luks.devices = {
         mirrored_decrypted = {

@@ -42,6 +42,7 @@ vim.diagnostic.config({
 
 -- use system-wide python (needs pynvim installed; see also :checkhealth provider)
 vim.g.python3_host_prog = '/run/current-system/sw/bin/python3'
+vim.g.loaded_python3_provider = nil -- make sure Python provider is not forced off with '0'
 
 -- todo mode
 vim.api.nvim_create_autocmd("BufRead", {

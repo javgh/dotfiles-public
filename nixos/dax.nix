@@ -76,9 +76,11 @@
                description = "pre-raid-integritysetup";
                requires = [ a089-device cf0a-device ];
                after = [ a089-device cf0a-device ];
-               before = [ "local-fs-pre.target" ];
+               before = [ "local-fs-pre.target" "shutdown.target" ];
                wantedBy = [ "local-fs-pre.target" ];
+               conflicts = [ "shutdown.target" ];
                unitConfig.DefaultDependencies = false;  # avoid surprise ordering in initrd
+                                                        # shutdown.target added as per 'man 7 systemd.special'
                serviceConfig = {
                  Type = "oneshot";
                  RemainAfterExit = true;

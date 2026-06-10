@@ -20,14 +20,14 @@ vim.opt.list = true
 vim.o.listchars = 'tab:▷⋅,trail:⋅,nbsp:⋅'
 
 -- configure status line
-vim.opt.statusline = ""
-vim.opt.statusline:append("%f ")                            -- file name
+vim.opt.statusline = "%f "                                  -- file name
 vim.opt.statusline:append("%h%m%r%w")                       -- flags
 vim.opt.statusline:append("[%{strlen(&ft)?&ft:'none'},")    -- filetype
 vim.opt.statusline:append("disk:%{&fileencoding},")         -- file encoding
 vim.opt.statusline:append("mem:%{&encoding},")              -- internal encoding
 vim.opt.statusline:append("%{&fileformat}]")                -- file format
 vim.opt.statusline:append("%=")                             -- right align
+vim.opt.statusline:append("%{% luaeval('(package.loaded[''vim.diagnostic''] and next(vim.diagnostic.count()) and vim.diagnostic.status() .. '' '') or '''' ') %} ")
 vim.opt.statusline:append("%-14.(%l,%c%V%) %<%P")           -- offset
 
 vim.api.nvim_set_keymap('n', '<Leader>sp', 'vip:!sort<CR>', {}) -- sort paragraph with ,sp

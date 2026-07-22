@@ -376,6 +376,9 @@ require("lazy").setup({
 
         {
             "xuhdev/vim-latex-live-preview",
+            init = function()
+                vim.g.livepreview_cursorhold_recompile = 0
+            end,
         },
 
         {

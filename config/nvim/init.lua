@@ -405,6 +405,9 @@ require("lazy").setup({
 
 -- LSP
 vim.keymap.set('n', '<Leader>lf', vim.lsp.buf.format, {})
+vim.keymap.set('n', '<Leader>lc', function()
+    vim.lsp.codelens.enable(not vim.lsp.codelens.is_enabled())
+end, {})
 
 local default_caps = vim.lsp.protocol.make_client_capabilities()
 local cmp_caps = require("cmp_nvim_lsp").default_capabilities()
@@ -468,6 +471,17 @@ local tips = {
     ",<ESC> to exit terminal mode",
     "<CTRL-f> to complete filesystem paths",
     ",lf to request LSP formatting",
+    ",lc to toggle LSP codelens",
+    "LSP: gra is mapped to vim.lsp.buf.code_action()",
+    "LSP: gri is mapped to vim.lsp.buf.implementation()",
+    "LSP: grn is mapped to vim.lsp.buf.rename()",
+    "LSP: grr is mapped to vim.lsp.buf.references()",
+    "LSP: grt is mapped to vim.lsp.buf.type_definition()",
+    "LSP: grx is mapped to vim.lsp.codelens.run()",
+    "LSP: gO is mapped to vim.lsp.buf.document_symbol()",
+    "LSP: <CTRL-s> in insert mode is mapped to vim.lsp.buf.signature_help()",
+    "LSP: K is mapped to vim.lsp.buf.hover()",
+    "<CTRL-]> to jump to the definition of the keyword under the cursor",
     ",np to call nix-prefetch-url and insert a hash",
     "<CTRL-w>d to show diagnostics for the current line",
     "]d to jump to next diagnostic in the buffer",

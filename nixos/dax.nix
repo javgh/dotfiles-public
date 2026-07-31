@@ -109,6 +109,8 @@
     };
 
     nvidia.open = true;
+
+    rasdaemon.enable = true;
   };
 
   networking = {

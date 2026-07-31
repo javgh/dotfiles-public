@@ -1,6 +1,19 @@
 { pkgs, ... }:
 
-{
+let
+  my-i3 = pkgs.i3.overrideAttrs (oldAttrs: {
+    version = "4.25-25-g9be3249a";
+    src = pkgs.fetchFromGitHub {
+      owner = "i3";
+      repo = "i3";
+      rev = "9be3249a";  # need version that includes this commit
+      hash = "sha256-1oQg5vaAeUPmpGpvHnTNUYabE+xi6VF2//70mmMzVv8=";
+    };
+    postPatch = ''
+      patchShebangs .
+    '';
+  });
+in {
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   boot = {
@@ -349,7 +362,10 @@
         noDesktop = true;
         enableXfwm = false;
       };
-      windowManager.i3.enable = true;
+      windowManager.i3 = {
+        enable = true;
+        package = my-i3;
+      };
     };
 
     displayManager.autoLogin = {

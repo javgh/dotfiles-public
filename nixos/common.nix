@@ -132,7 +132,6 @@ in {
       cargo
       cargo-outdated
       charles
-      chromium
       clang-tools
       clippy
       clojure-lsp
@@ -169,6 +168,7 @@ in {
       go-ethereum
       golangci-lint
       golint
+      google-chrome
       gopls
       gpodder
       gqrx

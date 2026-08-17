@@ -33,9 +33,9 @@ case "$TERM" in
 esac
 
 # browser
-chromiumpath=$(which chromium)
-if [ -f "$chromiumpath" ]; then
-    export BROWSER="$chromiumpath"
+firefoxpath=$(which firefox)
+if [ -f "$firefoxpath" ]; then
+    export BROWSER="$firefoxpath"
 fi
 
 # NPM

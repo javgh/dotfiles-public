@@ -201,6 +201,7 @@ in {
       mplayer
       mpv
       msmtp
+      mupdf
       mutt
       nbd
       ncdu
@@ -382,7 +383,6 @@ in {
 
   virtualisation = {
     virtualbox.host.enable = true;
-    docker.enable = true;
   };
 
   users.extraUsers.jan = {  # set password with 'passwd'
@@ -392,7 +392,6 @@ in {
       "audio"
       "cdrom"
       "dialout"
-      "docker"
       "lp"
       "networkmanager"
       "plugdev"
